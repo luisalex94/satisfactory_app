@@ -1,0 +1,116 @@
+{
+    "Iron ingot": {
+        "materialName": "Iron ingot",
+        "materialId": 2,
+        "recipes": {
+            "1": {
+                "output": 1,
+                "output_pm": 30,
+                "materials": {
+                    "1": {
+                        "materialName": "Iron ore",
+                        "materialId": 1,
+                        "input": 1,
+                        "input_pm": 30
+                    }
+                }
+            }
+        }
+    },
+    "Iron plate": {
+        "materialName": "Iron plate",
+        "materialId": 3,
+        "recipes": {
+            "1": {
+                "output": 3,
+                "output_pm": 30,
+                "materials": {
+                    "1": {
+                        "materialName": "Iron ingot",
+                        "materialId": 2,
+                        "input": 2,
+                        "input_pm": 20
+                    }
+                }
+            }
+        }
+    },
+    "Iron rod": {
+        "materialName": "Iron rod",
+        "materialId": 4,
+        "recipes": {
+            "1": {
+                "output": 1,
+                "output_pm": 15,
+                "materials": {
+                    "1": {
+                        "materialName": "Iron ingot",
+                        "materialId": 2,
+                        "input": 1,
+                        "input_pm": 15
+                    }
+                }
+            }
+        }
+    },
+    "Screw": {
+        "materialName": "Screw",
+        "materialId": 5,
+        "recipes": {
+            "1": {
+                "output": 4,
+                "output_pm": 40,
+                "materials": {
+                    "1": {
+                        "materialName": "Iron rod",
+                        "materialId": 4,
+                        "input": 1,
+                        "input_pm": 10
+                    }
+                }
+            }
+        }
+    },
+    "Reinforced iron plate": {
+        "materialName": "Reinforced iron plate",
+        "materialId": 6,
+        "recipes": {
+            "1": {
+                "output": 1,
+                "output_pm": 5,
+                "materials": {
+                    "1": {
+                        "materialName": "Iron plate",
+                        "materialId": 3,
+                        "input": 6,
+                        "input_pm": 30
+                    },
+                    "2": {
+                        "materialName": "Screw",
+                        "materialId": 5,
+                        "input": 12,
+                        "input_pm": 60
+                    }
+                }
+            }
+        }
+    },
+    "Coopper ingot": {
+        "materialName": "Coopper ingot",
+        "materialId": 7,
+        "recipes": {
+            "1": {
+                "output": 1,
+                "output_pm": 30,
+                "materials": {
+                    "1": {
+                        "materialName": "Coopper ore",
+                        "materialId": 1,
+                        "input": 1,
+                        "input_pm": 30
+                    }
+                }
+            }
+        }
+    }
+}
