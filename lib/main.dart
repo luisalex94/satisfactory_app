@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'handlers/material_handlers.dart';
-import 'handlers/engine.dart';
-import 'handlers/material_item.dart';
 
 void main() {
   runApp(const MyApp());
@@ -49,6 +47,14 @@ class _MyHomePageState extends State<MyHomePage> {
           appBar: AppBar(
             backgroundColor: Theme.of(context).colorScheme.inversePrimary,
             title: Text(widget.title),
+            actions: [
+              IconButton(
+                onPressed: () {
+                  MaterialHandlers().runMatrixRecipe('Iron plate');
+                },
+                icon: const Icon(Icons.add),
+              ),
+            ],
           ),
           body: FutureBuilder(
             future: MaterialHandlers().loadJson(),
@@ -146,7 +152,6 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       );
     } else {
-      var dt = Engine().recipe(material['materialName']);
       return Padding(
         padding: const EdgeInsets.all(12.0),
         child: Container(
@@ -163,7 +168,7 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(material['materialName']),
-                
+
                 //GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, crossAxisSpacing: 10, mainAxisSpacing: 10), itemBuilder: items.)
               ],
             ),

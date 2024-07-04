@@ -25,9 +25,7 @@ class MaterialHandlers {
     globalMaterials = jsonResponse;
 
     globalMaterials.forEach((key, value) {
-      print('key: $key');
-      print('value: $value');
-      materialItems[key] = MaterialItem.fromJson(globalMaterials);
+      materialItems[key] = MaterialItem.fromJson(value);
     });
 
     return jsonResponse;
@@ -50,7 +48,9 @@ class MaterialHandlers {
     return globalMaterials[name] ?? {};
   }
 
-  Map<String, dynamic> getMaterialRecipe(String name) {
-    return globalMaterials[name] ?? {};
+  List<List<MaterialItem>> runMatrixRecipe(String name) {
+    
+    List<List<MaterialItem>> matrixRecipe = [];
+    return matrixRecipe;
   }
 }

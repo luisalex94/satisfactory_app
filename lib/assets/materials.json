@@ -1,6 +1,8 @@
 {
     "Iron ingot": {
         "materialName": "Iron ingot",
+        "fact": "Smleter",
+        "power_input": 4,
         "materialId": 2,
         "recipes": {
             "1": {
@@ -19,6 +21,8 @@
     },
     "Iron plate": {
         "materialName": "Iron plate",
+        "fact": "Constructor",
+        "power_input": 4,
         "materialId": 3,
         "recipes": {
             "1": {
@@ -37,6 +41,8 @@
     },
     "Iron rod": {
         "materialName": "Iron rod",
+        "fact": "Constructor",
+        "power_input": 4,
         "materialId": 4,
         "recipes": {
             "1": {
@@ -55,6 +61,8 @@
     },
     "Screw": {
         "materialName": "Screw",
+        "fact": "Constructor",
+        "power_input": 4,
         "materialId": 5,
         "recipes": {
             "1": {
@@ -73,6 +81,8 @@
     },
     "Reinforced iron plate": {
         "materialName": "Reinforced iron plate",
+        "fact": "Assembler",
+        "power_input": 15,
         "materialId": 6,
         "recipes": {
             "1": {
@@ -97,6 +107,8 @@
     },
     "Coopper ingot": {
         "materialName": "Coopper ingot",
+        "fact": "Smelter",
+        "power_input": 4,
         "materialId": 7,
         "recipes": {
             "1": {
