@@ -50,9 +50,17 @@ class _MyHomePageState extends State<MyHomePage> {
             actions: [
               IconButton(
                 onPressed: () {
+                  //MaterialHandlers().runMatrixRecipe('Reinforced iron plate');
                   MaterialHandlers().runMatrixRecipe('Iron plate');
                 },
                 icon: const Icon(Icons.add),
+              ),
+              IconButton(
+                onPressed: () {
+                  MaterialHandlers().runMatrixRecipe('Reinforced iron plate');
+                  //MaterialHandlers().runMatrixRecipe('Iron plate');
+                },
+                icon: const Icon(Icons.abc),
               ),
             ],
           ),
