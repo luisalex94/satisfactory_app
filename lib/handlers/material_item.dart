@@ -3,6 +3,7 @@ class MaterialItem {
   String fact = "";
   int powerInput = 0;
   int materialId = 0;
+  bool ore = false;
   Map<String, RecipeItem> recipes = {};
 
   MaterialItem({
@@ -10,6 +11,7 @@ class MaterialItem {
     this.fact = "",
     this.powerInput = 0,
     this.materialId = 0,
+    this.ore = false,
     this.recipes = const {},
   });
 
@@ -27,6 +29,7 @@ class MaterialItem {
       fact: json['fact'] ?? '',
       powerInput: json['power_input'] ?? 0,
       materialId: json['materialId'] ?? 0,
+      ore: json['ore'] ?? false,
       recipes: recipes,
     );
   }

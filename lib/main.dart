@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:satisfactory_app/handlers/material_item.dart';
 import 'handlers/material_handlers.dart';
 
 void main() {
@@ -33,7 +34,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   double _screenWidth = 0;
   double _screenHeight = 0;
-  Map<String, dynamic> selectedMaterial = {};
+  MaterialItem selectedMaterial = MaterialItem();
   int selectedIndex = -1;
 
   @override
@@ -51,6 +52,20 @@ class _MyHomePageState extends State<MyHomePage> {
               IconButton(
                 onPressed: () {
                   //MaterialHandlers().runMatrixRecipe('Reinforced iron plate');
+                  MaterialHandlers().runMatrixRecipeB('Iron plate');
+                },
+                icon: const Icon(Icons.ac_unit_sharp),
+              ),
+              IconButton(
+                onPressed: () {
+                  //MaterialHandlers().runMatrixRecipe('Reinforced iron plate');
+                  MaterialHandlers().runMatrixRecipeB('Reinforced iron plate');
+                },
+                icon: const Icon(Icons.access_alarm_sharp),
+              ),
+              IconButton(
+                onPressed: () {
+                  //MaterialHandlers().runMatrixRecipe('Reinforced iron plate');
                   MaterialHandlers().runMatrixRecipe('Iron plate');
                 },
                 icon: const Icon(Icons.add),
@@ -61,6 +76,41 @@ class _MyHomePageState extends State<MyHomePage> {
                   //MaterialHandlers().runMatrixRecipe('Iron plate');
                 },
                 icon: const Icon(Icons.abc),
+              ),
+              IconButton(
+                onPressed: () {
+                  MaterialHandlers().printMaterialsB();
+                  //MaterialHandlers().runMatrixRecipe('Iron plate');
+                },
+                icon: const Icon(Icons.print),
+              ),
+              IconButton(
+                onPressed: () {
+                  MaterialHandlers().fillWithEmptyMaterialItemsB();
+                  //MaterialHandlers().runMatrixRecipe('Iron plate');
+                },
+                icon: const Icon(Icons.print_disabled),
+              ),
+              IconButton(
+                onPressed: () {
+                  MaterialHandlers().testAdd();
+                  //MaterialHandlers().runMatrixRecipe('Iron plate');
+                },
+                icon: const Icon(Icons.textsms_sharp),
+              ),
+              IconButton(
+                onPressed: () {
+                  MaterialHandlers().needGrowB();
+                  //MaterialHandlers().runMatrixRecipe('Iron plate');
+                },
+                icon: const Icon(Icons.arrow_circle_up_rounded),
+              ),
+              IconButton(
+                onPressed: () {
+                  MaterialHandlers().expandTreeB();
+                  //MaterialHandlers().runMatrixRecipe('Iron plate');
+                },
+                icon: const Icon(Icons.new_label),
               ),
             ],
           ),
@@ -108,10 +158,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       Expanded(
                         child: ListView.builder(
                           itemCount:
-                              MaterialHandlers().getMaterialsList(json).length,
+                              MaterialHandlers().getMaterialsList().length,
                           itemBuilder: (context, index) {
                             List materials =
-                                MaterialHandlers().getMaterialsList(json);
+                                MaterialHandlers().getMaterialsList();
 
                             return ListTile(
                               title: Text(materials[index]),
@@ -119,7 +169,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               onTap: () {
                                 setState(() {
                                   selectedMaterial = MaterialHandlers()
-                                      .getMaterialInfo(materials[index]);
+                                      .getMaterialItem(materials[index]);
                                 });
                               },
                             );
@@ -138,8 +188,8 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Widget _mainPage(Map<String, dynamic> material) {
-    if (material == {} || material.isEmpty) {
+  Widget _mainPage(MaterialItem? material) {
+    if (material != null) {
       return Padding(
         padding: const EdgeInsets.all(12.0),
         child: Container(
@@ -175,7 +225,7 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text(material['materialName']),
+                Text(material!.materialName),
 
                 //GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, crossAxisSpacing: 10, mainAxisSpacing: 10), itemBuilder: items.)
               ],

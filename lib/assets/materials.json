@@ -1,9 +1,18 @@
 {
+    "Iron ore": {
+        "materialName": "Iron ore",
+        "fact": "Miner",
+        "power_input": 5,
+        "materialId": 1,
+        "ore": true,
+        "recipes": {}
+    },
     "Iron ingot": {
         "materialName": "Iron ingot",
         "fact": "Smleter",
         "power_input": 4,
         "materialId": 2,
+        "ore": false,
         "recipes": {
             "1": {
                 "output": 1,
@@ -24,6 +33,7 @@
         "fact": "Constructor",
         "power_input": 4,
         "materialId": 3,
+        "ore": false,
         "recipes": {
             "1": {
                 "output": 3,
@@ -44,6 +54,7 @@
         "fact": "Constructor",
         "power_input": 4,
         "materialId": 4,
+        "ore": false,
         "recipes": {
             "1": {
                 "output": 1,
@@ -64,6 +75,7 @@
         "fact": "Constructor",
         "power_input": 4,
         "materialId": 5,
+        "ore": false,
         "recipes": {
             "1": {
                 "output": 4,
@@ -84,6 +96,7 @@
         "fact": "Assembler",
         "power_input": 15,
         "materialId": 6,
+        "ore": false,
         "recipes": {
             "1": {
                 "output": 1,
@@ -110,6 +123,7 @@
         "fact": "Smelter",
         "power_input": 4,
         "materialId": 7,
+        "ore": false,
         "recipes": {
             "1": {
                 "output": 1,
