@@ -1,9 +1,8 @@
-// ignore_for_file: unused_local_variable, avoid_print
-
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/services.dart' show rootBundle;
 import './material_item.dart';
+import 'dart:developer';
 
 class MaterialHandlers {
   static final MaterialHandlers _instance = MaterialHandlers._internal();
@@ -16,9 +15,6 @@ class MaterialHandlers {
 
   // Mapa de materiales
   Map<String, MaterialItem> materialItems = {};
-
-  // Matriz de receta
-  List<List<MaterialItem>> mainMaterialMatrix = [[]];
 
   /// Carga los materiales a materialItems desde el json
   Future<Map<String, dynamic>> loadJson() async {
@@ -52,76 +48,8 @@ class MaterialHandlers {
     return materialItems[name]!;
   }
 
-  List<List<MaterialItem>> runMatrixRecipe(String name) {
-    List<List<MaterialItem>> matrixRecipe = [[]];
-
-    matrixRecipe[0].insert(0, materialItems[name]!);
-
-    List<String> initialMaterials = hasMaterials(materialItems[name]!);
-
-    // Altura de la matriz
-    int matHei = matrixRecipe.length;
-    // Anchura de la matriz
-    int matWid = matrixRecipe[0].length;
-    // Agrega una fila debajo
-
-    // Agrega la primer fila de receta
-    if (initialMaterials.isNotEmpty) {
-      // Agrega una fila a la matriz
-      matrixRecipe.add([]);
-
-      // Agrega los items de la receta en la nueva fila
-      for (int i = 0; i < initialMaterials.length; i++) {
-        matrixRecipe[matHei].insert(i, materialItems[initialMaterials[i]]!);
-      }
-    }
-
-    // Altura de la matriz
-    matHei = matrixRecipe.length;
-    // Anchura de la matriz
-    matWid = matrixRecipe[matHei - 1].length;
-
-    print('matHei $matHei');
-    print('matWid $matWid');
-
-    // Guarda la altura a la que se encontró el último item
-    int lastHeiItem = 0;
-
-    for (int i = 0; i < matWid; i++) {
-      for (int j = 0; j < matHei; j++) {
-        try {
-          print(matrixRecipe[j][i]);
-          print('row $j');
-          print('column $i');
-          lastHeiItem = j;
-          print('lastHeiItem: $lastHeiItem');
-        } catch (e) {
-          print('nulo en: ');
-          print('row $j');
-          print('column $i');
-        }
-      }
-      List<String> materials = hasMaterials(matrixRecipe[lastHeiItem][i]);
-      print(materials);
-
-      matrixRecipe.add([]);
-
-      for (int k = 0; k < materials.length; k++) {
-        matrixRecipe[lastHeiItem + 1]
-            .insert(k + i, materialItems[materials[k]]!);
-      }
-    }
-
-    mainMaterialMatrix = matrixRecipe;
-
-    return matrixRecipe;
-  }
-
-  // Proceso principal
-  List<List<MaterialItem>> runMatrixRecipeB(String item) {
-    // Indica si el proceso de crecimiento ha terminado
-    bool finish = false;
-
+  /// Proceso principal
+  List<List<MaterialItem>> runMatrixRecipe(String item) {
     // Matriz principal de receta
     List<List<MaterialItem>> recipe = [[]];
 
@@ -133,14 +61,8 @@ class MaterialHandlers {
 
     // Ciclo para expandir el arbol de receta
     while (needGrow(recipe)) {
-      // Verifica si requiere crecer
-      needGrow(recipe) ? finish = false : finish = true;
-
       // Completa la matriz
       fillWithEmptyMaterialItems(recipe);
-
-      // Imprime la matriz (informativo)
-      printMaterials(recipe);
 
       // Expane el arbol de materiales
       expandTree(recipe);
@@ -167,138 +89,52 @@ class MaterialHandlers {
           // Verifica que la [row][column] actual no sea un MaterialItem vacio
           if (materialMatrix[row][column].materialId != 0) {
             // Verifica si el MaterialItem es mineral (o fuente)
-            // True: salta la columna a la superior
+            // True: salta a la siguiente columna
             // False: crece el arbol
             if (materialMatrix[row][column].ore) {
               row = -1;
             } else {
-              print('grow = true');
+              // Revisa si está en la última fila, si si, agrega una adicional para los nuevos materiales
               if (maxRow - 1 - row == 0) {
                 // Agrega una fila debajo, ya que detecta que está en la última fila
                 materialMatrix.add([]);
+                // Llena la fila debajo con materiales vacios
                 fillWithEmptyMaterialItems(materialMatrix);
               }
+              // Obtiene la lista de materiales nuevos a agregarse
               List<String> newMaterials =
                   hasMaterials(materialMatrix[row][column]);
+              // Si la lista es mayor a uno, se agrega una columna adicional para los nuevos materiales
               if (newMaterials.length > 1) {
                 materialMatrix = addColumn(
                   materialMatrix: materialMatrix,
                   column: column + 1,
                 );
               }
+              // Contador para recorrer lista de materiales
               int j = 0;
+              // Recorre desde la columna original, en fila + 1, para ir agregando los nuevos materiales
               for (int i = column; i <= newMaterials.length + column - 1; i++) {
+                // Agrega el material
                 materialMatrix[row + 1][i] = getMaterialItem(newMaterials[j]);
+                // Aumenta el contador para continuar recorriendo la lista de materiales
                 j++;
               }
-
               // Sale del flujo total
               row = -1;
               column = maxColumn + 1;
             }
           }
         } catch (e) {
-          print('NULO Posición: $row x $column');
-          materialMatrix[row].insert(column, emptyMaterialItem());
-          print(materialMatrix[row][column]);
+          log('ERROR en -expandTree- posición: $row x $column');
         }
       }
     }
     return materialMatrix;
   }
 
-  // Busca donde expandir materiales y los expande
-  void expandTreeB() {
-    // Altura de la matriz
-    int maxRow = mainMaterialMatrix.length;
-    // Guarda el numero con la fila mas ancha
-    int maxColumn = mainMaterialMatrix[0].length;
-
-    // Recorre column
-    for (int column = 0; column < maxColumn; column++) {
-      // Recorre row
-      for (int row = maxRow - 1; row >= 0; row--) {
-        try {
-          print('Posición: $row x $column');
-          print(mainMaterialMatrix[row][column]);
-          if (mainMaterialMatrix[row][column].materialId != 0) {
-            print('materialId = ${mainMaterialMatrix[row][column].ore}');
-            if (mainMaterialMatrix[row][column].ore) {
-              print('grow = false');
-
-              row = -1;
-            } else {
-              print('grow = true');
-              if (maxRow - 1 - row == 0) {
-                // Agrega una fila debajo, ya que detecta que está en la última fila
-                mainMaterialMatrix.add([]);
-              }
-              List<String> newMaterials =
-                  hasMaterials(mainMaterialMatrix[row][column]);
-              if (newMaterials.length > 1) {
-                addColumnB(column);
-              }
-              for (int i = column; i <= newMaterials.length + column - 1; i++) {
-                int j = 0;
-                mainMaterialMatrix[row + 1]
-                    .insert(column, getMaterialItem(newMaterials[j]));
-                j++;
-              }
-
-              // Sale del flujo total
-              row = -1;
-              column = maxColumn + 1;
-            }
-          }
-        } catch (e) {
-          print('NULO Posición: $row x $column');
-          mainMaterialMatrix[row].insert(column, emptyMaterialItem());
-          print(mainMaterialMatrix[row][column]);
-        }
-      }
-    }
-  }
-
-  // Devuelve si es necesario crecer el arbol
-  // Debe entrar una matriz completa
-  bool needGrowB() {
-    // Altura de la matriz
-    int maxRow = mainMaterialMatrix.length;
-    // Guarda el numero con la fila mas ancha
-    int maxColumn = mainMaterialMatrix[0].length;
-    // Indica que el arbol necesita crecer
-    bool needGrow = false;
-
-    // Recorre column
-    for (int column = 0; column < maxColumn; column++) {
-      // Recorre row
-      for (int row = maxRow - 1; row >= 0; row--) {
-        try {
-          // Verifica que MaterialItem no sea vacio
-          if (mainMaterialMatrix[row][column].materialId != 0) {
-            // Verifica si el MaterialItem es mineral (o fuente)
-            if (mainMaterialMatrix[row][column].ore) {
-              needGrow = false;
-              row = -1;
-            } else {
-              print('needGrow = true');
-              needGrow = true;
-              row = -1;
-              column = maxColumn + 1;
-            }
-          }
-        } catch (e) {
-          print('NULO Posición: $row x $column');
-          mainMaterialMatrix[row].insert(column, emptyMaterialItem());
-          print(mainMaterialMatrix[row][column]);
-        }
-      }
-    }
-    return needGrow;
-  }
-
-  // Devuelve si es necesario crecer el arbol
-  // Debe entrar una matriz completa
+  /// Devuelve bool si debe crecer el arbol.
+  /// [materialMatrix] debe entrar como matriz completa.
   bool needGrow(List<List<MaterialItem>> materialMatrix) {
     // Altura de la matriz
     int maxRow = materialMatrix.length;
@@ -315,43 +151,23 @@ class MaterialHandlers {
           // Verifica que MaterialItem no sea vacio
           if (materialMatrix[row][column].materialId != 0) {
             // Verifica si el MaterialItem es mineral (o fuente)
+            // True: salta a la siguiente columna
+            // False: indica crecimiento y termina el proceso
             if (materialMatrix[row][column].ore) {
               needGrow = false;
               row = -1;
             } else {
-              print('needGrow = true');
               needGrow = true;
               row = -1;
               column = maxColumn + 1;
             }
           }
         } catch (e) {
-          print('NULO Posición: $row x $column');
+          log('ERROR en -needGrow- posición: $row x $column');
         }
       }
     }
     return needGrow;
-  }
-
-  // Devuelve un MaterialItem vacio
-  MaterialItem emptyMaterialItem() {
-    return MaterialItem();
-  }
-
-  // Agrega una columna a la matriz
-  // [column] es donde se agrega la nueva columna
-  // Entra matriz completa / sale matriz completa
-  void addColumnB(int column) {
-    // Altura de la matriz
-    int maxRow = mainMaterialMatrix.length;
-    // Guarda el numero con la fila mas ancha
-    int maxColumn = mainMaterialMatrix[0].length;
-
-    // Recorre la matriz en la columna [column] agregando un MaterialItem vacio
-    for (int i = 0; i < maxColumn; i++) {
-      mainMaterialMatrix[column].insert(i, emptyMaterialItem());
-    }
-    //return MaterialItem();
   }
 
   // Agrega una columna a la matriz
@@ -362,11 +178,10 @@ class MaterialHandlers {
     required List<List<MaterialItem>> materialMatrix,
     required int column,
   }) {
+    // Rellena los espacios antes de empezar
     fillWithEmptyMaterialItems(materialMatrix);
     // Altura de la matriz
     int maxRow = materialMatrix.length;
-    // Guarda el numero con la fila mas ancha
-    int maxColumn = materialMatrix[0].length;
 
     // Recorre la matriz en la columna [column] agregando un MaterialItem vacio
     for (int i = 0; i < maxRow; i++) {
@@ -390,58 +205,19 @@ class MaterialHandlers {
       }
     }
 
-    // Guarda la altura a la que se encontró el último item
-    int lastHeiItem = 0;
-
     // Recorre column
     for (int column = 0; column < maxColumn; column++) {
       for (int row = 0; row < maxRow; row++) {
         try {
-          print('Posición: $row x $column');
-          print(materialMatrix[row][column]);
-          lastHeiItem = row;
+          // Contiene MaterialItem valido
+          materialMatrix[row][column];
         } catch (e) {
-          print('NULO Posición: $row x $column');
+          // Agrega MaterialItem valido
           materialMatrix[row].insert(column, emptyMaterialItem());
-          print(materialMatrix[row][column]);
         }
       }
     }
     return materialMatrix;
-  }
-
-  // Rellena la matriz con materialItem vacios
-  void fillWithEmptyMaterialItemsB() {
-    // Altura de la matriz
-    int maxRow = mainMaterialMatrix.length;
-    // Guarda el numero con la fila mas ancha
-    int maxColumn = 0;
-
-    // Busca la fila mas larga
-    for (int i = 0; i < maxRow; i++) {
-      if (mainMaterialMatrix[i].length > maxColumn) {
-        maxColumn = mainMaterialMatrix[i].length;
-      }
-    }
-
-    // Guarda la altura a la que se encontró el último item
-    int lastHeiItem = 0;
-
-    // Recorre column
-    for (int column = 0; column < maxColumn; column++) {
-      for (int row = 0; row < maxRow; row++) {
-        try {
-          print('Posición: $row x $column');
-          print(mainMaterialMatrix[row][column]);
-          lastHeiItem = row;
-        } catch (e) {
-          print('NULO Posición: $row x $column');
-          mainMaterialMatrix[row].insert(column, emptyMaterialItem());
-          print(mainMaterialMatrix[row][column]);
-        }
-      }
-    }
-    print('paso');
   }
 
   // Imprime los id de los materiales en la matriz
@@ -450,12 +226,6 @@ class MaterialHandlers {
     int maxRow = materialMatrix.length;
     // Columnas de la matriz
     int maxColumn = materialMatrix[maxRow - 1].length;
-
-    print('maxRow $maxRow');
-    print('matWid $maxColumn');
-
-    // Guarda la altura a la que se encontró el último item
-    int lastHeiItem = 0;
 
     for (int row = 0; row < maxRow; row++) {
       for (int column = 0; column < maxColumn; column++) {
@@ -466,68 +236,21 @@ class MaterialHandlers {
     }
   }
 
-  // Imprime los id de los materiales en la matriz mainMaterialMatrix
-  void printMaterialsB() {
-    // Filas de la matriz
-    int maxRow = mainMaterialMatrix.length;
-    // Columnas de la matriz
-    int maxColumn = mainMaterialMatrix[maxRow - 1].length;
-
-    print('maxRow $maxRow');
-    print('matWid $maxColumn');
-
-    // Guarda la altura a la que se encontró el último item
-    int lastHeiItem = 0;
-
-    for (int row = 0; row < maxRow; row++) {
-      for (int column = 0; column < maxColumn; column++) {
-        //stdout.write('Posición: $row x $column');
-        stdout.write('${mainMaterialMatrix[row][column].materialId} ');
-      }
-      stdout.writeln();
-    }
+  /// Devuelve un MaterialItem vacio
+  MaterialItem emptyMaterialItem() {
+    return MaterialItem();
   }
 
-  // Metodo test para ver como opera la lista
-  void testAdd() {
-    // Inicial:
-    // 6 0
-    // 3 5
-    // 2 4
-    // 0 0
-
-    // Esto le agrega filas
-    mainMaterialMatrix.add([]);
-    // Despues de mainMaterialMatrix.add([]):
-    // 6 0
-    // 3 5
-    // 2 4
-    // 0 0
-    // 0 0 <- NUEVO
-
-    // Esto le agrega columnas
-    // NOTA: El insert no puede ser mayor a n+1 columnas
-    // mainMaterialMatrix[2].insert(3, emptyMaterialItem()); <- por el 3 se rompe, por que
-    // n filas es 1, n+1 = 2, siempre debe ser n+1.
-    mainMaterialMatrix[2].insert(2, emptyMaterialItem());
-    // Despues de mainMaterialMatrix[2].insert(2, emptyMaterialItem()):
-    // 6 0
-    // 3 5
-    // 2 4 0 <- NUEVO
-    // 0 0
-    // 0 0
-
-    print('paso');
-  }
-
+  /// Devuelve una lista de los materiales de la receta
   List<String> hasMaterials(MaterialItem materialItem) {
     List<String> materials = [];
-    materialItem.recipes['1']?.materials.forEach(
-      (key, value) {
-        materials.add(value.materialName);
-      },
-    );
-    print(materials);
+    if (!materialItem.ore) {
+      materialItem.recipes['1']?.materials.forEach(
+        (key, value) {
+          materials.add(value.materialName);
+        },
+      );
+    }
     return materials;
   }
 }

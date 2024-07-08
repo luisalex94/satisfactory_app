@@ -118,22 +118,188 @@
             }
         }
     },
-    "Coopper ingot": {
-        "materialName": "Coopper ingot",
+    "Copper ingot": {
+        "materialName": "Copper ingot",
         "fact": "Smelter",
         "power_input": 4,
         "materialId": 7,
-        "ore": true,
+        "ore": false,
         "recipes": {
             "1": {
                 "output": 1,
                 "output_pm": 30,
                 "materials": {
                     "1": {
-                        "materialName": "Coopper ore",
-                        "materialId": 8,
+                        "materialName": "Copper ore",
+                        "materialId": 15,
                         "input": 1,
                         "input_pm": 30
+                    }
+                }
+            }
+        }
+    },
+    "Motor": {
+        "materialName": "Motor",
+        "fact": "Assembler",
+        "power_input": 15,
+        "materialId": 16,
+        "ore": false,
+        "recipes": {
+            "1": {
+                "output": 1,
+                "output_pm": 5,
+                "materials": {
+                    "1": {
+                        "materialName": "Rotor",
+                        "materialId": 9,
+                        "input": 2,
+                        "input_pm": 10
+                    },
+                    "2": {
+                        "materialName": "Stator",
+                        "materialId": 10,
+                        "input": 2,
+                        "input_pm": 10
+                    }
+                }
+            }
+        }
+    },
+    "Rotor": {
+        "materialName": "Rotor",
+        "fact": "Assembler",
+        "power_input": 15,
+        "materialId": 9,
+        "ore": false,
+        "recipes": {
+            "1": {
+                "output": 1,
+                "output_pm": 4,
+                "materials": {
+                    "1": {
+                        "materialName": "Iron rod",
+                        "materialId": 4,
+                        "input": 5,
+                        "input_pm": 20
+                    },
+                    "2": {
+                        "materialName": "Screw",
+                        "materialId": 5,
+                        "input": 25,
+                        "input_pm": 100
+                    }
+                }
+            }
+        }
+    },
+    "Stator": {
+        "materialName": "Stator",
+        "fact": "Assembler",
+        "power_input": 15,
+        "materialId": 10,
+        "ore": false,
+        "recipes": {
+            "1": {
+                "output": 1,
+                "output_pm": 5,
+                "materials": {
+                    "1": {
+                        "materialName": "Steel pipe",
+                        "materialId": 11,
+                        "input": 3,
+                        "input_pm": 15
+                    },
+                    "2": {
+                        "materialName": "Wire",
+                        "materialId": 12,
+                        "input": 8,
+                        "input_pm": 40
+                    }
+                }
+            }
+        }
+    },
+    "Steel pipe": {
+        "materialName": "Steel pipe",
+        "fact": "Constructor",
+        "power_input": 4,
+        "materialId": 11,
+        "ore": false,
+        "recipes": {
+            "1": {
+                "output": 2,
+                "output_pm": 20,
+                "materials": {
+                    "1": {
+                        "materialName": "Steel ingot",
+                        "materialId": 13,
+                        "input": 3,
+                        "input_pm": 30
+                    }
+                }
+            }
+        }
+    },
+    "Steel ingot": {
+        "materialName": "Steel ingot",
+        "fact": "Foundry",
+        "power_input": 16,
+        "materialId": 13,
+        "ore": false,
+        "recipes": {
+            "1": {
+                "output": 3,
+                "output_pm": 45,
+                "materials": {
+                    "1": {
+                        "materialName": "Iron ore",
+                        "materialId": 1,
+                        "input": 3,
+                        "input_pm": 45
+                    },
+                    "2": {
+                        "materialName": "Coal",
+                        "materialId": 14,
+                        "input": 3,
+                        "input_pm": 45
+                    }
+                }
+            }
+        }
+    },
+    "Coal": {
+        "materialName": "Coal",
+        "fact": "Miner",
+        "power_input": 5,
+        "materialId": 14,
+        "ore": true,
+        "recipes": {}
+    },
+    "Copper ore": {
+        "materialName": "Copper ore",
+        "fact": "Miner",
+        "power_input": 5,
+        "materialId": 15,
+        "ore": true,
+        "recipes": {}
+    },
+    "Wire": {
+        "materialName": "Wire",
+        "fact": "Constructor",
+        "power_input": 4,
+        "materialId": 12,
+        "ore": false,
+        "recipes": {
+            "1": {
+                "output": 2,
+                "output_pm": 30,
+                "materials": {
+                    "1": {
+                        "materialName": "Copper ingot",
+                        "materialId": 7,
+                        "input": 1,
+                        "input_pm": 15
                     }
                 }
             }

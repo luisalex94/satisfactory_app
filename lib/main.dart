@@ -52,16 +52,9 @@ class _MyHomePageState extends State<MyHomePage> {
               IconButton(
                 onPressed: () {
                   //MaterialHandlers().runMatrixRecipe('Reinforced iron plate');
-                  MaterialHandlers().runMatrixRecipeB('Iron plate');
+                  MaterialHandlers().runMatrixRecipe('Motor');
                 },
-                icon: const Icon(Icons.ac_unit_sharp),
-              ),
-              IconButton(
-                onPressed: () {
-                  //MaterialHandlers().runMatrixRecipe('Reinforced iron plate');
-                  MaterialHandlers().runMatrixRecipeB('Reinforced iron plate');
-                },
-                icon: const Icon(Icons.access_alarm_sharp),
+                icon: const Icon(Icons.unarchive),
               ),
               IconButton(
                 onPressed: () {
@@ -76,41 +69,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   //MaterialHandlers().runMatrixRecipe('Iron plate');
                 },
                 icon: const Icon(Icons.abc),
-              ),
-              IconButton(
-                onPressed: () {
-                  MaterialHandlers().printMaterialsB();
-                  //MaterialHandlers().runMatrixRecipe('Iron plate');
-                },
-                icon: const Icon(Icons.print),
-              ),
-              IconButton(
-                onPressed: () {
-                  MaterialHandlers().fillWithEmptyMaterialItemsB();
-                  //MaterialHandlers().runMatrixRecipe('Iron plate');
-                },
-                icon: const Icon(Icons.print_disabled),
-              ),
-              IconButton(
-                onPressed: () {
-                  MaterialHandlers().testAdd();
-                  //MaterialHandlers().runMatrixRecipe('Iron plate');
-                },
-                icon: const Icon(Icons.textsms_sharp),
-              ),
-              IconButton(
-                onPressed: () {
-                  MaterialHandlers().needGrowB();
-                  //MaterialHandlers().runMatrixRecipe('Iron plate');
-                },
-                icon: const Icon(Icons.arrow_circle_up_rounded),
-              ),
-              IconButton(
-                onPressed: () {
-                  MaterialHandlers().expandTreeB();
-                  //MaterialHandlers().runMatrixRecipe('Iron plate');
-                },
-                icon: const Icon(Icons.new_label),
               ),
             ],
           ),
@@ -204,7 +162,9 @@ class _MyHomePageState extends State<MyHomePage> {
             padding: const EdgeInsets.all(10.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
-              children: [Text('Choose item')],
+              children: [Text('Choose item'),
+              //GridView.builder(itemCount: ,)
+              ],
             ),
           ),
         ),
