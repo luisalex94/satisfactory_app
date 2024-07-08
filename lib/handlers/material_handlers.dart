@@ -176,6 +176,7 @@ class MaterialHandlers {
               if (maxRow - 1 - row == 0) {
                 // Agrega una fila debajo, ya que detecta que está en la última fila
                 materialMatrix.add([]);
+                fillWithEmptyMaterialItems(materialMatrix);
               }
               List<String> newMaterials =
                   hasMaterials(materialMatrix[row][column]);
@@ -187,8 +188,7 @@ class MaterialHandlers {
               }
               int j = 0;
               for (int i = column; i <= newMaterials.length + column - 1; i++) {
-                materialMatrix[row + 1]
-                    .insert(column, getMaterialItem(newMaterials[j]));
+                materialMatrix[row + 1][i] = getMaterialItem(newMaterials[j]);
                 j++;
               }
 
@@ -362,14 +362,15 @@ class MaterialHandlers {
     required List<List<MaterialItem>> materialMatrix,
     required int column,
   }) {
+    fillWithEmptyMaterialItems(materialMatrix);
     // Altura de la matriz
     int maxRow = materialMatrix.length;
     // Guarda el numero con la fila mas ancha
     int maxColumn = materialMatrix[0].length;
 
     // Recorre la matriz en la columna [column] agregando un MaterialItem vacio
-    for (int i = 0; i < maxColumn; i++) {
-      materialMatrix[column].insert(i, emptyMaterialItem());
+    for (int i = 0; i < maxRow; i++) {
+      materialMatrix[i].insert(column, emptyMaterialItem());
     }
     return materialMatrix;
   }
