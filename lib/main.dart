@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:satisfactory_app/handlers/material_item.dart';
 import 'handlers/material_handlers.dart';
 
@@ -37,6 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
   MaterialItem selectedMaterial = MaterialItem();
   int selectedIndex = -1;
   List<List<MaterialItem>> recipe = [];
+  TextEditingController _itemsPmTextController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -113,6 +115,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
+                      _itemsPm(),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       _findBox(),
                       Expanded(
                         child: ListView.builder(
@@ -153,7 +159,6 @@ class _MyHomePageState extends State<MyHomePage> {
     int column = 0;
     int row = 0;
     if (material!.materialName != "") {
-      int totalCount = (recipe.length * recipe.length);
       int columnSize = recipe[0].length;
       return Padding(
         padding: const EdgeInsets.all(12.0),
@@ -164,7 +169,7 @@ class _MyHomePageState extends State<MyHomePage> {
             border: Border.all(width: 1),
           ),
           height: _screenHeight - 124,
-          width: 320,
+          width: 720,
           child: Padding(
             padding: const EdgeInsets.all(10.0),
             child: Column(
@@ -181,10 +186,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     itemBuilder: (context, index) {
                       column = (index / columnSize).floor();
                       row = index - (column * columnSize);
-                      return ListTile(
-                        title: Text(recipe[column][row].materialId.toString()),
-                        //title: Text(index.toString()),
-                      );
+                      return regularItemCard(recipe[column][row]);
                     },
                   ),
                 ),
@@ -210,13 +212,43 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text('Selecciona un item'),
-
-                //GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, crossAxisSpacing: 10, mainAxisSpacing: 10), itemBuilder: items.)
               ],
             ),
           ),
         ),
       );
+    }
+  }
+
+  Widget regularItemCard(MaterialItem material) {
+    if (material.ore) {
+      return SizedBox(
+        height: 200,
+        width: 200,
+        child: Column(
+          children: [
+            Text(material.materialName),
+            //Text(material.materialId.toString()),
+            Text(material.fact),
+          ],
+        ),
+      );
+    } else if (material.materialId != 0) {
+      return SizedBox(
+        height: 200,
+        width: 200,
+        child: Column(
+          children: [
+            Text(material.materialName),
+            //Text(material.materialId.toString()),
+            Text(material.fact),
+            Text('Output: ${material.recipes['1']!.output.toString()}'),
+            Text('Output PM: ${material.recipes['1']!.outputPm.toString()}')
+          ],
+        ),
+      );
+    } else {
+      return Container();
     }
   }
 
@@ -227,6 +259,22 @@ class _MyHomePageState extends State<MyHomePage> {
         filled: true,
         hintStyle: TextStyle(color: Colors.grey[800]),
         hintText: "Find item",
+        fillColor: Colors.white70,
+        suffixIcon: const Icon(Icons.search),
+        suffixIconColor: Colors.grey[800],
+      ),
+    );
+  }
+
+  Widget _itemsPm() {
+    return TextFormField(
+      controller: _itemsPmTextController,
+      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+      decoration: InputDecoration(
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+        filled: true,
+        hintStyle: TextStyle(color: Colors.grey[800]),
+        hintText: "Items per minute",
         fillColor: Colors.white70,
         suffixIcon: const Icon(Icons.search),
         suffixIconColor: Colors.grey[800],
