@@ -36,6 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
   double _screenHeight = 0;
   MaterialItem selectedMaterial = MaterialItem();
   int selectedIndex = -1;
+  List<List<MaterialItem>> recipe = [];
 
   @override
   Widget build(BuildContext context) {
@@ -128,6 +129,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                 setState(() {
                                   selectedMaterial = MaterialHandlers()
                                       .getMaterialItem(materials[index]);
+                                  recipe = MaterialHandlers()
+                                      .runMatrixRecipe(materials[index] ?? []);
                                 });
                               },
                             );
@@ -147,7 +150,11 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget _mainPage(MaterialItem? material) {
-    if (material != null) {
+    int column = 0;
+    int row = 0;
+    if (material!.materialName != "") {
+      int totalCount = (recipe.length * recipe.length);
+      int columnSize = recipe[0].length;
       return Padding(
         padding: const EdgeInsets.all(12.0),
         child: Container(
@@ -158,12 +165,29 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           height: _screenHeight - 124,
           width: 320,
-          child: const Padding(
+          child: Padding(
             padding: const EdgeInsets.all(10.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
-              children: [Text('Choose item'),
-              //GridView.builder(itemCount: ,)
+              children: [
+                Text(material.materialName),
+                Expanded(
+                  child: GridView.builder(
+                    itemCount: (recipe[0].length * recipe.length),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: recipe[0].length),
+                    padding: const EdgeInsets.all(10),
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      column = (index / columnSize).floor();
+                      row = index - (column * columnSize);
+                      return ListTile(
+                        title: Text(recipe[column][row].materialId.toString()),
+                        //title: Text(index.toString()),
+                      );
+                    },
+                  ),
+                ),
               ],
             ),
           ),
@@ -180,12 +204,12 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           height: _screenHeight - 124,
           width: 320,
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
+          child: const Padding(
+            padding: EdgeInsets.all(10.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text(material!.materialName),
+                Text('Selecciona un item'),
 
                 //GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, crossAxisSpacing: 10, mainAxisSpacing: 10), itemBuilder: items.)
               ],
