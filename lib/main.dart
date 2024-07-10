@@ -38,7 +38,13 @@ class _MyHomePageState extends State<MyHomePage> {
   MaterialItem selectedMaterial = MaterialItem();
   int selectedIndex = -1;
   List<List<MaterialItem>> recipe = [];
-  TextEditingController _itemsPmTextController = TextEditingController();
+  final TextEditingController _itemsPmTextController = TextEditingController();
+
+  @override
+  void initState() {
+    _itemsPmTextController.text = '0';
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,29 +57,6 @@ class _MyHomePageState extends State<MyHomePage> {
           appBar: AppBar(
             backgroundColor: Theme.of(context).colorScheme.inversePrimary,
             title: Text(widget.title),
-            actions: [
-              IconButton(
-                onPressed: () {
-                  //MaterialHandlers().runMatrixRecipe('Reinforced iron plate');
-                  MaterialHandlers().runMatrixRecipe('Motor');
-                },
-                icon: const Icon(Icons.unarchive),
-              ),
-              IconButton(
-                onPressed: () {
-                  //MaterialHandlers().runMatrixRecipe('Reinforced iron plate');
-                  MaterialHandlers().runMatrixRecipe('Iron plate');
-                },
-                icon: const Icon(Icons.add),
-              ),
-              IconButton(
-                onPressed: () {
-                  MaterialHandlers().runMatrixRecipe('Reinforced iron plate');
-                  //MaterialHandlers().runMatrixRecipe('Iron plate');
-                },
-                icon: const Icon(Icons.abc),
-              ),
-            ],
           ),
           body: FutureBuilder(
             future: MaterialHandlers().loadJson(),
@@ -115,7 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      _itemsPm(),
+                      _itemsPm(context),
                       const SizedBox(
                         height: 10,
                       ),
@@ -135,8 +118,15 @@ class _MyHomePageState extends State<MyHomePage> {
                                 setState(() {
                                   selectedMaterial = MaterialHandlers()
                                       .getMaterialItem(materials[index]);
-                                  recipe = MaterialHandlers()
-                                      .runMatrixRecipe(materials[index] ?? []);
+                                  recipe = MaterialHandlers().runMatrixRecipe(
+                                      item: materials[index] ?? [],
+                                      ppm: double.parse(_itemsPmTextController.text
+                                                  .toString()) ==
+                                              0
+                                          ? 1
+                                          : double.parse(_itemsPmTextController
+                                              .text
+                                              .toString()));
                                 });
                               },
                             );
@@ -169,7 +159,7 @@ class _MyHomePageState extends State<MyHomePage> {
             border: Border.all(width: 1),
           ),
           height: _screenHeight - 124,
-          width: 720,
+          width: 1200,
           child: Padding(
             padding: const EdgeInsets.all(10.0),
             child: Column(
@@ -235,7 +225,7 @@ class _MyHomePageState extends State<MyHomePage> {
       );
     } else if (material.materialId != 0) {
       return SizedBox(
-        height: 200,
+        height: 300,
         width: 200,
         child: Column(
           children: [
@@ -243,7 +233,28 @@ class _MyHomePageState extends State<MyHomePage> {
             //Text(material.materialId.toString()),
             Text(material.fact),
             Text('Output: ${material.recipes['1']!.output.toString()}'),
-            Text('Output PM: ${material.recipes['1']!.outputPm.toString()}')
+            Text('Output PM: ${material.recipes['1']!.outputPm.toString()}'),
+            Text(
+              'Modified Output PM: ${material.recipes['1']!.outputModifiedPm.toString()}',
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+            Divider(),
+            material.recipes['1']!.materials['1']?.input != null
+                ? Text(
+                    '1 - ${material.recipes['1']!.materials['1']?.materialName}: ${material.recipes['1']!.materials['1']?.inputPm} (${material.recipes['1']!.materials['1']?.inputModifiedPm})')
+                : Container(),
+            material.recipes['1']!.materials['2']?.input != null
+                ? Text(
+                    '2 - ${material.recipes['1']!.materials['2']?.materialName}: ${material.recipes['1']!.materials['2']?.inputPm} (${material.recipes['1']!.materials['2']?.inputModifiedPm})')
+                : Container(),
+            material.recipes['1']!.materials['3']?.input != null
+                ? Text(
+                    '3 - ${material.recipes['1']!.materials['3']?.materialName}: ${material.recipes['1']!.materials['3']?.inputPm} (${material.recipes['1']!.materials['3']?.inputModifiedPm})')
+                : Container(),
+            material.recipes['1']!.materials['4']?.input != null
+                ? Text(
+                    '4 - ${material.recipes['1']!.materials['4']?.materialName}: ${material.recipes['1']!.materials['4']?.inputPm} (${material.recipes['1']!.materials['4']?.inputModifiedPm})')
+                : Container(),
           ],
         ),
       );
@@ -266,7 +277,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Widget _itemsPm() {
+  Widget _itemsPm(BuildContext context) {
     return TextFormField(
       controller: _itemsPmTextController,
       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
@@ -279,6 +290,11 @@ class _MyHomePageState extends State<MyHomePage> {
         suffixIcon: const Icon(Icons.search),
         suffixIconColor: Colors.grey[800],
       ),
+      onChanged: (value) {
+        setState(() {
+          print(_itemsPmTextController.text);
+        });
+      },
     );
   }
 }
