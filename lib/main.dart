@@ -225,7 +225,31 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget _columnConstructor(int column, int row) {
     List<Widget> mainColumn = [];
     for (int i = 0; i < row; i++) {
-      mainColumn.add(regularItemCard(recipe[i][column - 1]));
+      List<Widget> rowChildren = [];
+      for (int j = 0; j < column; j++) {
+        rowChildren.add(
+          regularItemCard(
+            recipe[i][j],
+          ),
+        );
+        rowChildren.add(
+          const SizedBox(
+            width: 10,
+            height: 10,
+          ),
+        );
+      }
+      mainColumn.add(
+        Row(
+          children: rowChildren,
+        ),
+      );
+      mainColumn.add(
+        const SizedBox(
+          width: 10,
+          height: 10,
+        ),
+      );
     }
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
