@@ -38,6 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
   MaterialItem selectedMaterial = MaterialItem();
   int selectedIndex = -1;
   List<List<MaterialItem>> recipe = [];
+  
   final TextEditingController _itemsPmTextController = TextEditingController();
 
   @override
@@ -120,7 +121,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                       .getMaterialItem(materials[index]);
                                   recipe = MaterialHandlers().runMatrixRecipe(
                                       item: materials[index] ?? [],
-                                      ppm: double.parse(_itemsPmTextController.text
+                                      ppm: double.parse(_itemsPmTextController
+                                                  .text
                                                   .toString()) ==
                                               0
                                           ? 1
@@ -220,6 +222,11 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(material.materialName),
             //Text(material.materialId.toString()),
             Text(material.fact),
+            Divider(),
+            material.oreOutputPm != 0
+                ? Text('InputPM: ${material.oreOutputPm}',
+                    style: const TextStyle(fontWeight: FontWeight.bold))
+                : Container(),
           ],
         ),
       );

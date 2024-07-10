@@ -4,14 +4,16 @@ class MaterialItem {
   double powerInput = 0.0;
   int materialId = 0;
   bool ore = false;
+  double oreOutputPm = 0.0;
   Map<String, RecipeItem> recipes = {};
 
   MaterialItem({
     this.materialName = "",
     this.fact = "",
-    this.powerInput = 0,
+    this.powerInput = 0.0,
     this.materialId = 0,
     this.ore = false,
+    this.oreOutputPm = 0.0,
     this.recipes = const {},
   });
 
@@ -30,6 +32,7 @@ class MaterialItem {
       powerInput: json['power_input'] ?? 0.0,
       materialId: json['materialId'] ?? 0,
       ore: json['ore'] ?? false,
+      oreOutputPm: json['oreOutputPm'] ?? 0.0,
       recipes: recipes,
     );
   }
@@ -48,6 +51,7 @@ class MaterialItem {
       materialName: item.materialName,
       ore: item.ore,
       powerInput: item.powerInput,
+      oreOutputPm: item.oreOutputPm,
       recipes: newRecipes,
     );
   }

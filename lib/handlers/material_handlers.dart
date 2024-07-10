@@ -77,7 +77,7 @@ class MaterialHandlers {
     // Imprime la matriz (informativo)
     printMaterials(recipe);
 
-      return recipe;
+    return recipe;
   }
 
   // Busca donde expandir materiales y los expande
@@ -312,6 +312,11 @@ class MaterialHandlers {
         materialItem.recipes['1']!.materials[(i + 1).toString()]!
             .inputModifiedPm = inputModifiedPm;
       }
+      // Se retorna el materialItem
+      return materialItem;
+    } else if (relation != 0 && materialItem.ore == true) {
+      materialItem.oreOutputPm = ppm;
+
       // Se retorna el materialItem
       return materialItem;
     } else {
