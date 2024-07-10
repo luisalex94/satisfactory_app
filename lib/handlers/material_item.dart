@@ -137,3 +137,31 @@ class Ingredient {
     );
   }
 }
+
+class OreItem {
+  String materialName = "";
+  int materialId = 0;
+  double outputPm = 0.0;
+
+  OreItem({
+    this.materialName = "",
+    this.materialId = 0,
+    this.outputPm = 0.0,
+  });
+
+  factory OreItem.fromJson(json) {
+    return OreItem(
+      materialName: json['materialName'] ?? '',
+      materialId: json['materialId'] ?? 0,
+      outputPm: json['outputPm'] ?? 0.0,
+    );
+  }
+
+  factory OreItem.copyWith(OreItem item) {
+    return OreItem(
+      materialName: item.materialName,
+      materialId: item.materialId,
+      outputPm: item.outputPm,
+    );
+  }
+}

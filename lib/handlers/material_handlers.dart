@@ -16,6 +16,9 @@ class MaterialHandlers {
   // Mapa de materiales
   Map<String, MaterialItem> materialItems = {};
 
+  // Mapa de ores
+  Map<String, OreItem> oreItems = {};
+
   /// Carga los materiales a materialItems desde el json
   Future<Map<String, dynamic>> loadJson() async {
     // Se obtiene el json
@@ -27,7 +30,10 @@ class MaterialHandlers {
     jsonResponse.forEach((key, value) {
       materialItems[key] = MaterialItem.fromJson(value);
     });
+    // Se cargan los oreItems al mapa
+    oreItems = getOreItemMap();
 
+    // Se retoran el jsonResponse
     return jsonResponse;
   }
 
@@ -41,6 +47,30 @@ class MaterialHandlers {
     });
     // Devuelve la lista de nombres
     return data;
+  }
+
+  /// Devuelve una lista con los nombres de cada itemOre
+  Map<String, OreItem> getOreItemMap() {
+    // Variable para almacenar el mapa de OreItems
+    Map<String, OreItem> data = {};
+
+    // Se recorre el mapa de materiales para capturar en data los de tipo ore
+    materialItems.forEach((key, value) {
+      if (value.ore) {
+        data[key] = OreItem(
+          materialName: value.materialName,
+          materialId: value.materialId,
+          outputPm: 0.0,
+        );
+      }
+    });
+
+    // Retornamos el mapa con los items tipo ore
+    return data;
+  }
+
+  Map<String, OreItem> getOreItems() {
+    return oreItems;
   }
 
   /// Devuelve un [MaterialItem]
@@ -314,12 +344,25 @@ class MaterialHandlers {
       }
       // Se retorna el materialItem
       return materialItem;
+
+      // Si el materialItem es un ore, entra aqui
     } else if (relation != 0 && materialItem.ore == true) {
+      // Se agrega directo el ppm al oreOutputPm
       materialItem.oreOutputPm = ppm;
+
+      // Se obtiene el valor actual de outputPm del ore
+      double currentOutputPm = oreItems[materialItem.materialName]!.outputPm;
+
+      // Se suma el valor actual con el valor nuevo al outputPm del ore
+      double newOutputPm = currentOutputPm + ppm;
+
+      // Se asigna el valor nuevo al oreItem
+      oreItems[materialItem.materialName]!.outputPm = newOutputPm;
 
       // Se retorna el materialItem
       return materialItem;
     } else {
+      // Se retorna el materialItem si no cumple ninguna de las condiciones anteriores
       return materialItem;
     }
   }

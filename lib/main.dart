@@ -38,7 +38,8 @@ class _MyHomePageState extends State<MyHomePage> {
   MaterialItem selectedMaterial = MaterialItem();
   int selectedIndex = -1;
   List<List<MaterialItem>> recipe = [];
-  
+  Map<String, OreItem> oreItems = {};
+
   final TextEditingController _itemsPmTextController = TextEditingController();
 
   @override
@@ -86,58 +87,103 @@ class _MyHomePageState extends State<MyHomePage> {
           padding: const EdgeInsets.all(12.0),
           child: Row(
             children: [
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.black12,
-                  border: Border.all(width: 1),
-                ),
-                height: _screenHeight - 120,
-                width: 320,
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      _itemsPm(context),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      _findBox(),
-                      Expanded(
-                        child: ListView.builder(
-                          itemCount:
-                              MaterialHandlers().getMaterialsList().length,
-                          itemBuilder: (context, index) {
-                            List materials =
-                                MaterialHandlers().getMaterialsList();
-
-                            return ListTile(
-                              title: Text(materials[index]),
-                              selected: selectedIndex == index,
-                              onTap: () {
-                                setState(() {
-                                  selectedMaterial = MaterialHandlers()
-                                      .getMaterialItem(materials[index]);
-                                  recipe = MaterialHandlers().runMatrixRecipe(
-                                      item: materials[index] ?? [],
-                                      ppm: double.parse(_itemsPmTextController
-                                                  .text
-                                                  .toString()) ==
-                                              0
-                                          ? 1
-                                          : double.parse(_itemsPmTextController
-                                              .text
-                                              .toString()));
-                                });
+              Column(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.black12,
+                      border: Border.all(width: 1),
+                    ),
+                    height: 300,
+                    width: 320,
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: ListView.builder(
+                              itemCount: oreItems.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                String name = oreItems.values
+                                    .elementAt(index)
+                                    .materialName;
+                                double quantity =
+                                    oreItems.values.elementAt(index).outputPm;
+                                return Text('$name: ${quantity.toString()}');
                               },
-                            );
-                          },
-                        ),
-                      )
-                    ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
-                ),
+                  const SizedBox(
+                    height: 10,
+                    width: 10,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.black12,
+                      border: Border.all(width: 1),
+                    ),
+                    height: _screenHeight - 430,
+                    width: 320,
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          _itemsPm(context),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          _findBox(),
+                          Expanded(
+                            child: ListView.builder(
+                              itemCount:
+                                  MaterialHandlers().getMaterialsList().length,
+                              itemBuilder: (context, index) {
+                                List materials =
+                                    MaterialHandlers().getMaterialsList();
+
+                                return ListTile(
+                                  title: Text(materials[index]),
+                                  selected: selectedIndex == index,
+                                  onTap: () {
+                                    setState(
+                                      () {
+                                        selectedMaterial = MaterialHandlers()
+                                            .getMaterialItem(materials[index]);
+                                        recipe = MaterialHandlers()
+                                            .runMatrixRecipe(
+                                                item: materials[index] ?? [],
+                                                ppm: double.parse(
+                                                            _itemsPmTextController
+                                                                .text
+                                                                .toString()) ==
+                                                        0
+                                                    ? 1
+                                                    : double.parse(
+                                                        _itemsPmTextController
+                                                            .text
+                                                            .toString()));
+                                        oreItems =
+                                            MaterialHandlers().getOreItems();
+                                      },
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
               _mainPage(selectedMaterial)
             ],
@@ -222,7 +268,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(material.materialName),
             //Text(material.materialId.toString()),
             Text(material.fact),
-            Divider(),
+            const Divider(),
             material.oreOutputPm != 0
                 ? Text('InputPM: ${material.oreOutputPm}',
                     style: const TextStyle(fontWeight: FontWeight.bold))
@@ -245,7 +291,7 @@ class _MyHomePageState extends State<MyHomePage> {
               'Modified Output PM: ${material.recipes['1']!.outputModifiedPm.toString()}',
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
-            Divider(),
+            const Divider(),
             material.recipes['1']!.materials['1']?.input != null
                 ? Text(
                     '1 - ${material.recipes['1']!.materials['1']?.materialName}: ${material.recipes['1']!.materials['1']?.inputPm} (${material.recipes['1']!.materials['1']?.inputModifiedPm})')
