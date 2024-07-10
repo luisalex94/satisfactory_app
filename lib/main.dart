@@ -86,8 +86,12 @@ class _MyHomePageState extends State<MyHomePage> {
         Padding(
           padding: const EdgeInsets.all(12.0),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
                     decoration: BoxDecoration(
@@ -111,7 +115,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                     .materialName;
                                 double quantity =
                                     oreItems.values.elementAt(index).outputPm;
-                                return Text('$name: ${quantity.toString()}');
+                                return Text(
+                                    '$name: ${quantity.toStringAsFixed(2)}');
                               },
                             ),
                           ),
@@ -185,11 +190,47 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ],
               ),
-              _mainPage(selectedMaterial)
+              //_mainPage(selectedMaterial)
+              const SizedBox(
+                height: 10,
+                width: 10,
+              ),
+              _mainPageB(selectedMaterial),
             ],
           ),
         ),
       ],
+    );
+  }
+
+  Widget _mainPageB(MaterialItem? material) {
+    if (material!.materialName != "") {
+      int row = recipe.length;
+      int column = recipe[0].length;
+      return SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: _columnConstructor(
+            column,
+            row,
+          ),
+        ),
+      );
+    } else {
+      return const Text('No info');
+    }
+  }
+
+  Widget _columnConstructor(int column, int row) {
+    List<Widget> mainColumn = [];
+    for (int i = 0; i < row; i++) {
+      mainColumn.add(regularItemCard(recipe[i][column - 1]));
+    }
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: mainColumn,
     );
   }
 
@@ -258,9 +299,66 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  Widget buildB(BuildContext context) {
+    // Define el número de filas y columnas
+    int n = 10; // número de filas
+    int m = 10; // número de columnas
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // Calcula el tamaño de cada celda
+        double cellWidth = constraints.maxWidth / m;
+        double cellHeight = 100; // Altura fija de cada celda (puedes cambiarlo)
+
+        return SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxWidth: cellWidth * m,
+            ),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxHeight: cellHeight * n,
+                ),
+                child: Expanded(
+                  child: GridView.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: m,
+                      childAspectRatio: cellWidth / cellHeight,
+                    ),
+                    itemCount: n * m,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        margin: EdgeInsets.all(4.0),
+                        color: Colors.blueAccent,
+                        child: Center(
+                          child: Text('Item $index'),
+                        ),
+                      );
+                    },
+                    physics:
+                        NeverScrollableScrollPhysics(), // Desactiva el scroll del GridView
+                    shrinkWrap: true,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   Widget regularItemCard(MaterialItem material) {
     if (material.ore) {
-      return SizedBox(
+      return Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.amber,
+          border: Border.all(width: 1),
+        ),
         height: 200,
         width: 200,
         child: Column(
@@ -270,15 +368,20 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(material.fact),
             const Divider(),
             material.oreOutputPm != 0
-                ? Text('InputPM: ${material.oreOutputPm}',
+                ? Text('InputPM: ${(material.oreOutputPm.toStringAsFixed(2))}',
                     style: const TextStyle(fontWeight: FontWeight.bold))
                 : Container(),
           ],
         ),
       );
     } else if (material.materialId != 0) {
-      return SizedBox(
-        height: 300,
+      return Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.amber,
+          border: Border.all(width: 1),
+        ),
+        height: 200,
         width: 200,
         child: Column(
           children: [
@@ -288,31 +391,40 @@ class _MyHomePageState extends State<MyHomePage> {
             Text('Output: ${material.recipes['1']!.output.toString()}'),
             Text('Output PM: ${material.recipes['1']!.outputPm.toString()}'),
             Text(
-              'Modified Output PM: ${material.recipes['1']!.outputModifiedPm.toString()}',
+              'Modified Output PM: ${(material.recipes['1']!.outputModifiedPm.toStringAsFixed(2))}',
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             const Divider(),
             material.recipes['1']!.materials['1']?.input != null
                 ? Text(
-                    '1 - ${material.recipes['1']!.materials['1']?.materialName}: ${material.recipes['1']!.materials['1']?.inputPm} (${material.recipes['1']!.materials['1']?.inputModifiedPm})')
+                    '1 - ${material.recipes['1']!.materials['1']?.materialName}: ${material.recipes['1']!.materials['1']?.inputPm} (${(material.recipes['1']!.materials['1']?.inputModifiedPm)!.toStringAsFixed(2)})')
                 : Container(),
             material.recipes['1']!.materials['2']?.input != null
                 ? Text(
-                    '2 - ${material.recipes['1']!.materials['2']?.materialName}: ${material.recipes['1']!.materials['2']?.inputPm} (${material.recipes['1']!.materials['2']?.inputModifiedPm})')
+                    '2 - ${material.recipes['1']!.materials['2']?.materialName}: ${material.recipes['1']!.materials['2']?.inputPm} (${(material.recipes['1']!.materials['2']?.inputModifiedPm.toStringAsFixed(2))})')
                 : Container(),
             material.recipes['1']!.materials['3']?.input != null
                 ? Text(
-                    '3 - ${material.recipes['1']!.materials['3']?.materialName}: ${material.recipes['1']!.materials['3']?.inputPm} (${material.recipes['1']!.materials['3']?.inputModifiedPm})')
+                    '3 - ${material.recipes['1']!.materials['3']?.materialName}: ${material.recipes['1']!.materials['3']?.inputPm} (${(material.recipes['1']!.materials['3']?.inputModifiedPm.toStringAsFixed(2))})')
                 : Container(),
             material.recipes['1']!.materials['4']?.input != null
                 ? Text(
-                    '4 - ${material.recipes['1']!.materials['4']?.materialName}: ${material.recipes['1']!.materials['4']?.inputPm} (${material.recipes['1']!.materials['4']?.inputModifiedPm})')
+                    '4 - ${material.recipes['1']!.materials['4']?.materialName}: ${material.recipes['1']!.materials['4']?.inputPm} (${(material.recipes['1']!.materials['4']?.inputModifiedPm.toStringAsFixed(2))})')
                 : Container(),
           ],
         ),
       );
     } else {
-      return Container();
+      return Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.white,
+          border: Border.all(width: 1),
+        ),
+        height: 200,
+        width: 200,
+        //child: const Text('No item'),
+      );
     }
   }
 
@@ -344,9 +456,7 @@ class _MyHomePageState extends State<MyHomePage> {
         suffixIconColor: Colors.grey[800],
       ),
       onChanged: (value) {
-        setState(() {
-          print(_itemsPmTextController.text);
-        });
+        setState(() {});
       },
     );
   }
