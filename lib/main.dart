@@ -99,8 +99,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: SingleChildScrollView(
                       child: ConstrainedBox(
                         constraints: BoxConstraints(
-                          minHeight: viewportConstraints.maxHeight,
-                          minWidth: viewportConstraints.maxWidth,
+                          minHeight: viewportConstraints.maxHeight - 20,
+                          minWidth: viewportConstraints.maxWidth - 360,
                         ),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
@@ -167,9 +167,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             _itemsPm(context),
-            const SizedBox(
-              height: 10,
-            ),
+            _sizedBox10(),
             _findBox(),
             Expanded(
               child: ListView.builder(
@@ -282,7 +280,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: Colors.amber,
+          color: Colors.amber[100],
           border: Border.all(width: 1),
         ),
         height: 200,
@@ -304,7 +302,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: Colors.amber,
+          color: Colors.blue[100],
           border: Border.all(width: 1),
         ),
         height: 200,
