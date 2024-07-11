@@ -5,6 +5,7 @@ class MaterialItem {
   int materialId = 0;
   bool ore = false;
   double oreOutputPm = 0.0;
+  int factQuantity = 0;
   Map<String, RecipeItem> recipes = {};
 
   MaterialItem({
@@ -14,6 +15,7 @@ class MaterialItem {
     this.materialId = 0,
     this.ore = false,
     this.oreOutputPm = 0.0,
+    this.factQuantity = 0,
     this.recipes = const {},
   });
 
@@ -33,6 +35,7 @@ class MaterialItem {
       materialId: json['materialId'] ?? 0,
       ore: json['ore'] ?? false,
       oreOutputPm: json['oreOutputPm'] ?? 0.0,
+      factQuantity: json['factQuantity'] ?? 0,
       recipes: recipes,
     );
   }
@@ -52,6 +55,7 @@ class MaterialItem {
       ore: item.ore,
       powerInput: item.powerInput,
       oreOutputPm: item.oreOutputPm,
+      factQuantity: item.factQuantity,
       recipes: newRecipes,
     );
   }

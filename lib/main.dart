@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:satisfactory_app/cards/regularItemCard.dart';
 import 'package:satisfactory_app/handlers/material_item.dart';
 import 'handlers/material_handlers.dart';
 
@@ -38,6 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int selectedIndex = -1;
   List<List<MaterialItem>> recipe = [];
   Map<String, OreItem> oreItems = {};
+  bool ready = false;
 
   final TextEditingController _itemsPmTextController = TextEditingController();
 
@@ -245,8 +247,9 @@ class _MyHomePageState extends State<MyHomePage> {
       List<Widget> rowChildren = [];
       for (int j = 0; j < column; j++) {
         rowChildren.add(
-          regularItemCard(
-            recipe[i][j],
+          Regularitemcard(
+            material: recipe[i][j],
+            key: ValueKey('${recipe[i][j].materialId != 0 ? 0 : recipe[i][j].materialId} _$i _$j'),
           ),
         );
         rowChildren.add(
@@ -276,6 +279,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget regularItemCard(MaterialItem material) {
+    // CREAR UN NUEVO WIDGET SATEFULL PARA APLICAR SETSTATE SOLOAMENTE A ESTE WIDGET
     if (material.ore) {
       return Container(
         decoration: BoxDecoration(
@@ -299,43 +303,51 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       );
     } else if (material.materialId != 0) {
-      return Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: Colors.blue[100],
-          border: Border.all(width: 1),
-        ),
-        height: 200,
-        width: 200,
-        child: Column(
-          children: [
-            Text(material.materialName),
-            //Text(material.materialId.toString()),
-            Text(material.fact),
-            Text('Output: ${material.recipes['1']!.output.toString()}'),
-            Text('Output PM: ${material.recipes['1']!.outputPm.toString()}'),
-            Text(
-              'Modified Output PM: ${(material.recipes['1']!.outputModifiedPm.toStringAsFixed(2))}',
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
-            const Divider(),
-            material.recipes['1']!.materials['1']?.input != null
-                ? Text(
-                    '1 - ${material.recipes['1']!.materials['1']?.materialName}: ${material.recipes['1']!.materials['1']?.inputPm} (${(material.recipes['1']!.materials['1']?.inputModifiedPm)!.toStringAsFixed(2)})')
-                : Container(),
-            material.recipes['1']!.materials['2']?.input != null
-                ? Text(
-                    '2 - ${material.recipes['1']!.materials['2']?.materialName}: ${material.recipes['1']!.materials['2']?.inputPm} (${(material.recipes['1']!.materials['2']?.inputModifiedPm.toStringAsFixed(2))})')
-                : Container(),
-            material.recipes['1']!.materials['3']?.input != null
-                ? Text(
-                    '3 - ${material.recipes['1']!.materials['3']?.materialName}: ${material.recipes['1']!.materials['3']?.inputPm} (${(material.recipes['1']!.materials['3']?.inputModifiedPm.toStringAsFixed(2))})')
-                : Container(),
-            material.recipes['1']!.materials['4']?.input != null
-                ? Text(
-                    '4 - ${material.recipes['1']!.materials['4']?.materialName}: ${material.recipes['1']!.materials['4']?.inputPm} (${(material.recipes['1']!.materials['4']?.inputModifiedPm.toStringAsFixed(2))})')
-                : Container(),
-          ],
+      return GestureDetector(
+        onTap: () {
+          setState(() {
+            ready = !ready;
+            print('ready: $ready');
+          });
+        },
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: ready ? Colors.blue[100] : Colors.green[100],
+            border: Border.all(width: 1),
+          ),
+          height: 200,
+          width: 200,
+          child: Column(
+            children: [
+              Text(material.materialName),
+              //Text(material.materialId.toString()),
+              Text('${material.fact}: ${material.factQuantity}'),
+              Text('Output: ${material.recipes['1']!.output.toString()}'),
+              Text('Output PM: ${material.recipes['1']!.outputPm.toString()}'),
+              Text(
+                'Modified Output PM: ${(material.recipes['1']!.outputModifiedPm.toStringAsFixed(2))}',
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+              const Divider(),
+              material.recipes['1']!.materials['1']?.input != null
+                  ? Text(
+                      '1 - ${material.recipes['1']!.materials['1']?.materialName}: ${material.recipes['1']!.materials['1']?.inputPm} (${(material.recipes['1']!.materials['1']?.inputModifiedPm)!.toStringAsFixed(2)})')
+                  : Container(),
+              material.recipes['1']!.materials['2']?.input != null
+                  ? Text(
+                      '2 - ${material.recipes['1']!.materials['2']?.materialName}: ${material.recipes['1']!.materials['2']?.inputPm} (${(material.recipes['1']!.materials['2']?.inputModifiedPm.toStringAsFixed(2))})')
+                  : Container(),
+              material.recipes['1']!.materials['3']?.input != null
+                  ? Text(
+                      '3 - ${material.recipes['1']!.materials['3']?.materialName}: ${material.recipes['1']!.materials['3']?.inputPm} (${(material.recipes['1']!.materials['3']?.inputModifiedPm.toStringAsFixed(2))})')
+                  : Container(),
+              material.recipes['1']!.materials['4']?.input != null
+                  ? Text(
+                      '4 - ${material.recipes['1']!.materials['4']?.materialName}: ${material.recipes['1']!.materials['4']?.inputPm} (${(material.recipes['1']!.materials['4']?.inputModifiedPm.toStringAsFixed(2))})')
+                  : Container(),
+            ],
+          ),
         ),
       );
     } else {

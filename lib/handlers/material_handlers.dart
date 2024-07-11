@@ -326,6 +326,12 @@ class MaterialHandlers {
     if (relation != 0 && materialItem.ore == false) {
       // Multiplica la [outputPm] * [relation] para obtener la cantidad final de outputModifiedPm requerida
       double outputModifiedPm = materialItem.recipes['1']!.outputPm * relation;
+      // Se obtiene el [outputPm]
+      double outputPm = materialItem.recipes['1']!.outputPm;
+      // Dicide [outputModifiedPm] entre [outputPm] para obtener la cantidad de fabricas requeridas
+      double factQuantity = outputModifiedPm / outputPm;
+      // Asigna el valor de [factQuantity] al material
+      materialItem.factQuantity = factQuantity.ceil();
       // Asigna el valor de [outputModifiedPm] al material
       materialItem.recipes['1']!.outputModifiedPm = outputModifiedPm;
       // Cantidad de materiales para recorrerlos
