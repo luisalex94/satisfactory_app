@@ -64,7 +64,8 @@ class _MyHomePageState extends State<MyHomePage> {
             future: MaterialHandlers().loadJson(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                return _materialsBar(snapshot.data);
+                //return _materialsBar(snapshot.data);
+                return buildas(context);
               } else {
                 return const CircularProgressIndicator();
               }
@@ -72,6 +73,246 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         );
       },
+    );
+  }
+
+  Widget buildas(BuildContext context) {
+    return DefaultTextStyle(
+      style: Theme.of(context).textTheme.bodyMedium!,
+      child: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints viewportConstraints) {
+          return Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Row(
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _showOreItems(),
+                    _sizedBox10(),
+                    _showListOfItems(),
+                  ],
+                ),
+                Expanded(
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: SingleChildScrollView(
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(
+                          minHeight: viewportConstraints.maxHeight,
+                          minWidth: viewportConstraints.maxWidth,
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: <Widget>[
+                            _mainPageB(selectedMaterial),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _showOreItems() {
+    return Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.black12,
+                      border: Border.all(width: 1),
+                    ),
+                    height: 300,
+                    width: 320,
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: ListView.builder(
+                              itemCount: oreItems.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                String name = oreItems.values
+                                    .elementAt(index)
+                                    .materialName;
+                                double quantity =
+                                    oreItems.values.elementAt(index).outputPm;
+                                return Text(
+                                    '$name: ${quantity.toStringAsFixed(2)}');
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+  }
+
+  Widget _showListOfItems(){
+    return Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.black12,
+                      border: Border.all(width: 1),
+                    ),
+                    height: _screenHeight - 430,
+                    width: 320,
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          _itemsPm(context),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          _findBox(),
+                          Expanded(
+                            child: ListView.builder(
+                              itemCount:
+                                  MaterialHandlers().getMaterialsList().length,
+                              itemBuilder: (context, index) {
+                                List materials =
+                                    MaterialHandlers().getMaterialsList();
+
+                                return ListTile(
+                                  title: Text(materials[index]),
+                                  selected: selectedIndex == index,
+                                  onTap: () {
+                                    setState(
+                                      () {
+                                        selectedMaterial = MaterialHandlers()
+                                            .getMaterialItem(materials[index]);
+                                        recipe = MaterialHandlers()
+                                            .runMatrixRecipe(
+                                                item: materials[index] ?? [],
+                                                ppm: double.parse(
+                                                            _itemsPmTextController
+                                                                .text
+                                                                .toString()) ==
+                                                        0
+                                                    ? 1
+                                                    : double.parse(
+                                                        _itemsPmTextController
+                                                            .text
+                                                            .toString()));
+                                        oreItems =
+                                            MaterialHandlers().getOreItems();
+                                      },
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  );
+  }
+
+Widget _sizedBox10() {
+  return const SizedBox(
+                    height: 10,
+                    width: 10,
+                  );
+}
+
+  Widget testA() {
+    return Column(
+      children: [
+        Container(
+          // A fixed-height child.
+          color: const Color(0xffeeee00), // Yellow
+          height: 120.0,
+          width: 400,
+          alignment: Alignment.center,
+          child: const Text('Fixed Height Content'),
+        ),
+        Container(
+          // A fixed-height child.
+          color: const Color(0xffeeee00), // Yellow
+          height: 120.0,
+          width: 400,
+          alignment: Alignment.center,
+          child: const Text('Fixed Height Content'),
+        ),
+        Container(
+          // A fixed-height child.
+          color: const Color(0xffeeee00), // Yellow
+          height: 120.0,
+          width: 400,
+          alignment: Alignment.center,
+          child: const Text('Fixed Height Content'),
+        ),
+        Container(
+          // A fixed-height child.
+          color: const Color(0xffeeee00), // Yellow
+          height: 120.0,
+          width: 400,
+          alignment: Alignment.center,
+          child: const Text('Fixed Height Content'),
+        ),
+        Container(
+          // Another fixed-height child.
+          color: const Color(0xff008000), // Green
+          height: 120.0,
+          width: 400,
+          alignment: Alignment.center,
+          child: const Text('Fixed Height Content'),
+        ),
+      ],
+    );
+  }
+
+  @override
+  Widget buildas2(BuildContext context) {
+    return DefaultTextStyle(
+      style: Theme.of(context).textTheme.bodyMedium!,
+      child: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints viewportConstraints) {
+          return SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: viewportConstraints.maxHeight,
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    Container(
+                      // A fixed-height child.
+                      color: const Color(0xffeeee00), // Yellow
+                      height: 120.0,
+                      width: 400,
+                      alignment: Alignment.center,
+                      child: const Text('Fixed Height Content'),
+                    ),
+                    Container(
+                      // Another fixed-height child.
+                      color: const Color(0xff008000), // Green
+                      height: 120.0,
+                      width: 400,
+                      alignment: Alignment.center,
+                      child: const Text('Fixed Height Content'),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 
@@ -190,12 +431,15 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ],
               ),
-              //_mainPage(selectedMaterial)
+              //_mainPage(selectedMaterial),
+              //_mainPageC(selectedMaterial),
               const SizedBox(
                 height: 10,
                 width: 10,
               ),
               _mainPageB(selectedMaterial),
+              //buildas(context)
+              //buildas(context)
             ],
           ),
         ),
@@ -203,20 +447,68 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  Widget _mainPageC(MaterialItem? material) {
+    double h = 700;
+    double w = 700;
+    return DefaultTextStyle(
+      style: Theme.of(context).textTheme.bodyMedium!,
+      child: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints viewportConstraints) {
+          return SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                minHeight: viewportConstraints.maxHeight,
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  Container(
+                    // A fixed-height child.
+                    color: const Color(0xffeeee00), // Yellow
+                    height: 120.0,
+                    alignment: Alignment.center,
+                    child: const Text('Fixed Height Content'),
+                  ),
+                  Container(
+                    // Another fixed-height child.
+                    color: const Color(0xff008000), // Green
+                    height: 120.0,
+                    alignment: Alignment.center,
+                    child: const Text('Fixed Height Content'),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
   Widget _mainPageB(MaterialItem? material) {
     if (material!.materialName != "") {
       int row = recipe.length;
       int column = recipe[0].length;
-      return SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: SingleChildScrollView(
+      return LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints viewportConstraints) {
+        return Expanded(
+            child: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
-          child: _columnConstructor(
-            column,
-            row,
+          child: SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                minHeight: 400,
+                minWidth: 400,
+              ),
+              child: _columnConstructor(
+                column,
+                row,
+              ),
+            ),
           ),
-        ),
-      );
+        ));
+      });
     } else {
       return const Text('No info');
     }
@@ -336,36 +628,31 @@ class _MyHomePageState extends State<MyHomePage> {
 
         return SingleChildScrollView(
           scrollDirection: Axis.horizontal,
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              maxWidth: cellWidth * m,
-            ),
-            child: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: ConstrainedBox(
-                constraints: BoxConstraints(
-                  maxHeight: cellHeight * n,
-                ),
-                child: Expanded(
-                  child: GridView.builder(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: m,
-                      childAspectRatio: cellWidth / cellHeight,
-                    ),
-                    itemCount: n * m,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        margin: EdgeInsets.all(4.0),
-                        color: Colors.blueAccent,
-                        child: Center(
-                          child: Text('Item $index'),
-                        ),
-                      );
-                    },
-                    physics:
-                        NeverScrollableScrollPhysics(), // Desactiva el scroll del GridView
-                    shrinkWrap: true,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                maxHeight: cellHeight * n,
+              ),
+              child: Expanded(
+                child: GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: m,
+                    childAspectRatio: cellWidth / cellHeight,
                   ),
+                  itemCount: n * m,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      margin: EdgeInsets.all(4.0),
+                      color: Colors.blueAccent,
+                      child: Center(
+                        child: Text('Item $index'),
+                      ),
+                    );
+                  },
+                  physics:
+                      NeverScrollableScrollPhysics(), // Desactiva el scroll del GridView
+                  shrinkWrap: true,
                 ),
               ),
             ),
