@@ -63,7 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 //return _materialsBar(snapshot.data);
-                return buildas(context);
+                return body(context);
               } else {
                 return const CircularProgressIndicator();
               }
@@ -74,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Widget buildas(BuildContext context) {
+  Widget body(BuildContext context) {
     return DefaultTextStyle(
       style: Theme.of(context).textTheme.bodyMedium!,
       child: LayoutBuilder(
@@ -220,8 +220,7 @@ class _MyHomePageState extends State<MyHomePage> {
       int column = recipe[0].length;
       return LayoutBuilder(
           builder: (BuildContext context, BoxConstraints viewportConstraints) {
-        return Expanded(
-            child: SingleChildScrollView(
+        return SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: SingleChildScrollView(
             child: ConstrainedBox(
@@ -235,7 +234,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
           ),
-        ));
+        );
       });
     } else {
       return const Text('No info');
