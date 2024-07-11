@@ -33,7 +33,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  double _screenWidth = 0;
   double _screenHeight = 0;
   MaterialItem selectedMaterial = MaterialItem();
   int selectedIndex = -1;
@@ -52,7 +51,6 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        _screenWidth = constraints.maxWidth;
         _screenHeight = constraints.maxHeight;
 
         return Scaffold(
@@ -94,6 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     _showListOfItems(),
                   ],
                 ),
+                _sizedBox10(),
                 Expanded(
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
@@ -105,9 +104,10 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            _mainPageB(selectedMaterial),
+                            _mainPage(selectedMaterial),
                           ],
                         ),
                       ),
@@ -124,369 +124,97 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget _showOreItems() {
     return Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.black12,
-                      border: Border.all(width: 1),
-                    ),
-                    height: 300,
-                    width: 320,
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: ListView.builder(
-                              itemCount: oreItems.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                String name = oreItems.values
-                                    .elementAt(index)
-                                    .materialName;
-                                double quantity =
-                                    oreItems.values.elementAt(index).outputPm;
-                                return Text(
-                                    '$name: ${quantity.toStringAsFixed(2)}');
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: Colors.black12,
+        border: Border.all(width: 1),
+      ),
+      height: 300,
+      width: 320,
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Expanded(
+              child: ListView.builder(
+                itemCount: oreItems.length,
+                itemBuilder: (BuildContext context, int index) {
+                  String name = oreItems.values.elementAt(index).materialName;
+                  double quantity = oreItems.values.elementAt(index).outputPm;
+                  return Text('$name: ${quantity.toStringAsFixed(2)}');
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
-  Widget _showListOfItems(){
+  Widget _showListOfItems() {
     return Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.black12,
-                      border: Border.all(width: 1),
-                    ),
-                    height: _screenHeight - 430,
-                    width: 320,
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          _itemsPm(context),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          _findBox(),
-                          Expanded(
-                            child: ListView.builder(
-                              itemCount:
-                                  MaterialHandlers().getMaterialsList().length,
-                              itemBuilder: (context, index) {
-                                List materials =
-                                    MaterialHandlers().getMaterialsList();
-
-                                return ListTile(
-                                  title: Text(materials[index]),
-                                  selected: selectedIndex == index,
-                                  onTap: () {
-                                    setState(
-                                      () {
-                                        selectedMaterial = MaterialHandlers()
-                                            .getMaterialItem(materials[index]);
-                                        recipe = MaterialHandlers()
-                                            .runMatrixRecipe(
-                                                item: materials[index] ?? [],
-                                                ppm: double.parse(
-                                                            _itemsPmTextController
-                                                                .text
-                                                                .toString()) ==
-                                                        0
-                                                    ? 1
-                                                    : double.parse(
-                                                        _itemsPmTextController
-                                                            .text
-                                                            .toString()));
-                                        oreItems =
-                                            MaterialHandlers().getOreItems();
-                                      },
-                                    );
-                                  },
-                                );
-                              },
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  );
-  }
-
-Widget _sizedBox10() {
-  return const SizedBox(
-                    height: 10,
-                    width: 10,
-                  );
-}
-
-  Widget testA() {
-    return Column(
-      children: [
-        Container(
-          // A fixed-height child.
-          color: const Color(0xffeeee00), // Yellow
-          height: 120.0,
-          width: 400,
-          alignment: Alignment.center,
-          child: const Text('Fixed Height Content'),
-        ),
-        Container(
-          // A fixed-height child.
-          color: const Color(0xffeeee00), // Yellow
-          height: 120.0,
-          width: 400,
-          alignment: Alignment.center,
-          child: const Text('Fixed Height Content'),
-        ),
-        Container(
-          // A fixed-height child.
-          color: const Color(0xffeeee00), // Yellow
-          height: 120.0,
-          width: 400,
-          alignment: Alignment.center,
-          child: const Text('Fixed Height Content'),
-        ),
-        Container(
-          // A fixed-height child.
-          color: const Color(0xffeeee00), // Yellow
-          height: 120.0,
-          width: 400,
-          alignment: Alignment.center,
-          child: const Text('Fixed Height Content'),
-        ),
-        Container(
-          // Another fixed-height child.
-          color: const Color(0xff008000), // Green
-          height: 120.0,
-          width: 400,
-          alignment: Alignment.center,
-          child: const Text('Fixed Height Content'),
-        ),
-      ],
-    );
-  }
-
-  @override
-  Widget buildas2(BuildContext context) {
-    return DefaultTextStyle(
-      style: Theme.of(context).textTheme.bodyMedium!,
-      child: LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints viewportConstraints) {
-          return SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: SingleChildScrollView(
-              child: ConstrainedBox(
-                constraints: BoxConstraints(
-                  minHeight: viewportConstraints.maxHeight,
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget>[
-                    Container(
-                      // A fixed-height child.
-                      color: const Color(0xffeeee00), // Yellow
-                      height: 120.0,
-                      width: 400,
-                      alignment: Alignment.center,
-                      child: const Text('Fixed Height Content'),
-                    ),
-                    Container(
-                      // Another fixed-height child.
-                      color: const Color(0xff008000), // Green
-                      height: 120.0,
-                      width: 400,
-                      alignment: Alignment.center,
-                      child: const Text('Fixed Height Content'),
-                    ),
-                  ],
-                ),
-              ),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: Colors.black12,
+        border: Border.all(width: 1),
+      ),
+      height: _screenHeight - 430,
+      width: 320,
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            _itemsPm(context),
+            const SizedBox(
+              height: 10,
             ),
-          );
-        },
+            _findBox(),
+            Expanded(
+              child: ListView.builder(
+                itemCount: MaterialHandlers().getMaterialsList().length,
+                itemBuilder: (context, index) {
+                  List materials = MaterialHandlers().getMaterialsList();
+
+                  return ListTile(
+                    title: Text(materials[index]),
+                    selected: selectedIndex == index,
+                    onTap: () {
+                      setState(
+                        () {
+                          selectedMaterial = MaterialHandlers()
+                              .getMaterialItem(materials[index]);
+                          recipe = MaterialHandlers().runMatrixRecipe(
+                              item: materials[index] ?? [],
+                              ppm: double.parse(_itemsPmTextController.text
+                                          .toString()) ==
+                                      0
+                                  ? 1
+                                  : double.parse(
+                                      _itemsPmTextController.text.toString()));
+                          oreItems = MaterialHandlers().getOreItems();
+                        },
+                      );
+                    },
+                  );
+                },
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
 
-  Widget _materialsBar(Map<String, dynamic>? json) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(
-          'Height: $_screenHeight, width: $_screenWidth',
-        ),
-        Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.black12,
-                      border: Border.all(width: 1),
-                    ),
-                    height: 300,
-                    width: 320,
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: ListView.builder(
-                              itemCount: oreItems.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                String name = oreItems.values
-                                    .elementAt(index)
-                                    .materialName;
-                                double quantity =
-                                    oreItems.values.elementAt(index).outputPm;
-                                return Text(
-                                    '$name: ${quantity.toStringAsFixed(2)}');
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                    width: 10,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.black12,
-                      border: Border.all(width: 1),
-                    ),
-                    height: _screenHeight - 430,
-                    width: 320,
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          _itemsPm(context),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          _findBox(),
-                          Expanded(
-                            child: ListView.builder(
-                              itemCount:
-                                  MaterialHandlers().getMaterialsList().length,
-                              itemBuilder: (context, index) {
-                                List materials =
-                                    MaterialHandlers().getMaterialsList();
-
-                                return ListTile(
-                                  title: Text(materials[index]),
-                                  selected: selectedIndex == index,
-                                  onTap: () {
-                                    setState(
-                                      () {
-                                        selectedMaterial = MaterialHandlers()
-                                            .getMaterialItem(materials[index]);
-                                        recipe = MaterialHandlers()
-                                            .runMatrixRecipe(
-                                                item: materials[index] ?? [],
-                                                ppm: double.parse(
-                                                            _itemsPmTextController
-                                                                .text
-                                                                .toString()) ==
-                                                        0
-                                                    ? 1
-                                                    : double.parse(
-                                                        _itemsPmTextController
-                                                            .text
-                                                            .toString()));
-                                        oreItems =
-                                            MaterialHandlers().getOreItems();
-                                      },
-                                    );
-                                  },
-                                );
-                              },
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              //_mainPage(selectedMaterial),
-              //_mainPageC(selectedMaterial),
-              const SizedBox(
-                height: 10,
-                width: 10,
-              ),
-              _mainPageB(selectedMaterial),
-              //buildas(context)
-              //buildas(context)
-            ],
-          ),
-        ),
-      ],
+  Widget _sizedBox10() {
+    return const SizedBox(
+      height: 10,
+      width: 10,
     );
   }
 
-  Widget _mainPageC(MaterialItem? material) {
-    double h = 700;
-    double w = 700;
-    return DefaultTextStyle(
-      style: Theme.of(context).textTheme.bodyMedium!,
-      child: LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints viewportConstraints) {
-          return SingleChildScrollView(
-            child: ConstrainedBox(
-              constraints: BoxConstraints(
-                minHeight: viewportConstraints.maxHeight,
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  Container(
-                    // A fixed-height child.
-                    color: const Color(0xffeeee00), // Yellow
-                    height: 120.0,
-                    alignment: Alignment.center,
-                    child: const Text('Fixed Height Content'),
-                  ),
-                  Container(
-                    // Another fixed-height child.
-                    color: const Color(0xff008000), // Green
-                    height: 120.0,
-                    alignment: Alignment.center,
-                    child: const Text('Fixed Height Content'),
-                  ),
-                ],
-              ),
-            ),
-          );
-        },
-      ),
-    );
-  }
-
-  Widget _mainPageB(MaterialItem? material) {
+  Widget _mainPage(MaterialItem? material) {
     if (material!.materialName != "") {
       int row = recipe.length;
       int column = recipe[0].length;
@@ -497,7 +225,7 @@ Widget _sizedBox10() {
           scrollDirection: Axis.horizontal,
           child: SingleChildScrollView(
             child: ConstrainedBox(
-              constraints: BoxConstraints(
+              constraints: const BoxConstraints(
                 minHeight: 400,
                 minWidth: 400,
               ),
@@ -547,118 +275,6 @@ Widget _sizedBox10() {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: mainColumn,
-    );
-  }
-
-  Widget _mainPage(MaterialItem? material) {
-    int column = 0;
-    int row = 0;
-    if (material!.materialName != "") {
-      int columnSize = recipe[0].length;
-      return Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: Colors.black12,
-            border: Border.all(width: 1),
-          ),
-          height: _screenHeight - 124,
-          width: 1200,
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(material.materialName),
-                Expanded(
-                  child: GridView.builder(
-                    itemCount: (recipe[0].length * recipe.length),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: recipe[0].length),
-                    padding: const EdgeInsets.all(10),
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      column = (index / columnSize).floor();
-                      row = index - (column * columnSize);
-                      return regularItemCard(recipe[column][row]);
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      );
-    } else {
-      return Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: Colors.black12,
-            border: Border.all(width: 1),
-          ),
-          height: _screenHeight - 124,
-          width: 320,
-          child: const Padding(
-            padding: EdgeInsets.all(10.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text('Selecciona un item'),
-              ],
-            ),
-          ),
-        ),
-      );
-    }
-  }
-
-  Widget buildB(BuildContext context) {
-    // Define el número de filas y columnas
-    int n = 10; // número de filas
-    int m = 10; // número de columnas
-
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        // Calcula el tamaño de cada celda
-        double cellWidth = constraints.maxWidth / m;
-        double cellHeight = 100; // Altura fija de cada celda (puedes cambiarlo)
-
-        return SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: ConstrainedBox(
-              constraints: BoxConstraints(
-                maxHeight: cellHeight * n,
-              ),
-              child: Expanded(
-                child: GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: m,
-                    childAspectRatio: cellWidth / cellHeight,
-                  ),
-                  itemCount: n * m,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      margin: EdgeInsets.all(4.0),
-                      color: Colors.blueAccent,
-                      child: Center(
-                        child: Text('Item $index'),
-                      ),
-                    );
-                  },
-                  physics:
-                      NeverScrollableScrollPhysics(), // Desactiva el scroll del GridView
-                  shrinkWrap: true,
-                ),
-              ),
-            ),
-          ),
-        );
-      },
     );
   }
 
