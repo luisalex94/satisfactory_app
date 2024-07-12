@@ -387,6 +387,16 @@ class MaterialHandlers {
       double multipler = outputPm / materialItem.recipes['1']!.outputPm;
       // Asigna las [outputPm] a [outputModifiedPm]
       materialItem.recipes['1']!.outputModifiedPm = outputPm;
+      
+      // Multiplica la [outputPmNew] * [relation] para obtener la cantidad final de outputModifiedPm requerida
+      double outputModifiedPm = materialItem.recipes['1']!.outputPm * multipler;
+      // Se obtiene el [outputPmNew]
+      double outputPmNew = materialItem.recipes['1']!.outputPm;
+      // Dicide [outputModifiedPm] entre [outputPmNew] para obtener la cantidad de fabricas requeridas
+      double factQuantity = outputModifiedPm / outputPmNew;
+      // Asigna el valor de [factQuantity] al material
+      materialItem.factQuantity = factQuantity.ceil();
+
       // Cantidad de materiales en la receta para recorrerlos y modificarlos con el [multipler]
       int materiales = materialItem.recipes['1']!.materials.length;
       // Recorre cada material de la receta para modificarlo con el [multipler]
