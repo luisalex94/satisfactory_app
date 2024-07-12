@@ -303,6 +303,7 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
       ),
       onChanged: (value) {
         setState(() {
+          
           // Se extrae la informacion de [_itemsPmTextController]
           String ppmString = value;
 

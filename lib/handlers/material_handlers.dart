@@ -69,12 +69,16 @@ class MaterialHandlers {
     return data;
   }
 
+  /// Devuelve el mapa de oreItems con las cantidades
   Map<String, OreItem> getOreItems() {
     return oreItems;
   }
 
   /// Devuelve un [MaterialItem]
   MaterialItem getMaterialItem(String name) {
+    if(name == "") {
+      return MaterialItem();
+    }
     return MaterialItem.copyWith(materialItems[name]!);
   }
 
@@ -86,8 +90,16 @@ class MaterialHandlers {
     // Matriz principal de receta
     List<List<MaterialItem>> recipe = [[]];
 
+    // Resetea las cantidades del mapa de ores
+    oreItems = getOreItemMap();
+
     // Material del cual se quiere receta
     MaterialItem mainMaterial = getMaterialItem(item);
+
+    if(mainMaterial.materialId == 0) {
+      recipe[0].add(mainMaterial);
+      return recipe;
+    }
 
     // Agrega el mainMaterial (material objetivo) en la posicion [0][0]
     recipe[0].add(outputPmModifier(
