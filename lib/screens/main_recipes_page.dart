@@ -4,6 +4,8 @@ import 'package:satisfactory_app/cards/regularItemCard.dart';
 import 'package:satisfactory_app/handlers/material_handlers.dart';
 import 'package:satisfactory_app/handlers/material_item.dart';
 import 'package:satisfactory_app/screens/arguments/arguments.dart';
+import 'package:satisfactory_app/handlers/factories_item.dart';
+import 'package:satisfactory_app/handlers/factories_handlers.dart';
 
 class MainRecipesPage extends StatefulWidget {
   const MainRecipesPage({super.key});
@@ -27,7 +29,6 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
@@ -41,14 +42,74 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
     super.didChangeDependencies();
   }
 
-  
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text('Recipes'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              recipe = MaterialHandlers().runMatrixRecipe(
+                item: 'Stator',
+                ppm: 10,
+              );
+              Recipe recipeItemTest = Recipe(recipe: recipe);
+              FactoriesHandlers().addFlowDefault(
+                FactoryConfiguration(
+                  itemName: 'Stator',
+                  factoryItem: {'Stator': recipeItemTest},
+                  outputPm: 10,
+                ),
+              );
+              var test = FactoriesHandlers().getMainFactoryCollection();
+              print(test);
+              setState(() {});
+            },
+            icon: const Icon(Icons.add),
+          ),
+          IconButton(
+            onPressed: () {
+              recipe = MaterialHandlers().runMatrixRecipe(
+                item: 'Rotor',
+                ppm: 10,
+              );
+              Recipe recipeItemTest = Recipe(recipe: recipe);
+              FactoriesHandlers().addFlowDefault(
+                FactoryConfiguration(
+                  itemName: 'Rotor',
+                  factoryItem: {'Rotor': recipeItemTest},
+                  outputPm: 10,
+                ),
+              );
+              var test = FactoriesHandlers().getMainFactoryCollection();
+              print(test);
+              setState(() {});
+            },
+            icon: const Icon(Icons.email),
+          ),
+          IconButton(
+            onPressed: () {
+              recipe = MaterialHandlers().runMatrixRecipe(
+                item: 'Motor',
+                ppm: 10,
+              );
+              Recipe recipeItemTest = Recipe(recipe: recipe);
+              FactoriesHandlers().addFlowDefault(
+                FactoryConfiguration(
+                  itemName: 'Motor',
+                  factoryItem: {'Motor': recipeItemTest},
+                  outputPm: 10,
+                ),
+              );
+              var test = FactoriesHandlers().getMainFactoryCollection();
+              print(test);
+              setState(() {});
+            },
+            icon: const Icon(Icons.aspect_ratio),
+          ),
+        ],
       ),
       body: body(context),
     );
@@ -63,10 +124,14 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
           return Padding(
             padding: const EdgeInsets.all(10.0),
             child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 _leftColumn(),
                 _sizedBox10(),
                 _mainBody(context, viewportConstraints),
+                _sizedBox10(),
+                _factoriesCollections(),
               ],
             ),
           );
@@ -303,7 +368,6 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
       ),
       onChanged: (value) {
         setState(() {
-          
           // Se extrae la informacion de [_itemsPmTextController]
           String ppmString = value;
 
@@ -334,5 +398,126 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
       filteredMaterialList.add('No item match');
     }
     return filteredMaterialList;
+  }
+
+  Widget _factoriesCollections() {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: Colors.black12,
+        border: Border.all(width: 1),
+      ),
+      height: _screenHeight,
+      width: 320,
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Expanded(
+              child: _mainFactoryCollection(),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// Maneja la lista de widgets de todas las colecciones de fabricas
+  Widget _mainFactoryCollection() {
+    MainFactoryCollection mainFactoryCollection =
+        FactoriesHandlers().getMainFactoryCollection();
+
+    // Extrae los keys del mapa de colecciones en una lista
+    List<String> factoryCollectionKeys = _mapToListFactoryCollectionKeys(
+      mainFactoryCollection,
+    );
+
+    // Extrae los keys del mapa de colecciones en una lista
+    List<FactoryCollection> factoryCollectionValues =
+        _mapToListFactoryCollectionValues(
+      mainFactoryCollection,
+    );
+
+    return ListView.builder(
+      itemCount: factoryCollectionKeys.length,
+      itemBuilder: (context, index) {
+        _itemFactoryCollection(
+          factoryCollectionValues[index],
+        );
+      },
+    );
+  }
+
+  /// Extrae en una lista los VALUES del mapa de cada [FactoryCollection] de [MainFactoryCollection]
+  List<FactoryCollection> _mapToListFactoryCollectionValues(
+      MainFactoryCollection mainFactoryCollection) {
+    List<FactoryCollection> data = [];
+
+    mainFactoryCollection.mainCollection.forEach((key, value) {
+      data.add(value);
+    });
+
+    return data;
+  }
+
+  /// Extrae en una lista los KEYS del mapa de cada [FactoryCollection] de [MainFactoryCollection]
+  List<String> _mapToListFactoryCollectionKeys(
+    MainFactoryCollection mainFactoryCollection,
+  ) {
+    List<String> data = [];
+
+    mainFactoryCollection.mainCollection.forEach((key, value) {
+      data.add(key);
+    });
+
+    return data;
+  }
+
+  /// Muestra los items de una [FactoryCollection] individual
+  Widget _itemFactoryCollection(
+    FactoryCollection factoryCollection,
+  ) {
+    // Flujo para retornar vacio si entra vacio
+    if (factoryCollection.factoryCollection.isEmpty) {
+      return Text('No items');
+    }
+
+    // Establece una lista vacia para guardar las configuraciones de las fabricas
+    List<FactoryConfiguration> data = [];
+
+    // Convierte el mapa a lista de las configuraciones de las fabricas de la coleccion
+    data = _mapToListFactoryConfigurationValues(factoryCollection);
+
+    return ListView.builder(
+      itemCount: 4,
+      itemBuilder: (context, index) {
+        return Text(index.toString());
+      },
+    );
+  }
+
+  List<FactoryConfiguration> _mapToListFactoryConfigurationValues(
+      FactoryCollection factoryCollection) {
+    // Establece una lista vacia para guardar las configuraciones de las fabricas
+    List<FactoryConfiguration> data = [];
+
+    // Recorre el mapa para agregar cada elemento a la lista vacia
+    factoryCollection.factoryCollection.forEach((key, value) {
+      data.add(value);
+    });
+
+    // Retorna la informacion
+    return data;
+  }
+
+  Widget _itemFactoryConfiguration(FactoryConfiguration factoryConfiguration) {
+    return Row(
+      children: [
+        Text(
+          factoryConfiguration.itemName,
+        ),
+      ],
+    );
   }
 }

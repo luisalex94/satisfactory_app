@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'factories_item.dart';
 
 class FactoriesHandlers {
@@ -17,20 +19,33 @@ class FactoriesHandlers {
   );
 
   FactoryCollection factoryCollection = FactoryCollection(
-    factoryCollectionName: 'default',
+    factoryCollectionName: 'Main factory',
     factoryCollection: {},
   );
 
   MainFactoryCollection mainFactoryCollection = MainFactoryCollection(
-    mainCollection: {},
+    mainCollection: {
+      "Main factory": FactoryCollection(
+        factoryCollectionName: "Main Factory",
+        factoryCollection: {
+          "": FactoryConfiguration(
+            itemName: "",
+            outputPm: 0.0,
+            factoryItem: {},
+            oreItems: {},
+          ),
+        },
+      )
+    },
   );
 
   void addFactoryConfiguration(
     FactoryConfiguration factoryConfiguration,
     String? collectionName,
   ) {
-    String name = collectionName ?? 'default';
-    factoryCollection.factoryCollection[name] = factoryConfiguration;
+    String name = collectionName ?? 'Main factory';
+    factoryCollection.factoryCollection[factoryConfiguration.itemName] =
+        factoryConfiguration;
   }
 
   void addFactoryCollection(
@@ -42,11 +57,27 @@ class FactoriesHandlers {
   }
 
   void addFlowDefault(FactoryConfiguration factoryConfiguration) {
-    addFactoryConfiguration(factoryConfiguration, 'default');
+    addFactoryConfiguration(factoryConfiguration, 'Main factory');
     addFactoryCollection(factoryCollection);
   }
 
   MainFactoryCollection getMainFactoryCollection() {
     return mainFactoryCollection;
+  }
+
+  MainFactoryCollection getEmptyMainFactoryCollection() {
+    return MainFactoryCollection(mainCollection: {
+      "": FactoryCollection(
+        factoryCollectionName: "",
+        factoryCollection: {
+          "": FactoryConfiguration(
+            itemName: "",
+            outputPm: 0.0,
+            factoryItem: {},
+            oreItems: {},
+          ),
+        },
+      )
+    });
   }
 }
