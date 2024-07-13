@@ -433,19 +433,31 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
       mainFactoryCollection,
     );
 
-    // Extrae los keys del mapa de colecciones en una lista
+    // Extrae los values del mapa de colecciones en una lista
     List<FactoryCollection> factoryCollectionValues =
         _mapToListFactoryCollectionValues(
       mainFactoryCollection,
     );
 
-    return ListView.builder(
-      itemCount: factoryCollectionKeys.length,
-      itemBuilder: (context, index) {
-        _itemFactoryCollection(
-          factoryCollectionValues[index],
-        );
-      },
+    List<Widget> factoryCollectionWidgets = [];
+
+    for (int i = 0; i < factoryCollectionValues.length; i++) {
+      factoryCollectionWidgets.add(
+        Column(
+          children: [
+            Text(
+              factoryCollectionValues[i].factoryCollectionName,
+            ),
+            _itemFactoryCollection(
+              factoryCollectionValues[i],
+            ),
+          ],
+        ),
+      );
+    }
+
+    return Column(
+      children: factoryCollectionWidgets,
     );
   }
 
@@ -479,21 +491,27 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
     FactoryCollection factoryCollection,
   ) {
     // Flujo para retornar vacio si entra vacio
-    if (factoryCollection.factoryCollection.isEmpty) {
+    if (factoryCollection.factoryCollection[""]?.itemName != null) {
       return Text('No items');
     }
 
     // Establece una lista vacia para guardar las configuraciones de las fabricas
     List<FactoryConfiguration> data = [];
 
+    // Establece una lista vacia para guardar los Widgets de las fabricas
+    List<Widget> factoryConfiguration = [];
+
     // Convierte el mapa a lista de las configuraciones de las fabricas de la coleccion
     data = _mapToListFactoryConfigurationValues(factoryCollection);
 
-    return ListView.builder(
-      itemCount: 4,
-      itemBuilder: (context, index) {
-        return Text(index.toString());
-      },
+    // Recorre el mapa de [factoryCollection]
+    factoryCollection.factoryCollection.forEach((key, value) {
+      factoryConfiguration
+          .add(Text(factoryCollection.factoryCollection[key]!.itemName));
+    });
+
+    return Column(
+      children: factoryConfiguration,
     );
   }
 
