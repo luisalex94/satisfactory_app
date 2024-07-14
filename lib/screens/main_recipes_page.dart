@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:satisfactory_app/cards/regularItemCard.dart';
 import 'package:satisfactory_app/handlers/material_handlers.dart';
 import 'package:satisfactory_app/handlers/material_item.dart';
+import 'package:satisfactory_app/popup/add_new_factory_popup.dart';
 import 'package:satisfactory_app/screens/arguments/arguments.dart';
 import 'package:satisfactory_app/handlers/factories_item.dart';
 import 'package:satisfactory_app/handlers/factories_handlers.dart';
@@ -272,7 +273,7 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
         color: Colors.black12,
         border: Border.all(width: 1),
       ),
-      height: _screenHeight - 430,
+      height: _screenHeight - 330,
       width: 320,
       child: Padding(
         padding: const EdgeInsets.all(10.0),
@@ -428,11 +429,6 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
     MainFactoryCollection mainFactoryCollection =
         FactoriesHandlers().getMainFactoryCollection();
 
-    // Extrae los keys del mapa de colecciones en una lista
-    List<String> factoryCollectionKeys = _mapToListFactoryCollectionKeys(
-      mainFactoryCollection,
-    );
-
     // Extrae los values del mapa de colecciones en una lista
     List<FactoryCollection> factoryCollectionValues =
         _mapToListFactoryCollectionValues(
@@ -443,22 +439,57 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
 
     for (int i = 0; i < factoryCollectionValues.length; i++) {
       factoryCollectionWidgets.add(
-        Column(
-          children: [
-            Text(
-              factoryCollectionValues[i].factoryCollectionName,
-            ),
-            _itemFactoryCollection(
-              factoryCollectionValues[i],
-            ),
-          ],
-        ),
+        _factoryCollection(factoryCollectionValues[i]),
       );
     }
 
     return Column(
       children: factoryCollectionWidgets,
     );
+  }
+
+  /// Muestra el nombre de una coleccion y sus fabricas hijas
+  Widget _factoryCollection(FactoryCollection factoryCollection) {
+    return Column(
+      children: [
+        Text(
+          factoryCollection.factoryCollectionName,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const Divider(
+          endIndent: 10,
+          indent: 10,
+        ),
+        _itemFactoryCollection(
+          factoryCollection,
+        ),
+        ElevatedButton(
+          onPressed: () {
+            _addNewFactoryPopUp(
+              factoryCollection.factoryCollectionName,
+            );
+          },
+          child: const Text('Add factory'),
+        ),
+        _sizedBox10(),
+      ],
+    );
+  }
+
+  void _addNewFactoryPopUp(String collectionName) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            content: SizedBox(
+              child: AddNewFactoryPopup(
+                collectionName: collectionName,
+              ),
+            ),
+          );
+        });
   }
 
   /// Extrae en una lista los VALUES del mapa de cada [FactoryCollection] de [MainFactoryCollection]
@@ -495,14 +526,8 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
       return Text('No items');
     }
 
-    // Establece una lista vacia para guardar las configuraciones de las fabricas
-    List<FactoryConfiguration> data = [];
-
     // Establece una lista vacia para guardar los Widgets de las fabricas
     List<Widget> factoryConfiguration = [];
-
-    // Convierte el mapa a lista de las configuraciones de las fabricas de la coleccion
-    data = _mapToListFactoryConfigurationValues(factoryCollection);
 
     // Recorre el mapa de [factoryCollection]
     factoryCollection.factoryCollection.forEach((key, value) {

@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 import 'factories_item.dart';
 
 class FactoriesHandlers {
@@ -26,7 +24,7 @@ class FactoriesHandlers {
   MainFactoryCollection mainFactoryCollection = MainFactoryCollection(
     mainCollection: {
       "Main factory": FactoryCollection(
-        factoryCollectionName: "Main Factory",
+        factoryCollectionName: "Main factory",
         factoryCollection: {
           "": FactoryConfiguration(
             itemName: "",
@@ -43,7 +41,6 @@ class FactoriesHandlers {
     FactoryConfiguration factoryConfiguration,
     String? collectionName,
   ) {
-    String name = collectionName ?? 'Main factory';
     factoryCollection.factoryCollection[factoryConfiguration.itemName] =
         factoryConfiguration;
   }
