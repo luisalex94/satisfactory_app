@@ -486,6 +486,7 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
             content: SizedBox(
               child: AddNewFactoryPopup(
                 collectionName: collectionName,
+                originalMaterialStringList: originalMaterialStringList,
               ),
             ),
           );
@@ -531,8 +532,19 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
 
     // Recorre el mapa de [factoryCollection]
     factoryCollection.factoryCollection.forEach((key, value) {
-      factoryConfiguration
-          .add(Text(factoryCollection.factoryCollection[key]!.itemName));
+      String itenName = factoryCollection.factoryCollection[key]!.itemName;
+      String outputPm =
+          factoryCollection.factoryCollection[key]!.outputPm.toString();
+      factoryConfiguration.add(Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text('$itenName ($outputPm)'),
+          IconButton(
+            icon: Icon(Icons.edit),
+            onPressed: () {},
+          )
+        ],
+      ));
     });
 
     return Column(
