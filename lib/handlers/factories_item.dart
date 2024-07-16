@@ -27,10 +27,12 @@ class FactoryConfiguration {
 /// Coleccion de fabricas para obtener una fabrica final
 class FactoryCollection {
   String factoryCollectionName = "";
+  Map<String, OreItem> oreItems = {};
   Map<String, FactoryConfiguration> factoryCollection = {};
 
   FactoryCollection({
     this.factoryCollectionName = "",
+    this.oreItems = const {},
     this.factoryCollection = const {},
   });
 }

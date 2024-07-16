@@ -127,7 +127,7 @@ class MaterialHandlers {
       List<List<MaterialItem>> materialMatrix, int? ppm) {
     // Altura de la matriz
     int maxRow = materialMatrix.length;
-    // Guarda el numero con la fila mas ancha
+    // Ancho de la matriz
     int maxColumn = materialMatrix[0].length;
 
     // Recorre column

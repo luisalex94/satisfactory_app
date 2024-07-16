@@ -58,6 +58,13 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
             },
             icon: const Icon(Icons.factory_outlined),
           ),
+          IconButton(
+            onPressed: () {
+              var factories = FactoriesHandlers().getMainFactoryCollection();
+              var log = 0;
+            },
+            icon: const Icon(Icons.info_outline),
+          ),
         ],
       ),
       body: body(context),
@@ -400,13 +407,42 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
 
   /// Muestra el nombre de una coleccion y sus fabricas hijas
   Widget _factoryCollection(FactoryCollection factoryCollection) {
+    bool showFactories = true;
+
     return Column(
       children: [
-        Text(
-          factoryCollection.factoryCollectionName,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                IconButton(
+                  icon: Icon(Icons.arrow_forward_ios),
+                  onPressed: () {
+                    showFactories = !showFactories;
+                    setState(() {});
+                  },
+                ),
+                Text(
+                  factoryCollection.factoryCollectionName,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+            factoryCollection.factoryCollectionName == 'Main factory'
+                ? Container()
+                : IconButton(
+                    icon: const Icon(Icons.delete_outline),
+                    onPressed: () {
+                      FactoriesHandlers().deleteFactoryCollection(
+                        factoryCollection.factoryCollectionName,
+                      );
+                      setState(() {});
+                    },
+                  ),
+          ],
         ),
         const Divider(
           endIndent: 10,
