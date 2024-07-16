@@ -66,7 +66,12 @@ class _AddNewFactoryPopupState extends State<AddNewFactoryPopup> {
               selectedMaterial.materialName == ""
                   ? "Select material from the list"
                   : selectedMaterial.materialName,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 24,
+              ),
             ),
+            _sizedBox10(),
             _itemsPm(context),
             _sizedBox10(),
             _findBox(),
@@ -108,7 +113,12 @@ class _AddNewFactoryPopupState extends State<AddNewFactoryPopup> {
                 },
               ),
             ),
-            _addButton(),
+            Row(
+              children: [
+                _addButton(),
+                _addandCloseButton(),
+              ],
+            ),
           ],
         ),
       ),
@@ -152,7 +162,7 @@ class _AddNewFactoryPopupState extends State<AddNewFactoryPopup> {
         hintStyle: TextStyle(color: Colors.grey[800]),
         hintText: "Items per minute",
         fillColor: Colors.white70,
-        suffixIcon: const Icon(Icons.search),
+        suffixIcon: const Icon(Icons.play_arrow_rounded),
         suffixIconColor: Colors.grey[800],
       ),
       onChanged: (value) {
@@ -190,6 +200,38 @@ class _AddNewFactoryPopupState extends State<AddNewFactoryPopup> {
   }
 
   /// Agrega una fabrica a una coleccion y cierra el popup
+  Widget _addandCloseButton() {
+    return ElevatedButton(
+      onPressed: () {
+        // Se extrae la informacion de [_itemsPmTextController]
+        String ppmString = _itemsPmTextController.text;
+
+        // Se parsea a un double en [ppmString]
+        double ppmDouble = double.tryParse(ppmString) ?? 0.0;
+
+        // Se asegura un mínimo de 1 en [ppmString]
+        ppmDouble = ppmDouble == 0 ? 1 : ppmDouble;
+
+        if (selectedMaterial.materialName != "") {
+          Recipe recipeItemTest = Recipe(recipe: recipe);
+          FactoriesHandlers().addFactoryConfiguration(
+            FactoryConfiguration(
+              itemName: selectedMaterial.materialName,
+              factoryItem: {
+                selectedMaterial.materialName: recipeItemTest,
+              },
+              outputPm: ppmDouble,
+            ),
+            widget.collectionName,
+          );
+          Navigator.of(context).pop(true);
+        }
+      },
+      child: const Text('Add item and close'),
+    );
+  }
+
+  /// Agrega una fabrica a una coleccion y cierra el popup
   Widget _addButton() {
     return ElevatedButton(
       onPressed: () {
@@ -204,7 +246,7 @@ class _AddNewFactoryPopupState extends State<AddNewFactoryPopup> {
 
         if (selectedMaterial.materialName != "") {
           Recipe recipeItemTest = Recipe(recipe: recipe);
-          FactoriesHandlers().addFlowDefault(
+          FactoriesHandlers().addFactoryConfiguration(
             FactoryConfiguration(
               itemName: selectedMaterial.materialName,
               factoryItem: {
@@ -212,11 +254,11 @@ class _AddNewFactoryPopupState extends State<AddNewFactoryPopup> {
               },
               outputPm: ppmDouble,
             ),
+            widget.collectionName,
           );
         }
-        Navigator.of(context).pop(true);
       },
-      child: const Text('Add item to collection and close popup'),
+      child: const Text('Add item'),
     );
   }
 }

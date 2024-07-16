@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:satisfactory_app/cards/regularItemCard.dart';
 import 'package:satisfactory_app/handlers/material_handlers.dart';
 import 'package:satisfactory_app/handlers/material_item.dart';
+import 'package:satisfactory_app/popup/add_new_collection_popup.dart';
 import 'package:satisfactory_app/popup/add_new_factory_popup.dart';
 import 'package:satisfactory_app/screens/arguments/arguments.dart';
 import 'package:satisfactory_app/handlers/factories_item.dart';
@@ -18,6 +19,7 @@ class MainRecipesPage extends StatefulWidget {
 class _MainRecipesPageState extends State<MainRecipesPage> {
   List<String> materialStringList = [];
   List<String> originalMaterialStringList = [];
+  List<String> collectionListNames = [];
   Map<String, OreItem> oreItems = {};
   double _screenHeight = 0;
   MaterialItem selectedMaterial = MaterialItem();
@@ -52,63 +54,9 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
         actions: [
           IconButton(
             onPressed: () {
-              recipe = MaterialHandlers().runMatrixRecipe(
-                item: 'Stator',
-                ppm: 10,
-              );
-              Recipe recipeItemTest = Recipe(recipe: recipe);
-              FactoriesHandlers().addFlowDefault(
-                FactoryConfiguration(
-                  itemName: 'Stator',
-                  factoryItem: {'Stator': recipeItemTest},
-                  outputPm: 10,
-                ),
-              );
-              var test = FactoriesHandlers().getMainFactoryCollection();
-              print(test);
-              setState(() {});
+              _addNewCollectionPopup();
             },
-            icon: const Icon(Icons.add),
-          ),
-          IconButton(
-            onPressed: () {
-              recipe = MaterialHandlers().runMatrixRecipe(
-                item: 'Rotor',
-                ppm: 10,
-              );
-              Recipe recipeItemTest = Recipe(recipe: recipe);
-              FactoriesHandlers().addFlowDefault(
-                FactoryConfiguration(
-                  itemName: 'Rotor',
-                  factoryItem: {'Rotor': recipeItemTest},
-                  outputPm: 10,
-                ),
-              );
-              var test = FactoriesHandlers().getMainFactoryCollection();
-              print(test);
-              setState(() {});
-            },
-            icon: const Icon(Icons.email),
-          ),
-          IconButton(
-            onPressed: () {
-              recipe = MaterialHandlers().runMatrixRecipe(
-                item: 'Motor',
-                ppm: 10,
-              );
-              Recipe recipeItemTest = Recipe(recipe: recipe);
-              FactoriesHandlers().addFlowDefault(
-                FactoryConfiguration(
-                  itemName: 'Motor',
-                  factoryItem: {'Motor': recipeItemTest},
-                  outputPm: 10,
-                ),
-              );
-              var test = FactoriesHandlers().getMainFactoryCollection();
-              print(test);
-              setState(() {});
-            },
-            icon: const Icon(Icons.aspect_ratio),
+            icon: const Icon(Icons.factory_outlined),
           ),
         ],
       ),
@@ -364,7 +312,7 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
         hintStyle: TextStyle(color: Colors.grey[800]),
         hintText: "Items per minute",
         fillColor: Colors.white70,
-        suffixIcon: const Icon(Icons.search),
+        suffixIcon: const Icon(Icons.play_arrow_rounded),
         suffixIconColor: Colors.grey[800],
       ),
       onChanged: (value) {
@@ -416,7 +364,9 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Expanded(
-              child: _mainFactoryCollection(),
+              child: SingleChildScrollView(
+                child: _mainFactoryCollection(),
+              ),
             ),
           ],
         ),
@@ -480,17 +430,34 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
 
   void _addNewFactoryPopUp(String collectionName) {
     showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            content: SizedBox(
-              child: AddNewFactoryPopup(
-                collectionName: collectionName,
-                originalMaterialStringList: originalMaterialStringList,
-              ),
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          content: SizedBox(
+            child: AddNewFactoryPopup(
+              collectionName: collectionName,
+              originalMaterialStringList: originalMaterialStringList,
             ),
-          );
-        });
+          ),
+        );
+      },
+    );
+  }
+
+  void _addNewCollectionPopup() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          content: SizedBox(
+            child: AddNewCollectionPopup(
+              collectionsStringList:
+                  FactoriesHandlers().getCollectionStringNamesList(),
+            ),
+          ),
+        );
+      },
+    );
   }
 
   /// Extrae en una lista los VALUES del mapa de cada [FactoryCollection] de [MainFactoryCollection]
@@ -524,28 +491,44 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
   ) {
     // Flujo para retornar vacio si entra vacio
     if (factoryCollection.factoryCollection[""]?.itemName != null) {
-      return Text('No items');
+      return const Text('No items');
     }
 
     // Establece una lista vacia para guardar los Widgets de las fabricas
     List<Widget> factoryConfiguration = [];
 
     // Recorre el mapa de [factoryCollection]
-    factoryCollection.factoryCollection.forEach((key, value) {
-      String itenName = factoryCollection.factoryCollection[key]!.itemName;
-      String outputPm =
-          factoryCollection.factoryCollection[key]!.outputPm.toString();
-      factoryConfiguration.add(Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text('$itenName ($outputPm)'),
-          IconButton(
-            icon: Icon(Icons.edit),
-            onPressed: () {},
-          )
-        ],
-      ));
-    });
+    factoryCollection.factoryCollection.forEach(
+      (key, value) {
+        String itenName = factoryCollection.factoryCollection[key]!.itemName;
+        String outputPm =
+            factoryCollection.factoryCollection[key]!.outputPm.toString();
+        factoryConfiguration.add(
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('$itenName ($outputPm)'),
+              Row(
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.edit),
+                    onPressed: () {},
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.delete_outline),
+                    onPressed: () {
+                      _deleteItemFromCollection(
+                          key, factoryCollection.factoryCollectionName);
+                      setState(() {});
+                    },
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
+    );
 
     return Column(
       children: factoryConfiguration,
@@ -574,5 +557,9 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
         ),
       ],
     );
+  }
+
+  void _deleteItemFromCollection(String itemName, String collectionName) {
+    FactoriesHandlers().deleteFactoryConfiguration(collectionName, itemName);
   }
 }

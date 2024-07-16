@@ -53,7 +53,6 @@ class _RegularitemcardState extends State<Regularitemcard> {
         onTap: () {
           setState(() {
             ready = !ready;
-            print('ready: $ready');
           });
         },
         child: Container(
