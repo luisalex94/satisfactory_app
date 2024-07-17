@@ -213,12 +213,12 @@ class _AddNewFactoryPopupState extends State<AddNewFactoryPopup> {
         ppmDouble = ppmDouble == 0 ? 1 : ppmDouble;
 
         if (selectedMaterial.materialName != "") {
-          Recipe recipeItemTest = Recipe(recipe: recipe);
+          Recipe recipeItem = Recipe(recipe: recipe);
           FactoriesHandlers().addFactoryConfiguration(
             FactoryConfiguration(
               itemName: selectedMaterial.materialName,
               factoryItem: {
-                selectedMaterial.materialName: recipeItemTest,
+                selectedMaterial.materialName: recipeItem,
               },
               outputPm: ppmDouble,
             ),

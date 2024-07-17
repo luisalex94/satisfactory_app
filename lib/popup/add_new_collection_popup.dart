@@ -89,6 +89,9 @@ class _AddNewCollectionPopupState extends State<AddNewCollectionPopup> {
           suffixIcon: const Icon(Icons.search),
           suffixIconColor: Colors.grey[800],
         ),
+        onFieldSubmitted: (value) {
+          _onSubmit();
+        },
         validator: (value) {
           if (_sameName(value)) {
             return "Already exists";
@@ -100,6 +103,20 @@ class _AddNewCollectionPopupState extends State<AddNewCollectionPopup> {
         },
       ),
     );
+  }
+
+  void _onSubmit() {
+    final validation =
+        _formKeyAddNewCollection.currentState?.validate() ?? false;
+    if (!validation) {
+      return;
+    }
+    // Se extrae la informacion de [_itemsPmTextController]
+    String collectionName = _newCollectionNameController.text;
+
+    FactoriesHandlers().addFactoryCollection(collectionName);
+
+    Navigator.of(context).pop(true);
   }
 
   /// Agrega una fabrica a una coleccion y cierra el popup

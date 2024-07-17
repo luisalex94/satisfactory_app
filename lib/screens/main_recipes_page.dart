@@ -8,6 +8,7 @@ import 'package:satisfactory_app/popup/add_new_factory_popup.dart';
 import 'package:satisfactory_app/screens/arguments/arguments.dart';
 import 'package:satisfactory_app/handlers/factories_item.dart';
 import 'package:satisfactory_app/handlers/factories_handlers.dart';
+import 'package:satisfactory_app/widgets/factory_collection.dart';
 
 class MainRecipesPage extends StatefulWidget {
   const MainRecipesPage({super.key});
@@ -29,6 +30,10 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
 
   final TextEditingController _itemsPmTextController = TextEditingController();
   final TextEditingController _searchItemController = TextEditingController();
+
+  // Controla que OreItems presenta en pantalla principal
+  bool showCollectionMaterials = false;
+  String nameCollectionMaterials = "";
 
   @override
   void initState() {
@@ -60,8 +65,8 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
           ),
           IconButton(
             onPressed: () {
-              var factories = FactoriesHandlers().getMainFactoryCollection();
-              var log = 0;
+              //var factories = FactoriesHandlers().getMainFactoryCollection();
+              //var log = 0;
             },
             icon: const Icon(Icons.info_outline),
           ),
@@ -97,15 +102,25 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
   }
 
   Widget _leftColumn() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _showOreItems(),
-        _sizedBox10(),
-        _showListOfItems(),
-      ],
-    );
+    if (showCollectionMaterials == true && nameCollectionMaterials != "") {
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _showOreItemsCollections(),
+        ],
+      );
+    } else {
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _showOreItems(),
+          _sizedBox10(),
+          _showListOfItems(),
+        ],
+      );
+    }
   }
 
   Widget _mainBody(BuildContext context, BoxConstraints viewportConstraints) {
@@ -188,6 +203,60 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: mainColumn,
+    );
+  }
+
+  /// Muestra los OreItem de una coleccion
+  Widget _showOreItemsCollections() {
+    // Recolecta el mapa de ores
+    Map<String, OreItem> data =
+        FactoriesHandlers().oreItemsCollection(nameCollectionMaterials);
+
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: Colors.black12,
+        border: Border.all(width: 1),
+      ),
+      height: _screenHeight - 20,
+      width: 320,
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(nameCollectionMaterials),
+                IconButton(
+                  icon: const Icon(Icons.close),
+                  onPressed: () {
+                    setState(() {
+                      showCollectionMaterials = false;
+                    });
+                  },
+                )
+              ],
+            ),
+            const Divider(),
+            data.length != 0
+                ? Expanded(
+                    child: ListView.builder(
+                      itemCount: data.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        String name = data.values.elementAt(index).materialName;
+                        double quantity = data.values.elementAt(index).outputPm;
+                        return Text('$name: ${quantity.toStringAsFixed(2)}');
+                      },
+                    ),
+                  )
+                : const Text(
+                    'Agrega algunos materiales a la receta para mostrar los ingredientes necesarios.',
+                  ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -396,13 +465,30 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
 
     for (int i = 0; i < factoryCollectionValues.length; i++) {
       factoryCollectionWidgets.add(
-        _factoryCollection(factoryCollectionValues[i]),
+        FactoryCollectionWidget(
+          factoryCollection: factoryCollectionValues[i],
+          materialStringList: originalMaterialStringList,
+          callBackFunction: _callBackFunction,
+          callBackFunctionOnlySetState: _callBackFunctionOnlySetState,
+        ),
       );
     }
 
     return Column(
       children: factoryCollectionWidgets,
     );
+  }
+
+  /// Actualiza el estado como callback de un ChildWidget
+  void _callBackFunction(String collectionName) {
+    setState(() {
+      showCollectionMaterials = true;
+      nameCollectionMaterials = collectionName;
+    });
+  }
+
+  void _callBackFunctionOnlySetState() {
+    setState(() {});
   }
 
   /// Muestra el nombre de una coleccion y sus fabricas hijas

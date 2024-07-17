@@ -74,6 +74,19 @@ class FactoriesHandlers {
         .removeWhere((key, value) {
       return key == factoryConfigurationName;
     });
+
+    _updateCollectionOres(factoryCollectionName);
+  }
+
+  /// Edita la cantidad de output de un [FactoryConfiguration]
+  /// Elimina y agrega la [FactoryConfiguration], recicla ambas funciones
+  void editFactoryConfiguration({
+    required FactoryConfiguration factoryConfiguration,
+    required String factoryCollectionName,
+    required String factoryConfigurationName,
+  }) {
+    deleteFactoryConfiguration(factoryCollectionName, factoryConfigurationName);
+    addFactoryConfiguration(factoryConfiguration, factoryCollectionName);
   }
 
   /// Agrega una [FactoryCollection] a [MainFactoryCollection]
@@ -242,5 +255,14 @@ class FactoriesHandlers {
 
     // Se actualiza el valor de oreItems
     mainFactoryCollection.mainCollection[collectionName]!.oreItems = data;
+  }
+
+  ///Retorna un mapa de OreItems de los ores de una coleccion
+  Map<String, OreItem> oreItemsCollection(String collectionName) {
+    // Recolecta la informacion
+    Map<String, OreItem> data =
+        mainFactoryCollection.mainCollection[collectionName]?.oreItems ?? {};
+    // Retorna la informacion
+    return data;
   }
 }
