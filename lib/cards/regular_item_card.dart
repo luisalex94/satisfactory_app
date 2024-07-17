@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import '../handlers/material_item.dart';
 
-class Regularitemcard extends StatefulWidget {
+class RegularItemcard extends StatefulWidget {
   final MaterialItem? material;
 
-  const Regularitemcard({super.key, this.material});
+  const RegularItemcard({super.key, this.material});
 
   @override
-  State<Regularitemcard> createState() => _RegularitemcardState();
+  State<RegularItemcard> createState() => _RegularItemcardState();
 }
 
-class _RegularitemcardState extends State<Regularitemcard> {
+class _RegularItemcardState extends State<RegularItemcard> {
   bool ready = false;
 
   @override
-  void didUpdateWidget(Regularitemcard oldWidget) {
+  void didUpdateWidget(RegularItemcard oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.material != oldWidget.material) {
       setState(() {

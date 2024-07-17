@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:satisfactory_app/cards/regularItemCard.dart';
+import 'package:satisfactory_app/cards/regular_item_card.dart';
 import 'package:satisfactory_app/handlers/material_handlers.dart';
 import 'package:satisfactory_app/handlers/material_item.dart';
 import 'package:satisfactory_app/popup/add_new_collection_popup.dart';
-import 'package:satisfactory_app/popup/add_new_factory_popup.dart';
 import 'package:satisfactory_app/screens/arguments/arguments.dart';
 import 'package:satisfactory_app/handlers/factories_item.dart';
 import 'package:satisfactory_app/handlers/factories_handlers.dart';
@@ -174,7 +173,7 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
       List<Widget> rowChildren = [];
       for (int j = 0; j < column; j++) {
         rowChildren.add(
-          Regularitemcard(
+          RegularItemcard(
             material: recipe[i][j],
             key: ValueKey(
                 '${recipe[i][j].materialId != 0 ? 0 : recipe[i][j].materialId} _$i _$j'),
@@ -240,7 +239,7 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
               ],
             ),
             const Divider(),
-            data.length != 0
+            data.isNotEmpty
                 ? Expanded(
                     child: ListView.builder(
                       itemCount: data.length,
@@ -491,81 +490,6 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
     setState(() {});
   }
 
-  /// Muestra el nombre de una coleccion y sus fabricas hijas
-  Widget _factoryCollection(FactoryCollection factoryCollection) {
-    bool showFactories = true;
-
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                IconButton(
-                  icon: Icon(Icons.arrow_forward_ios),
-                  onPressed: () {
-                    showFactories = !showFactories;
-                    setState(() {});
-                  },
-                ),
-                Text(
-                  factoryCollection.factoryCollectionName,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-            factoryCollection.factoryCollectionName == 'Main factory'
-                ? Container()
-                : IconButton(
-                    icon: const Icon(Icons.delete_outline),
-                    onPressed: () {
-                      FactoriesHandlers().deleteFactoryCollection(
-                        factoryCollection.factoryCollectionName,
-                      );
-                      setState(() {});
-                    },
-                  ),
-          ],
-        ),
-        const Divider(
-          endIndent: 10,
-          indent: 10,
-        ),
-        _itemFactoryCollection(
-          factoryCollection,
-        ),
-        ElevatedButton(
-          onPressed: () {
-            _addNewFactoryPopUp(
-              factoryCollection.factoryCollectionName,
-            );
-          },
-          child: const Text('Add factory'),
-        ),
-        _sizedBox10(),
-      ],
-    );
-  }
-
-  void _addNewFactoryPopUp(String collectionName) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          content: SizedBox(
-            child: AddNewFactoryPopup(
-              collectionName: collectionName,
-              originalMaterialStringList: originalMaterialStringList,
-            ),
-          ),
-        );
-      },
-    );
-  }
-
   void _addNewCollectionPopup() {
     showDialog(
       context: context,
@@ -592,96 +516,5 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
     });
 
     return data;
-  }
-
-  /// Extrae en una lista los KEYS del mapa de cada [FactoryCollection] de [MainFactoryCollection]
-  List<String> _mapToListFactoryCollectionKeys(
-    MainFactoryCollection mainFactoryCollection,
-  ) {
-    List<String> data = [];
-
-    mainFactoryCollection.mainCollection.forEach((key, value) {
-      data.add(key);
-    });
-
-    return data;
-  }
-
-  /// Muestra los items de una [FactoryCollection] individual
-  Widget _itemFactoryCollection(
-    FactoryCollection factoryCollection,
-  ) {
-    // Flujo para retornar vacio si entra vacio
-    if (factoryCollection.factoryCollection[""]?.itemName != null) {
-      return const Text('No items');
-    }
-
-    // Establece una lista vacia para guardar los Widgets de las fabricas
-    List<Widget> factoryConfiguration = [];
-
-    // Recorre el mapa de [factoryCollection]
-    factoryCollection.factoryCollection.forEach(
-      (key, value) {
-        String itenName = factoryCollection.factoryCollection[key]!.itemName;
-        String outputPm =
-            factoryCollection.factoryCollection[key]!.outputPm.toString();
-        factoryConfiguration.add(
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('$itenName ($outputPm)'),
-              Row(
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.edit),
-                    onPressed: () {},
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.delete_outline),
-                    onPressed: () {
-                      _deleteItemFromCollection(
-                          key, factoryCollection.factoryCollectionName);
-                      setState(() {});
-                    },
-                  ),
-                ],
-              ),
-            ],
-          ),
-        );
-      },
-    );
-
-    return Column(
-      children: factoryConfiguration,
-    );
-  }
-
-  List<FactoryConfiguration> _mapToListFactoryConfigurationValues(
-      FactoryCollection factoryCollection) {
-    // Establece una lista vacia para guardar las configuraciones de las fabricas
-    List<FactoryConfiguration> data = [];
-
-    // Recorre el mapa para agregar cada elemento a la lista vacia
-    factoryCollection.factoryCollection.forEach((key, value) {
-      data.add(value);
-    });
-
-    // Retorna la informacion
-    return data;
-  }
-
-  Widget _itemFactoryConfiguration(FactoryConfiguration factoryConfiguration) {
-    return Row(
-      children: [
-        Text(
-          factoryConfiguration.itemName,
-        ),
-      ],
-    );
-  }
-
-  void _deleteItemFromCollection(String itemName, String collectionName) {
-    FactoriesHandlers().deleteFactoryConfiguration(collectionName, itemName);
   }
 }

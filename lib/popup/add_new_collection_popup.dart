@@ -144,11 +144,11 @@ class _AddNewCollectionPopupState extends State<AddNewCollectionPopup> {
     String name = actualName ?? "";
     bool sameName = false;
 
-    collectionsStringList.forEach((value) {
+    for (var value in collectionsStringList) {
       if (name == value) {
         sameName = true;
       }
-    });
+    }
 
     return sameName;
   }

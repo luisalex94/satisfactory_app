@@ -27,16 +27,6 @@ class _FactoryCollectionWidgetState extends State<FactoryCollectionWidget> {
   bool showFactories = true;
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
