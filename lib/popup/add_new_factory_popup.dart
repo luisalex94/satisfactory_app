@@ -9,11 +9,13 @@ class AddNewFactoryPopup extends StatefulWidget {
   const AddNewFactoryPopup({
     required this.collectionName,
     required this.originalMaterialStringList,
+    required this.callBackFunctionOnlySetState,
     super.key,
   });
 
   final String collectionName;
   final List<String> originalMaterialStringList;
+  final Function callBackFunctionOnlySetState;
 
   @override
   State<AddNewFactoryPopup> createState() => _AddNewFactoryPopupState();
@@ -257,6 +259,7 @@ class _AddNewFactoryPopupState extends State<AddNewFactoryPopup> {
             widget.collectionName,
           );
         }
+        widget.callBackFunctionOnlySetState();
       },
       child: const Text('Add item'),
     );

@@ -72,7 +72,7 @@ class _FactoryCollectionWidgetState extends State<FactoryCollectionWidget> {
                           FactoriesHandlers().deleteFactoryCollection(
                             widget.factoryCollection.factoryCollectionName,
                           );
-                          setState(() {});
+                          widget.callBackFunctionOnlySetState();
                         },
                       ),
                 IconButton(
@@ -221,6 +221,7 @@ class _FactoryCollectionWidgetState extends State<FactoryCollectionWidget> {
             child: AddNewFactoryPopup(
               collectionName: collectionName,
               originalMaterialStringList: widget.materialStringList,
+              callBackFunctionOnlySetState: widget.callBackFunctionOnlySetState,
             ),
           ),
         );

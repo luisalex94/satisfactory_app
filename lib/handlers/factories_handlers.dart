@@ -85,8 +85,19 @@ class FactoriesHandlers {
     required String factoryCollectionName,
     required String factoryConfigurationName,
   }) {
-    deleteFactoryConfiguration(factoryCollectionName, factoryConfigurationName);
-    addFactoryConfiguration(factoryConfiguration, factoryCollectionName);
+    // Extrae la receta de [factoryConfiguration]
+    Recipe recipe =
+        factoryConfiguration.factoryItem[factoryConfiguration.itemName]!;
+    // Agrega los [oreItems] de la receta
+    factoryConfiguration.oreItems = _oreItemsIngredient(recipe);
+
+    // Agrega al [FactoryCollection] con el nombre [collectionName] la
+    // [FactoryConfiguration] con el nombre [factoryConfiguration]
+    mainFactoryCollection.mainCollection[factoryCollectionName]!
+            .factoryCollection[factoryConfiguration.itemName] =
+        factoryConfiguration;
+
+    _updateCollectionOres(factoryCollectionName);
   }
 
   /// Agrega una [FactoryCollection] a [MainFactoryCollection]
