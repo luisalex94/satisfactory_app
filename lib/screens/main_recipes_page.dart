@@ -26,6 +26,7 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
   int selectedIndex = -1;
   List<List<MaterialItem>> recipe = [];
   bool ready = false;
+  bool showCollectionRecipe = false;
 
   final TextEditingController _itemsPmTextController = TextEditingController();
   final TextEditingController _searchItemController = TextEditingController();
@@ -147,23 +148,40 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
   }
 
   Widget _mainPage(MaterialItem? material) {
-    if (material!.materialName != "") {
+    if (showCollectionRecipe) {
       int row = recipe.length;
       int column = recipe[0].length;
       return LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints viewportConstraints) {
-        return SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: SingleChildScrollView(
-            child: _columnConstructor(
-              column,
-              row,
+        builder: (BuildContext context, BoxConstraints viewportConstraints) {
+          return SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: SingleChildScrollView(
+              child: _columnConstructor(
+                column,
+                row,
+              ),
             ),
-          ),
-        );
-      });
+          );
+        },
+      );
+    } else if (material!.materialName != "") {
+      int row = recipe.length;
+      int column = recipe[0].length;
+      return LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints viewportConstraints) {
+          return SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: SingleChildScrollView(
+              child: _columnConstructor(
+                column,
+                row,
+              ),
+            ),
+          );
+        },
+      );
     } else {
-      return const Text('No info');
+      return const Text('Selecciona un item para ver su receta');
     }
   }
 
@@ -241,13 +259,9 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
             const Divider(),
             data.isNotEmpty
                 ? Expanded(
-                    child: ListView.builder(
-                      itemCount: data.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        String name = data.values.elementAt(index).materialName;
-                        double quantity = data.values.elementAt(index).outputPm;
-                        return Text('$name: ${quantity.toStringAsFixed(2)}');
-                      },
+                    child: oreItemsCollection(
+                      data,
+                      nameCollectionMaterials,
                     ),
                   )
                 : const Text(
@@ -256,6 +270,34 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget oreItemsCollection(Map<String, OreItem> data, String collectionName) {
+    List<Widget> widgetList = [];
+
+    if (data.isEmpty) {
+      return const Text('No hay materiales pendientes');
+    }
+
+    data.forEach(
+      (key, value) {
+        widgetList.add(Row(
+          children: [
+            CheckboxOreItemCollection(
+              collectionName: collectionName,
+              oreName: value.materialName,
+              ppm: value.outputPm,
+              key: ValueKey('$collectionName-${value.materialName}'),
+              //ready: value.ready,
+            )
+          ],
+        ));
+      },
+    );
+
+    return Column(
+      children: widgetList,
     );
   }
 
@@ -469,6 +511,7 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
           materialStringList: originalMaterialStringList,
           callBackFunction: _callBackFunction,
           callBackFunctionOnlySetState: _callBackFunctionOnlySetState,
+          callBackFunctionUpdateRecipe: _callBackFunctionUpdateRecipe,
         ),
       );
     }
@@ -488,6 +531,19 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
 
   void _callBackFunctionOnlySetState() {
     setState(() {});
+  }
+
+  void _callBackFunctionUpdateRecipe(
+    Recipe recipeUpdate,
+    Map<String, OreItem> oreItemsUpdate,
+    String materialNameUpdate,
+    String collectionNameUpdate,
+  ) {
+    setState(() {
+      recipe = recipeUpdate.recipe;
+      oreItems = oreItemsUpdate;
+      showCollectionRecipe = true;
+    });
   }
 
   void _addNewCollectionPopup() {
@@ -516,5 +572,63 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
     });
 
     return data;
+  }
+}
+
+class CheckboxOreItemCollection extends StatefulWidget {
+  const CheckboxOreItemCollection({
+    required this.oreName,
+    required this.collectionName,
+    required this.ppm,
+    //required this.ready,
+    super.key,
+  });
+
+  final String oreName;
+  final String collectionName;
+  final double ppm;
+  //final bool ready;
+
+  @override
+  State<CheckboxOreItemCollection> createState() =>
+      _CheckboxOreItemCollectionState();
+}
+
+class _CheckboxOreItemCollectionState extends State<CheckboxOreItemCollection> {
+  bool? isCheck = false;
+
+  @override
+  void initState() {
+    isCheck = FactoriesHandlers().getReadyOreItemFactoryCollection(
+      collectionName: widget.collectionName,
+      oreName: widget.oreName,
+    );
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    isCheck = FactoriesHandlers().getReadyOreItemFactoryCollection(
+      collectionName: widget.collectionName,
+      oreName: widget.oreName,
+    );
+    return Row(
+      children: [
+        Checkbox(
+          value: isCheck,
+          onChanged: (value) {
+            FactoriesHandlers().setReadyOreItemFactoryCollection(
+              collectionName: widget.collectionName,
+              oreName: widget.oreName,
+              ready: value ?? false,
+            );
+            setState(() {
+              isCheck = value;
+            });
+          },
+        ),
+        Text('${widget.oreName}: ${widget.ppm.ceil()}')
+      ],
+    );
   }
 }

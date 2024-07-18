@@ -15,12 +15,14 @@ class FactoryConfiguration {
   Map<String, Recipe> factoryItem = {};
   double outputPm = 1.0;
   Map<String, OreItem> oreItems = {};
+  bool ready = false;
 
   FactoryConfiguration({
     this.itemName = "",
     this.factoryItem = const {},
     this.outputPm = 1.0,
     this.oreItems = const {},
+    this.ready = false,
   });
 }
 

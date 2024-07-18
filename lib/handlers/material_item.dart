@@ -146,11 +146,13 @@ class OreItem {
   String materialName = "";
   int materialId = 0;
   double outputPm = 0.0;
+  bool ready = false;
 
   OreItem({
     this.materialName = "",
     this.materialId = 0,
     this.outputPm = 0.0,
+    this.ready = false,
   });
 
   factory OreItem.fromJson(json) {

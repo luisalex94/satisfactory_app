@@ -43,7 +43,9 @@ class MaterialHandlers {
     List<String> data = [];
     // Recorre el mapa de materiales para agregar a la lista cada key (nombre)
     materialItems.forEach((key, value) {
-      data.add(key);
+      if (!value.ore) {
+        data.add(key);
+      }
     });
     // Devuelve la lista de nombres
     return data;
@@ -76,7 +78,7 @@ class MaterialHandlers {
 
   /// Devuelve un [MaterialItem]
   MaterialItem getMaterialItem(String name) {
-    if(name == "") {
+    if (name == "") {
       return MaterialItem();
     }
     return MaterialItem.copyWith(materialItems[name]!);
@@ -96,7 +98,7 @@ class MaterialHandlers {
     // Material del cual se quiere receta
     MaterialItem mainMaterial = getMaterialItem(item);
 
-    if(mainMaterial.materialId == 0) {
+    if (mainMaterial.materialId == 0) {
       recipe[0].add(mainMaterial);
       return recipe;
     }
@@ -399,7 +401,7 @@ class MaterialHandlers {
       double multipler = outputPm / materialItem.recipes['1']!.outputPm;
       // Asigna las [outputPm] a [outputModifiedPm]
       materialItem.recipes['1']!.outputModifiedPm = outputPm;
-      
+
       // Multiplica la [outputPmNew] * [relation] para obtener la cantidad final de outputModifiedPm requerida
       double outputModifiedPm = materialItem.recipes['1']!.outputPm * multipler;
       // Se obtiene el [outputPmNew]

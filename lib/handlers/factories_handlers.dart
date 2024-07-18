@@ -257,12 +257,50 @@ class FactoriesHandlers {
     mainFactoryCollection.mainCollection[collectionName]!.oreItems = data;
   }
 
-  ///Retorna un mapa de OreItems de los ores de una coleccion
+  /// Retorna un mapa de OreItems de los ores de una coleccion
   Map<String, OreItem> oreItemsCollection(String collectionName) {
     // Recolecta la informacion
     Map<String, OreItem> data =
         mainFactoryCollection.mainCollection[collectionName]?.oreItems ?? {};
     // Retorna la informacion
     return data;
+  }
+
+  /// Setea true o false el bool ready de una [FactoryConfiguration]
+  void setReadyFactoryConfiguration({
+    required String factoryConfigurationName,
+    required String collectionName,
+    required bool ready,
+  }) {
+    mainFactoryCollection.mainCollection[collectionName]!
+        .factoryCollection[factoryConfigurationName]!.ready = ready;
+  }
+
+  /// Obtiene true o false del bool ready de una [FactoryConfiguration]
+  bool getReadyFactoryConfiguration({
+    required String factoryConfigurationName,
+    required String collectionName,
+  }) {
+    return mainFactoryCollection.mainCollection[collectionName]!
+        .factoryCollection[factoryConfigurationName]!.ready;
+  }
+
+  /// Setea true o false el bool ready de un [OreItem] del oreItems de un [FactoryCollection]
+  void setReadyOreItemFactoryCollection({
+    required String collectionName,
+    required String oreName,
+    required bool ready,
+  }) {
+    mainFactoryCollection
+        .mainCollection[collectionName]!.oreItems[oreName]!.ready = ready;
+  }
+
+  /// Obtiene true o false del bool ready de un [OreItem] del oreItems de una [FactoryCollection]
+  bool getReadyOreItemFactoryCollection({
+    required String collectionName,
+    required String oreName,
+  }) {
+    return mainFactoryCollection
+        .mainCollection[collectionName]!.oreItems[oreName]!.ready;
   }
 }

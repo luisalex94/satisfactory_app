@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:satisfactory_app/handlers/factories_handlers.dart';
 import 'package:satisfactory_app/handlers/factories_item.dart';
+import 'package:satisfactory_app/handlers/material_item.dart';
 import 'package:satisfactory_app/popup/add_new_factory_popup.dart';
 import 'package:satisfactory_app/popup/edit_material_quantity_popup.dart';
 
@@ -10,13 +11,22 @@ class FactoryCollectionWidget extends StatefulWidget {
     required this.materialStringList,
     required this.callBackFunction,
     required this.callBackFunctionOnlySetState,
+    required this.callBackFunctionUpdateRecipe,
     super.key,
   });
 
   final FactoryCollection factoryCollection;
   final List<String> materialStringList;
-  final Function(String collectionName) callBackFunction;
+  final Function(
+    String collectionName,
+  ) callBackFunction;
   final Function callBackFunctionOnlySetState;
+  final Function(
+    Recipe recipeUpdate,
+    Map<String, OreItem> oreItemsUpdate,
+    String materialName,
+    String collectionName,
+  ) callBackFunctionUpdateRecipe;
 
   @override
   State<FactoryCollectionWidget> createState() =>
@@ -119,40 +129,57 @@ class _FactoryCollectionWidgetState extends State<FactoryCollectionWidget> {
     // Recorre el mapa de [factoryCollection]
     factoryCollection.factoryCollection.forEach(
       (key, value) {
-        String itenName = factoryCollection.factoryCollection[key]!.itemName;
+        String itemName = factoryCollection.factoryCollection[key]!.itemName;
         String outputPm =
             factoryCollection.factoryCollection[key]!.outputPm.toString();
         factoryConfiguration.add(
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('$itenName ($outputPm)'),
-              Row(
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.edit),
-                    onPressed: () {
-                      _editFactoryConfiguration(
-                        factoryConfiguration: value,
-                        factoryCollectionName:
-                            factoryCollection.factoryCollectionName,
-                        factoryConfigurationName: value.itemName,
-                      );
-                    },
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.delete_outline),
-                    onPressed: () {
-                      _deleteItemFromCollection(
-                          key, factoryCollection.factoryCollectionName);
-                      setState(() {
-                        widget.callBackFunctionOnlySetState();
-                      });
-                    },
-                  ),
-                ],
-              ),
-            ],
+          GestureDetector(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    CheckboxFactoryConfiguration(
+                      factoryConfigurationName: itemName,
+                      collectionName: factoryCollection.factoryCollectionName,
+                    ),
+                    Text('$itemName ($outputPm)'),
+                  ],
+                ),
+                Row(
+                  children: [
+                    IconButton(
+                      icon: const Icon(Icons.edit),
+                      onPressed: () {
+                        _editFactoryConfiguration(
+                          factoryConfiguration: value,
+                          factoryCollectionName:
+                              factoryCollection.factoryCollectionName,
+                          factoryConfigurationName: value.itemName,
+                        );
+                      },
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.delete_outline),
+                      onPressed: () {
+                        _deleteItemFromCollection(
+                            key, factoryCollection.factoryCollectionName);
+                        setState(() {
+                          widget.callBackFunctionOnlySetState();
+                        });
+                      },
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            onTap: () {
+              widget.callBackFunctionUpdateRecipe(
+                  value.factoryItem[value.itemName]!,
+                  value.oreItems,
+                  value.itemName,
+                  factoryCollection.factoryCollectionName);
+            },
           ),
         );
       },
@@ -210,5 +237,49 @@ class _FactoryCollectionWidgetState extends State<FactoryCollectionWidget> {
       height: 10,
       width: 10,
     );
+  }
+}
+
+class CheckboxFactoryConfiguration extends StatefulWidget {
+  const CheckboxFactoryConfiguration({
+    required this.factoryConfigurationName,
+    required this.collectionName,
+    super.key,
+  });
+
+  final String factoryConfigurationName;
+  final String collectionName;
+
+  @override
+  State<CheckboxFactoryConfiguration> createState() =>
+      _CheckboxFactoryConfigurationState();
+}
+
+class _CheckboxFactoryConfigurationState
+    extends State<CheckboxFactoryConfiguration> {
+  bool? isCheck = false;
+
+  @override
+  void initState() {
+    isCheck = FactoriesHandlers().getReadyFactoryConfiguration(
+        factoryConfigurationName: widget.factoryConfigurationName,
+        collectionName: widget.collectionName);
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Checkbox(
+        value: isCheck,
+        onChanged: (value) {
+          FactoriesHandlers().setReadyFactoryConfiguration(
+            factoryConfigurationName: widget.factoryConfigurationName,
+            collectionName: widget.collectionName,
+            ready: value ?? false,
+          );
+          setState(() {
+            isCheck = value;
+          });
+        });
   }
 }
