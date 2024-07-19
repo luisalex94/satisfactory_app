@@ -204,7 +204,7 @@ class _FactoryCollectionWidgetState extends State<FactoryCollectionWidget> {
                                   key, factoryCollection.factoryCollectionName);
                               setState(
                                 () {
-                                  //widget.callBackFunctionOnlySetState();
+                                  widget.callBackFunctionOnlySetState();
                                   widget
                                       .callBackFunctionDeleteFunctionFactoryConfiguration(
                                     factoryCollectionName:
