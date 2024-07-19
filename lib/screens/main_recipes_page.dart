@@ -287,7 +287,8 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
       width: 320,
       child: Padding(
         padding: const EdgeInsets.all(10.0),
-        child: Column(
+        
+        child: data.isNotEmpty ? Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Row(
@@ -316,7 +317,7 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
                     'Agrega algunos materiales a la receta para mostrar los ingredientes necesarios.',
                   ),
           ],
-        ),
+        ) : Column(children: [Text('Selecciona una colección con materiales para mostrar los ingredientes.')],),
       ),
     );
   }
