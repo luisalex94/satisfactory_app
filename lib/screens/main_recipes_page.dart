@@ -287,37 +287,55 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
       width: 320,
       child: Padding(
         padding: const EdgeInsets.all(10.0),
-        
-        child: data.isNotEmpty ? Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(nameCollectionMaterials),
-                IconButton(
-                  icon: const Icon(Icons.close),
-                  onPressed: () {
-                    setState(() {
-                      showCollectionMaterials = false;
-                    });
-                  },
-                )
-              ],
-            ),
-            const Divider(),
-            data.isNotEmpty
-                ? Expanded(
-                    child: oreItemsCollection(
-                      data,
-                      nameCollectionMaterials,
-                    ),
-                  )
-                : const Text(
-                    'Agrega algunos materiales a la receta para mostrar los ingredientes necesarios.',
+        child: data.isNotEmpty
+            ? Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(nameCollectionMaterials),
+                      IconButton(
+                        icon: const Icon(Icons.close),
+                        onPressed: () {
+                          setState(() {
+                            showCollectionMaterials = false;
+                          });
+                        },
+                      )
+                    ],
                   ),
-          ],
-        ) : Column(children: [Text('Selecciona una colección con materiales para mostrar los ingredientes.')],),
+                  const Divider(),
+                  data.isNotEmpty
+                      ? Expanded(
+                          child: oreItemsCollection(
+                            data,
+                            nameCollectionMaterials,
+                          ),
+                        )
+                      : const Text(
+                          'Agrega algunos materiales a la receta para mostrar los ingredientes necesarios.',
+                        ),
+                ],
+              )
+            : Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Expanded(
+                    child: Text(
+                      'Selecciona una colección con materiales para mostrar los ingredientes.',
+                    ),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.close),
+                    onPressed: () {
+                      setState(() {
+                        showCollectionMaterials = false;
+                      });
+                    },
+                  )
+                ],
+              ),
       ),
     );
   }
