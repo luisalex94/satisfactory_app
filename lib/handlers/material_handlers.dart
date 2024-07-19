@@ -157,10 +157,12 @@ class MaterialHandlers {
                   hasMaterials(materialMatrix[row][column]);
               // Si la lista es mayor a uno, se agrega una columna adicional para los nuevos materiales
               if (newMaterials.length > 1) {
-                materialMatrix = addColumn(
-                  materialMatrix: materialMatrix,
-                  column: column + 1,
-                );
+                for (int i = 0; i < newMaterials.length - 1; i++) {
+                  materialMatrix = addColumn(
+                    materialMatrix: materialMatrix,
+                    column: column + 1,
+                  );
+                }
               }
               // Contador para recorrer lista de materiales
               int j = 0;
