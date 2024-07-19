@@ -314,4 +314,45 @@ class FactoriesHandlers {
     return mainFactoryCollection
         .mainCollection[collectionName]!.oreItems[oreName]!.ready;
   }
+
+  /* Manejadores del estado [ready] de los [MaterialItems] de las [FactoryConfiguration] */
+
+  /// Setea true o false el bool ready de un:
+  /// [MaterialItem] -> [Recipe] -> [FactoryConfiguration] -> [FactoryCollection]
+  void setReadyMaterialItem({
+    required String factoryCollectionName,
+    required String factoryConfigurationName,
+    required String materialName,
+    required int row,
+    required int column,
+    required bool ready,
+  }) {
+    mainFactoryCollection
+        .mainCollection[factoryCollectionName]!
+        .factoryCollection[factoryConfigurationName]!
+        .factoryItem[materialName]!
+        .recipe[row][column]
+        .ready = ready;
+  }
+
+  /// Obtiene true o false del bool ready de un:
+  /// [MaterialItem] -> [Recipe] -> [FactoryConfiguration] -> [FactoryCollection]
+  bool getReadyMaterialItem({
+    required String factoryCollectionName,
+    required String factoryConfigurationName,
+    required String materialName,
+    required int row,
+    required int column,
+  }) {
+    try {
+      return mainFactoryCollection
+          .mainCollection[factoryCollectionName]!
+          .factoryCollection[factoryConfigurationName]!
+          .factoryItem[materialName]!
+          .recipe[row][column]
+          .ready;
+    } catch (e) {
+      return false;
+    }
+  }
 }

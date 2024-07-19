@@ -21,12 +21,12 @@ class FactoryCollectionWidget extends StatefulWidget {
     String collectionName,
   ) callBackFunction;
   final Function callBackFunctionOnlySetState;
-  final Function(
-    Recipe recipeUpdate,
-    Map<String, OreItem> oreItemsUpdate,
-    String materialName,
-    String collectionName,
-  ) callBackFunctionUpdateRecipe;
+  final Function({
+    required Recipe recipeUpdate,
+    required Map<String, OreItem> oreItemsUpdate,
+    required String materialNameUpdate,
+    required String collectionNameUpdate,
+  }) callBackFunctionUpdateRecipe;
 
   @override
   State<FactoryCollectionWidget> createState() =>
@@ -175,10 +175,11 @@ class _FactoryCollectionWidgetState extends State<FactoryCollectionWidget> {
             ),
             onTap: () {
               widget.callBackFunctionUpdateRecipe(
-                  value.factoryItem[value.itemName]!,
-                  value.oreItems,
-                  value.itemName,
-                  factoryCollection.factoryCollectionName);
+                recipeUpdate: value.factoryItem[value.itemName]!,
+                oreItemsUpdate: value.oreItems,
+                materialNameUpdate: value.itemName,
+                collectionNameUpdate: factoryCollection.factoryCollectionName,
+              );
             },
           ),
         );

@@ -7,6 +7,7 @@ class MaterialItem {
   double oreOutputPm = 0.0;
   int factQuantity = 0;
   Map<String, RecipeItem> recipes = {};
+  bool ready = false;
 
   MaterialItem({
     this.materialName = "",
@@ -17,6 +18,7 @@ class MaterialItem {
     this.oreOutputPm = 0.0,
     this.factQuantity = 0,
     this.recipes = const {},
+    this.ready = false,
   });
 
   factory MaterialItem.fromJson(json) {

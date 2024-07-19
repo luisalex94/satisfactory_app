@@ -5,14 +5,196 @@
         "power_input": 5.0,
         "materialId": 1,
         "ore": true,
+        "enabled": true,
+        "recipes": {}
+    },
+    "Copper ore": {
+        "materialName": "Copper ore",
+        "fact": "Miner",
+        "power_input": 5.0,
+        "materialId": 2,
+        "ore": true,
+        "enabled": true,
+        "recipes": {}
+    },
+    "Limestone": {
+        "materialName": "Limestone",
+        "fact": "Miner",
+        "power_input": 5.0,
+        "materialId": 3,
+        "ore": true,
+        "enabled": true,
+        "recipes": {}
+    },
+    "Coal": {
+        "materialName": "Coal",
+        "fact": "Miner",
+        "power_input": 5.0,
+        "materialId": 4,
+        "ore": true,
+        "enabled": true,
+        "recipes": {}
+    },
+    "Caterium ore": {
+        "materialName": "Caterium ore",
+        "fact": "Miner",
+        "power_input": 5.0,
+        "materialId": 5,
+        "ore": true,
+        "enabled": true,
+        "recipes": {}
+    },
+    "Sulfur": {
+        "materialName": "Sulfur",
+        "fact": "Miner",
+        "power_input": 5.0,
+        "materialId": 6,
+        "ore": true,
+        "enabled": true,
+        "recipes": {}
+    },
+    "Water": {
+        "materialName": "Water",
+        "fact": "Resource well extractor",
+        "power_input": 25.0,
+        "materialId": 7,
+        "ore": true,
+        "enabled": true,
+        "recipes": {}
+    },
+    "Raw quartz": {
+        "materialName": "Raw quartz",
+        "fact": "Miner",
+        "power_input": 5.0,
+        "materialId": 8,
+        "ore": true,
+        "enabled": true,
+        "recipes": {}
+    },
+    "Bauxite": {
+        "materialName": "Bauxite",
+        "fact": "Miner",
+        "power_input": 5.0,
+        "materialId": 9,
+        "ore": true,
+        "enabled": true,
+        "recipes": {}
+    },
+    "Uranium": {
+        "materialName": "Uranium",
+        "fact": "Miner",
+        "power_input": 5.0,
+        "materialId": 10,
+        "ore": true,
+        "enabled": true,
+        "recipes": {}
+    },
+    "Nitrogen gas": {
+        "materialName": "Nitrogen gas",
+        "fact": "Resource well extractor",
+        "power_input": 25.0,
+        "materialId": 11,
+        "ore": true,
+        "enabled": true,
+        "recipes": {}
+    },
+    "Crude oil": {
+        "materialName": "Crude oil",
+        "fact": "Oil extractor",
+        "power_input": 40.0,
+        "materialId": 12,
+        "ore": true,
+        "enabled": true,
+        "recipes": {}
+    },
+    "Flower petals": {
+        "materialName": "Flower petals",
+        "fact": "Hand-picked",
+        "power_input": 0.0,
+        "materialId": 13,
+        "ore": true,
+        "enabled": true,
+        "recipes": {}
+    },
+    "Leaves": {
+        "materialName": "Leaves",
+        "fact": "Hand-picked",
+        "power_input": 0.0,
+        "materialId": 14,
+        "ore": true,
+        "enabled": true,
+        "recipes": {}
+    },
+    "Wood": {
+        "materialName": "Wood",
+        "fact": "Hand-picked",
+        "power_input": 0.0,
+        "materialId": 15,
+        "ore": true,
+        "enabled": true,
+        "recipes": {}
+    },
+    "Mycelia": {
+        "materialName": "Mycelia",
+        "fact": "Hand-picked",
+        "power_input": 0.0,
+        "materialId": 16,
+        "ore": true,
+        "enabled": true,
+        "recipes": {}
+    },
+    "Alien protein": {
+        "materialName": "Alien protein",
+        "fact": "Hand-picked",
+        "power_input": 0.0,
+        "materialId": 17,
+        "ore": true,
+        "enabled": true,
+        "recipes": {}
+    },
+    "Blue power slug": {
+        "materialName": "Blue power slug",
+        "fact": "Hand-picked",
+        "power_input": 0.0,
+        "materialId": 18,
+        "ore": true,
+        "enabled": true,
+        "recipes": {}
+    },
+    "Yellow power slug": {
+        "materialName": "Yellow power slug",
+        "fact": "Hand-picked",
+        "power_input": 0.0,
+        "materialId": 19,
+        "ore": true,
+        "enabled": true,
+        "recipes": {}
+    },
+    "Purple power slug": {
+        "materialName": "Purple power slug",
+        "fact": "Hand-picked",
+        "power_input": 0.0,
+        "materialId": 20,
+        "ore": true,
+        "enabled": true,
+        "recipes": {}
+    },
+    "Biomass": {
+        "materialName": "Biomass",
+        "fact": "Special",
+        "power_input": 5.0,
+        "materialId": 41,
+        "ore": true,
+        "enabled": true,
         "recipes": {}
     },
     "Iron ingot": {
         "materialName": "Iron ingot",
-        "fact": "Smleter",
+        "fact": "Smelter",
         "power_input": 4.0,
-        "materialId": 2,
+        "materialId": 101,
         "ore": false,
+        "enabled": true,
         "recipes": {
             "1": {
                 "output": 1.0,
@@ -28,102 +210,13 @@
             }
         }
     },
-    "Iron plate": {
-        "materialName": "Iron plate",
-        "fact": "Constructor",
-        "power_input": 4.0,
-        "materialId": 3,
-        "ore": false,
-        "recipes": {
-            "1": {
-                "output": 3.0,
-                "output_pm": 30.0,
-                "materials": {
-                    "1": {
-                        "materialName": "Iron ingot",
-                        "materialId": 2,
-                        "input": 2.0,
-                        "input_pm": 20.0
-                    }
-                }
-            }
-        }
-    },
-    "Iron rod": {
-        "materialName": "Iron rod",
-        "fact": "Constructor",
-        "power_input": 4.0,
-        "materialId": 4,
-        "ore": false,
-        "recipes": {
-            "1": {
-                "output": 1.0,
-                "output_pm": 15.0,
-                "materials": {
-                    "1": {
-                        "materialName": "Iron ingot",
-                        "materialId": 2,
-                        "input": 1.0,
-                        "input_pm": 15.0
-                    }
-                }
-            }
-        }
-    },
-    "Screw": {
-        "materialName": "Screw",
-        "fact": "Constructor",
-        "power_input": 4.0,
-        "materialId": 5,
-        "ore": false,
-        "recipes": {
-            "1": {
-                "output": 4.0,
-                "output_pm": 40.0,
-                "materials": {
-                    "1": {
-                        "materialName": "Iron rod",
-                        "materialId": 4,
-                        "input": 1.0,
-                        "input_pm": 10.0
-                    }
-                }
-            }
-        }
-    },
-    "Reinforced iron plate": {
-        "materialName": "Reinforced iron plate",
-        "fact": "Assembler",
-        "power_input": 15.0,
-        "materialId": 6,
-        "ore": false,
-        "recipes": {
-            "1": {
-                "output": 1.0,
-                "output_pm": 5.0,
-                "materials": {
-                    "1": {
-                        "materialName": "Iron plate",
-                        "materialId": 3,
-                        "input": 6.0,
-                        "input_pm": 30.0
-                    },
-                    "2": {
-                        "materialName": "Screw",
-                        "materialId": 5,
-                        "input": 12.0,
-                        "input_pm": 60.0
-                    }
-                }
-            }
-        }
-    },
     "Copper ingot": {
         "materialName": "Copper ingot",
         "fact": "Smelter",
         "power_input": 4.0,
-        "materialId": 7,
+        "materialId": 102,
         "ore": false,
+        "enabled": true,
         "recipes": {
             "1": {
                 "output": 1.0,
@@ -131,7 +224,7 @@
                 "materials": {
                     "1": {
                         "materialName": "Copper ore",
-                        "materialId": 15,
+                        "materialId": 2,
                         "input": 1.0,
                         "input_pm": 30.0
                     }
@@ -139,103 +232,23 @@
             }
         }
     },
-    "Motor": {
-        "materialName": "Motor",
-        "fact": "Assembler",
-        "power_input": 15.0,
-        "materialId": 16,
-        "ore": false,
-        "recipes": {
-            "1": {
-                "output": 1.0,
-                "output_pm": 5.0,
-                "materials": {
-                    "1": {
-                        "materialName": "Rotor",
-                        "materialId": 9,
-                        "input": 2.0,
-                        "input_pm": 10.0
-                    },
-                    "2": {
-                        "materialName": "Stator",
-                        "materialId": 10,
-                        "input": 2.0,
-                        "input_pm": 10.0
-                    }
-                }
-            }
-        }
-    },
-    "Rotor": {
-        "materialName": "Rotor",
-        "fact": "Assembler",
-        "power_input": 15.0,
-        "materialId": 9,
-        "ore": false,
-        "recipes": {
-            "1": {
-                "output": 1.0,
-                "output_pm": 4.0,
-                "materials": {
-                    "1": {
-                        "materialName": "Iron rod",
-                        "materialId": 4,
-                        "input": 5.0,
-                        "input_pm": 20.0
-                    },
-                    "2": {
-                        "materialName": "Screw",
-                        "materialId": 5,
-                        "input": 25.0,
-                        "input_pm": 100.0
-                    }
-                }
-            }
-        }
-    },
-    "Stator": {
-        "materialName": "Stator",
-        "fact": "Assembler",
-        "power_input": 15.0,
-        "materialId": 10,
-        "ore": false,
-        "recipes": {
-            "1": {
-                "output": 1.0,
-                "output_pm": 5.0,
-                "materials": {
-                    "1": {
-                        "materialName": "Steel pipe",
-                        "materialId": 11,
-                        "input": 3.0,
-                        "input_pm": 15.0
-                    },
-                    "2": {
-                        "materialName": "Wire",
-                        "materialId": 12,
-                        "input": 8.0,
-                        "input_pm": 40.0
-                    }
-                }
-            }
-        }
-    },
-    "Steel pipe": {
-        "materialName": "Steel pipe",
-        "fact": "Constructor",
+    "Caterium ingot": {
+        "materialName": "Caterium ingot",
+        "fact": "Smelter",
         "power_input": 4.0,
-        "materialId": 11,
+        "materialId": 103,
         "ore": false,
+        "enabled": true,
         "recipes": {
             "1": {
-                "output": 2.0,
-                "output_pm": 20.0,
+                "output": 1.0,
+                "output_pm": 15.0,
                 "materials": {
                     "1": {
-                        "materialName": "Steel ingot",
-                        "materialId": 13,
+                        "materialName": "Caterium ore",
+                        "materialId": 5,
                         "input": 3.0,
-                        "input_pm": 30.0
+                        "input_pm": 45.0
                     }
                 }
             }
@@ -245,8 +258,9 @@
         "materialName": "Steel ingot",
         "fact": "Foundry",
         "power_input": 16.0,
-        "materialId": 13,
+        "materialId": 104,
         "ore": false,
+        "enabled": true,
         "recipes": {
             "1": {
                 "output": 3.0,
@@ -260,7 +274,7 @@
                     },
                     "2": {
                         "materialName": "Coal",
-                        "materialId": 14,
+                        "materialId": 4,
                         "input": 3.0,
                         "input_pm": 45.0
                     }
@@ -268,28 +282,347 @@
             }
         }
     },
-    "Coal": {
-        "materialName": "Coal",
-        "fact": "Miner",
-        "power_input": 5.0,
-        "materialId": 14,
-        "ore": true,
-        "recipes": {}
+    "Aluminum ingot": {
+        "materialName": "Aluminum ingot",
+        "fact": "Foundry",
+        "power_input": 16.0,
+        "materialId": 105,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 4.0,
+                "output_pm": 60.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Aluminum scrap",
+                        "materialId": 1603,
+                        "input": 6.0,
+                        "input_pm": 90.0
+                    },
+                    "2": {
+                        "materialName": "Silica",
+                        "materialId": 403,
+                        "input": 5.0,
+                        "input_pm": 75.0
+                    }
+                }
+            }
+        }
     },
-    "Copper ore": {
-        "materialName": "Copper ore",
-        "fact": "Miner",
-        "power_input": 5.0,
-        "materialId": 15,
-        "ore": true,
-        "recipes": {}
+    "Iron plate": {
+        "materialName": "Iron plate",
+        "fact": "Constructor",
+        "power_input": 4.0,
+        "materialId": 201,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 2.0,
+                "output_pm": 20.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Iron ingot",
+                        "materialId": 101,
+                        "input": 3.0,
+                        "input_pm": 30.0
+                    }
+                }
+            }
+        }
+    },
+    "Iron rod": {
+        "materialName": "Iron rod",
+        "fact": "Constructor",
+        "power_input": 4.0,
+        "materialId": 202,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 1.0,
+                "output_pm": 15.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Iron ingot",
+                        "materialId": 101,
+                        "input": 1.0,
+                        "input_pm": 15.0
+                    }
+                }
+            }
+        }
+    },
+    "Screw": {
+        "materialName": "Screw",
+        "fact": "Constructor",
+        "power_input": 4.0,
+        "materialId": 203,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 4.0,
+                "output_pm": 40.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Iron rod",
+                        "materialId": 202,
+                        "input": 1.0,
+                        "input_pm": 10.0
+                    }
+                }
+            }
+        }
+    },
+    "Copper sheet": {
+        "materialName": "Copper sheet",
+        "fact": "Constructor",
+        "power_input": 4.0,
+        "materialId": 204,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 1.0,
+                "output_pm": 10.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Copper ingot",
+                        "materialId": 102,
+                        "input": 2.0,
+                        "input_pm": 20.0
+                    }
+                }
+            }
+        }
+    },
+    "Steel beam": {
+        "materialName": "Steel beam",
+        "fact": "Constructor",
+        "power_input": 4.0,
+        "materialId": 205,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 1.0,
+                "output_pm": 15.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Steel ingot",
+                        "materialId": 104,
+                        "input": 4.0,
+                        "input_pm": 60.0
+                    }
+                }
+            }
+        }
+    },
+    "Steel pipe": {
+        "materialName": "Steel pipe",
+        "fact": "Constructor",
+        "power_input": 4.0,
+        "materialId": 206,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 3.0,
+                "output_pm": 30.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Steel ingot",
+                        "materialId": 104,
+                        "input": 2.0,
+                        "input_pm": 20.0
+                    }
+                }
+            }
+        }
+    },
+    "Aluminum casing": {
+        "materialName": "Aluminum casing",
+        "fact": "Constructor",
+        "power_input": 4.0,
+        "materialId": 207,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 2.0,
+                "output_pm": 60.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Aluminum ingot",
+                        "materialId": 105,
+                        "input": 3.0,
+                        "input_pm": 90.0
+                    }
+                }
+            }
+        }
+    },
+    "Reinforced iron plate": {
+        "materialName": "Reinforced iron plate",
+        "fact": "Assembler",
+        "power_input": 15.0,
+        "materialId": 208,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 1.0,
+                "output_pm": 5.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Iron plate",
+                        "materialId": 201,
+                        "input": 6.0,
+                        "input_pm": 30.0
+                    },
+                    "2": {
+                        "materialName": "Screw",
+                        "materialId": 203,
+                        "input": 12.0,
+                        "input_pm": 60.0
+                    }
+                }
+            }
+        }
+    },
+    "Modular frame": {
+        "materialName": "Modular frame",
+        "fact": "Assembler",
+        "power_input": 15.0,
+        "materialId": 209,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 2.0,
+                "output_pm": 2.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Reinforced iron plate",
+                        "materialId": 208,
+                        "input": 3.0,
+                        "input_pm": 3.0
+                    },
+                    "2": {
+                        "materialName": "Iron rod",
+                        "materialId": 202,
+                        "input": 12.0,
+                        "input_pm": 12.0
+                    }
+                }
+            }
+        }
+    },
+    "Encased industrial beam": {
+        "materialName": "Encased industrial beam",
+        "fact": "Assembler",
+        "power_input": 15.0,
+        "materialId": 210,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 1.0,
+                "output_pm": 6.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Steel beam",
+                        "materialId": 205,
+                        "input": 4.0,
+                        "input_pm": 24.0
+                    },
+                    "2": {
+                        "materialName": "Concrete",
+                        "materialId": 401,
+                        "input": 5.0,
+                        "input_pm": 30.0
+                    }
+                }
+            }
+        }
+    },
+    "Alclad aluminum sheet": {
+        "materialName": "Alclad aluminum sheet",
+        "fact": "Assembler",
+        "power_input": 15.0,
+        "materialId": 211,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 3.0,
+                "output_pm": 30.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Aluminum ingot",
+                        "materialId": 105,
+                        "input": 3.0,
+                        "input_pm": 30.0
+                    },
+                    "2": {
+                        "materialName": "Copper ingot",
+                        "materialId": 102,
+                        "input": 1.0,
+                        "input_pm": 10.0
+                    }
+                }
+            }
+        }
+    },
+    "Heavy modular frame": {
+        "materialName": "Heavy modular frame",
+        "fact": "Manufacturer",
+        "power_input": 55.0,
+        "materialId": 212,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 1.0,
+                "output_pm": 2.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Modular frame",
+                        "materialId": 209,
+                        "input": 5.0,
+                        "input_pm": 10.0
+                    },
+                    "2": {
+                        "materialName": "Steel pipe",
+                        "materialId": 206,
+                        "input": 15.0,
+                        "input_pm": 30.0
+                    },
+                    "3": {
+                        "materialName": "Encased industrial beam",
+                        "materialId": 210,
+                        "input": 5.0,
+                        "input_pm": 10.0
+                    },
+                    "4": {
+                        "materialName": "Screw",
+                        "materialId": 203,
+                        "input": 100.0,
+                        "input_pm": 200.0
+                    }
+                }
+            }
+        }
     },
     "Wire": {
         "materialName": "Wire",
         "fact": "Constructor",
         "power_input": 4.0,
-        "materialId": 12,
+        "materialId": 301,
         "ore": false,
+        "enabled": true,
         "recipes": {
             "1": {
                 "output": 2.0,
@@ -297,8 +630,2322 @@
                 "materials": {
                     "1": {
                         "materialName": "Copper ingot",
-                        "materialId": 7,
+                        "materialId": 102,
                         "input": 1.0,
+                        "input_pm": 15.0
+                    }
+                }
+            }
+        }
+    },
+    "Cable": {
+        "materialName": "Cable",
+        "fact": "Constructor",
+        "power_input": 4.0,
+        "materialId": 302,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 1.0,
+                "output_pm": 30.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Wire",
+                        "materialId": 301,
+                        "input": 2.0,
+                        "input_pm": 60.0
+                    }
+                }
+            }
+        }
+    },
+    "Quickwire": {
+        "materialName": "Quickwire",
+        "fact": "Constructor",
+        "power_input": 4.0,
+        "materialId": 303,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 5.0,
+                "output_pm": 60.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Caterium ingot",
+                        "materialId": 103,
+                        "input": 1.0,
+                        "input_pm": 12.0
+                    }
+                }
+            }
+        }
+    },
+    "AI limiter": {
+        "materialName": "AI limiter",
+        "fact": "Assembler",
+        "power_input": 15.0,
+        "materialId": 304,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 1.0,
+                "output_pm": 5.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Copper sheet",
+                        "materialId": 204,
+                        "input": 5.0,
+                        "input_pm": 25.0
+                    },
+                    "2": {
+                        "materialName": "Quickwire",
+                        "materialId": 303,
+                        "input": 20.0,
+                        "input_pm": 100.0
+                    }
+                }
+            }
+        }
+    },
+    "Circuit board": {
+        "materialName": "Circuit board",
+        "fact": "Assembler",
+        "power_input": 15.0,
+        "materialId": 305,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 1.0,
+                "output_pm": 5.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Copper sheet",
+                        "materialId": 204,
+                        "input": 2.0,
+                        "input_pm": 15.0
+                    },
+                    "2": {
+                        "materialName": "Plastic",
+                        "materialId": 1701,
+                        "input": 4.0,
+                        "input_pm": 30.0
+                    }
+                }
+            }
+        }
+    },
+    "High-speed connector": {
+        "materialName": "High-speed connector",
+        "fact": "Manufacturer",
+        "power_input": 55.0,
+        "materialId": 306,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 1.0,
+                "output_pm": 3.75,
+                "materials": {
+                    "1": {
+                        "materialName": "Quickwire",
+                        "materialId": 303,
+                        "input": 56.0,
+                        "input_pm": 210.0
+                    },
+                    "2": {
+                        "materialName": "Cable",
+                        "materialId": 302,
+                        "input": 10.0,
+                        "input_pm": 37.5
+                    },
+                    "3": {
+                        "materialName": "Circuit board",
+                        "materialId": 305,
+                        "input": 1.0,
+                        "input_pm": 3.75
+                    }
+                }
+            }
+        }
+    },
+    "Concrete": {
+        "materialName": "Concrete",
+        "fact": "Constructor",
+        "power_input": 4.0,
+        "materialId": 401,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 1.0,
+                "output_pm": 15.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Limestone",
+                        "materialId": 3,
+                        "input": 3.0,
+                        "input_pm": 45.0
+                    }
+                }
+            }
+        }
+    },
+    "Quartz crystal": {
+        "materialName": "Quartz crystal",
+        "fact": "Constructor",
+        "power_input": 4.0,
+        "materialId": 402,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 3.0,
+                "output_pm": 22.5,
+                "materials": {
+                    "1": {
+                        "materialName": "Raw quartz",
+                        "materialId": 8,
+                        "input": 5.0,
+                        "input_pm": 37.5
+                    }
+                }
+            }
+        }
+    },
+    "Silica": {
+        "materialName": "Silica",
+        "fact": "Constructor",
+        "power_input": 4.0,
+        "materialId": 403,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 5.0,
+                "output_pm": 37.5,
+                "materials": {
+                    "1": {
+                        "materialName": "Raw quartz",
+                        "materialId": 8,
+                        "input": 3.0,
+                        "input_pm": 22.5
+                    }
+                }
+            }
+        }
+    },
+    "Copper powder": {
+        "materialName": "Copper powder",
+        "fact": "Constructor",
+        "power_input": 4.0,
+        "materialId": 404,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 5.0,
+                "output_pm": 50.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Copper ingot",
+                        "materialId": 102,
+                        "input": 30.0,
+                        "input_pm": 300.0
+                    }
+                }
+            }
+        }
+    },
+    "Compacted coal": {
+        "materialName": "Compacted coal",
+        "fact": "Assembler",
+        "power_input": 15.0,
+        "materialId": 405,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 5.0,
+                "output_pm": 25.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Coal",
+                        "materialId": 4,
+                        "input": 5.0,
+                        "input_pm": 25.0
+                    },
+                    "2": {
+                        "materialName": "Sulfur",
+                        "materialId": 6,
+                        "input": 5.0,
+                        "input_pm": 25.0
+                    }
+                }
+            }
+        }
+    },
+    "Color cartridge": {
+        "materialName": "Color cartridge",
+        "fact": "Constructor",
+        "power_input": 4.0,
+        "materialId": 501,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 10.0,
+                "output_pm": 100.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Flower petals",
+                        "materialId": 13,
+                        "input": 5.0,
+                        "input_pm": 50.0
+                    }
+                }
+            }
+        }
+    },
+    "Biomass (leaves)": {
+        "materialName": "Biomass (leaves)",
+        "fact": "Constructor",
+        "power_input": 4.0,
+        "materialId": 502,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 5.0,
+                "output_pm": 60.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Leaves",
+                        "materialId": 14,
+                        "input": 10.0,
+                        "input_pm": 120.0
+                    }
+                }
+            }
+        }
+    },
+    "Biomass (wood)": {
+        "materialName": "Biomass (wood)",
+        "fact": "Constructor",
+        "power_input": 4.0,
+        "materialId": 503,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 20.0,
+                "output_pm": 300.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Wood",
+                        "materialId": 15,
+                        "input": 4.0,
+                        "input_pm": 60.0
+                    }
+                }
+            }
+        }
+    },
+    "Biomass (mycelia)": {
+        "materialName": "Biomass (mycelia)",
+        "fact": "Constructor",
+        "power_input": 4.0,
+        "materialId": 504,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 10.0,
+                "output_pm": 150.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Mycelia",
+                        "materialId": 16,
+                        "input": 1.0,
+                        "input_pm": 15.0
+                    }
+                }
+            }
+        }
+    },
+    "Biomass (alien protein)": {
+        "materialName": "Biomass (alien protein)",
+        "fact": "Constructor",
+        "power_input": 4.0,
+        "materialId": 505,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 100.0,
+                "output_pm": 1500.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Alien protein",
+                        "materialId": 17,
+                        "input": 1.0,
+                        "input_pm": 15.0
+                    }
+                }
+            }
+        }
+    },
+    "Solid biofuel": {
+        "materialName": "Solid biofuel",
+        "fact": "Constructor",
+        "power_input": 4.0,
+        "materialId": 506,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 4.0,
+                "output_pm": 60.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Biomass",
+                        "materialId": 41,
+                        "input": 8.0,
+                        "input_pm": 120.0
+                    }
+                }
+            }
+        }
+    },
+    "Fabric": {
+        "materialName": "Fabric",
+        "fact": "Assembler",
+        "power_input": 15.0,
+        "materialId": 507,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 1.0,
+                "output_pm": 15.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Mycelia",
+                        "materialId": 16,
+                        "input": 1.0,
+                        "input_pm": 15.0
+                    },
+                    "2": {
+                        "materialName": "Biomass",
+                        "materialId": 41,
+                        "input": 5.0,
+                        "input_pm": 75.0
+                    }
+                }
+            }
+        }
+    },
+    "Power shard (1)": {
+        "materialName": "Power shard (1)",
+        "fact": "Constructor",
+        "power_input": 4.0,
+        "materialId": 601,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 1.0,
+                "output_pm": 7.5,
+                "materials": {
+                    "1": {
+                        "materialName": "Blue power slug",
+                        "materialId": 18,
+                        "input": 1.0,
+                        "input_pm": 7.5
+                    }
+                }
+            }
+        }
+    },
+    "Power shard (2)": {
+        "materialName": "Power shard (2)",
+        "fact": "Constructor",
+        "power_input": 4.0,
+        "materialId": 602,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 2.0,
+                "output_pm": 10.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Yellow power slug",
+                        "materialId": 19,
+                        "input": 1.0,
+                        "input_pm": 5.0
+                    }
+                }
+            }
+        }
+    },
+    "Power shard (5)": {
+        "materialName": "Power shard (5)",
+        "fact": "Constructor",
+        "power_input": 4.0,
+        "materialId": 603,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 5.0,
+                "output_pm": 12.5,
+                "materials": {
+                    "1": {
+                        "materialName": "Purple power slug",
+                        "materialId": 20,
+                        "input": 1.0,
+                        "input_pm": 2.5
+                    }
+                }
+            }
+        }
+    },
+    "Empty canister": {
+        "materialName": "Empty canister",
+        "fact": "Constructor",
+        "power_input": 4.0,
+        "materialId": 801,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 4.0,
+                "output_pm": 60.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Plastic",
+                        "materialId": 1701,
+                        "input": 2.0,
+                        "input_pm": 30.0
+                    }
+                }
+            }
+        }
+    },
+    "Empty fluid tank": {
+        "materialName": "Empty fluid tank",
+        "fact": "Constructor",
+        "power_input": 4.0,
+        "materialId": 802,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 1.0,
+                "output_pm": 60.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Aluminum ingot",
+                        "materialId": 105,
+                        "input": 1.0,
+                        "input_pm": 60.0
+                    }
+                }
+            }
+        }
+    },
+    "Pressure conversion cube": {
+        "materialName": "Pressure conversion cube",
+        "fact": "Assembler",
+        "power_input": 15.0,
+        "materialId": 803,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 1.0,
+                "output_pm": 1.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Fused modular frame",
+                        "materialId": 1007,
+                        "input": 1.0,
+                        "input_pm": 1.0
+                    },
+                    "2": {
+                        "materialName": "Radio control unit",
+                        "materialId": 1304,
+                        "input": 2.0,
+                        "input_pm": 2.0
+                    }
+                }
+            }
+        }
+    },
+    "Iron rebar": {
+        "materialName": "Iron rebar",
+        "fact": "Constructor",
+        "power_input": 4.0,
+        "materialId": 901,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 1.0,
+                "output_pm": 15.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Iron rod",
+                        "materialId": 202,
+                        "input": 1.0,
+                        "input_pm": 15.0
+                    }
+                }
+            }
+        }
+    },
+    "Black powder": {
+        "materialName": "Black powder",
+        "fact": "Assembler",
+        "power_input": 15.0,
+        "materialId": 902,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 2.0,
+                "output_pm": 30.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Coal",
+                        "materialId": 4,
+                        "input": 1.0,
+                        "input_pm": 15.0
+                    },
+                    "2": {
+                        "materialName": "Sulfur",
+                        "materialId": 6,
+                        "input": 1.0,
+                        "input_pm": 15.0
+                    }
+                }
+            }
+        }
+    },
+    "Stun rebar": {
+        "materialName": "Stun rebar",
+        "fact": "Assembler",
+        "power_input": 15.0,
+        "materialId": 903,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 1.0,
+                "output_pm": 10.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Iron rebar",
+                        "materialId": 901,
+                        "input": 1.0,
+                        "input_pm": 10.0
+                    },
+                    "2": {
+                        "materialName": "Quickwire",
+                        "materialId": 303,
+                        "input": 5.0,
+                        "input_pm": 50.0
+                    }
+                }
+            }
+        }
+    },
+    "Shatter rebar": {
+        "materialName": "Shatter rebar",
+        "fact": "Assembler",
+        "power_input": 15.0,
+        "materialId": 904,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 1.0,
+                "output_pm": 5.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Iron rebar",
+                        "materialId": 901,
+                        "input": 2.0,
+                        "input_pm": 10.0
+                    },
+                    "2": {
+                        "materialName": "Quartz crystal",
+                        "materialId": 402,
+                        "input": 3.0,
+                        "input_pm": 15.0
+                    }
+                }
+            }
+        }
+    },
+    "Nobelisk": {
+        "materialName": "Nobelisk",
+        "fact": "Assembler",
+        "power_input": 15.0,
+        "materialId": 905,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 1.0,
+                "output_pm": 10.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Black powder",
+                        "materialId": 902,
+                        "input": 2.0,
+                        "input_pm": 20.0
+                    },
+                    "2": {
+                        "materialName": "Steel pipe",
+                        "materialId": 206,
+                        "input": 2.0,
+                        "input_pm": 20.0
+                    }
+                }
+            }
+        }
+    },
+    "Gas nobelisk": {
+        "materialName": "Gas nobelisk",
+        "fact": "Assembler",
+        "power_input": 15.0,
+        "materialId": 906,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 1.0,
+                "output_pm": 5.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Nobelisk",
+                        "materialId": 905,
+                        "input": 1.0,
+                        "input_pm": 5.0
+                    },
+                    "2": {
+                        "materialName": "Biomass",
+                        "materialId": 41,
+                        "input": 10.0,
+                        "input_pm": 50.0
+                    }
+                }
+            }
+        }
+    },
+    "Cluster nobelisk": {
+        "materialName": "Cluster nobelisk",
+        "fact": "Assembler",
+        "power_input": 15.0,
+        "materialId": 907,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 1.0,
+                "output_pm": 2.5,
+                "materials": {
+                    "1": {
+                        "materialName": "Nobelisk",
+                        "materialId": 905,
+                        "input": 3.0,
+                        "input_pm": 7.5
+                    },
+                    "2": {
+                        "materialName": "Smokeless powder",
+                        "materialId": 915,
+                        "input": 4.0,
+                        "input_pm": 10.0
+                    }
+                }
+            }
+        }
+    },
+    "Pulse nobelisk": {
+        "materialName": "Pulse nobelisk",
+        "fact": "Assembler",
+        "power_input": 15.0,
+        "materialId": 908,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 5.0,
+                "output_pm": 5.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Nobelisk",
+                        "materialId": 905,
+                        "input": 5.0,
+                        "input_pm": 5.0
+                    },
+                    "2": {
+                        "materialName": "Crystal oscillator",
+                        "materialId": 1303,
+                        "input": 1.0,
+                        "input_pm": 1.0
+                    }
+                }
+            }
+        }
+    },
+    "Rifle ammo": {
+        "materialName": "Rifle ammo",
+        "fact": "Assembler",
+        "power_input": 15.0,
+        "materialId": 909,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 15.0,
+                "output_pm": 75.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Copper sheet",
+                        "materialId": 204,
+                        "input": 3.0,
+                        "input_pm": 15.0
+                    },
+                    "2": {
+                        "materialName": "Smokeless powder",
+                        "materialId": 915,
+                        "input": 2.0,
+                        "input_pm": 10.0
+                    }
+                }
+            }
+        }
+    },
+    "Homing rifle ammo": {
+        "materialName": "Homing rifle ammo",
+        "fact": "Assembler",
+        "power_input": 15.0,
+        "materialId": 910,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 10.0,
+                "output_pm": 25.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Rifle ammo",
+                        "materialId": 909,
+                        "input": 20.0,
+                        "input_pm": 50.0
+                    },
+                    "2": {
+                        "materialName": "High-speed connector",
+                        "materialId": 306,
+                        "input": 1.0,
+                        "input_pm": 2.5
+                    }
+                }
+            }
+        }
+    },
+    "Explosive rebar": {
+        "materialName": "Explosive rebar",
+        "fact": "Manufacturer",
+        "power_input": 55.0,
+        "materialId": 911,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 1.0,
+                "output_pm": 5.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Iron rebar",
+                        "materialId": 901,
+                        "input": 2.0,
+                        "input_pm": 10.0
+                    },
+                    "2": {
+                        "materialName": "Smokeless powder",
+                        "materialId": 915,
+                        "input": 2.0,
+                        "input_pm": 10.0
+                    },
+                    "3": {
+                        "materialName": "Steel pipe",
+                        "materialId": 206,
+                        "input": 2.0,
+                        "input_pm": 10.0
+                    }
+                }
+            }
+        }
+    },
+    "Nuke nobelisk": {
+        "materialName": "Nuke nobelisk",
+        "fact": "Manufacturer",
+        "power_input": 55.0,
+        "materialId": 912,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 1.0,
+                "output_pm": 0.5,
+                "materials": {
+                    "1": {
+                        "materialName": "Nobelisk",
+                        "materialId": 905,
+                        "input": 5.0,
+                        "input_pm": 2.5
+                    },
+                    "2": {
+                        "materialName": "Encased uranium cell",
+                        "materialId": 1205,
+                        "input": 20.0,
+                        "input_pm": 10.0
+                    },
+                    "3": {
+                        "materialName": "Smokeless powder",
+                        "materialId": 915,
+                        "input": 10.0,
+                        "input_pm": 5.0
+                    },
+                    "4": {
+                        "materialName": "AI limiter",
+                        "materialId": 304,
+                        "input": 6.0,
+                        "input_pm": 3.0
+                    }
+                }
+            }
+        }
+    },
+    "Turbo rifle ammo (manufacturer)": {
+        "materialName": "Turbo rifle ammo (manufacturer)",
+        "fact": "Manufacturer",
+        "power_input": 55.0,
+        "materialId": 913,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 50.0,
+                "output_pm": 250.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Rifle ammo",
+                        "materialId": 909,
+                        "input": 25.0,
+                        "input_pm": 125.0
+                    },
+                    "2": {
+                        "materialName": "Aluminum casing",
+                        "materialId": 207,
+                        "input": 3.0,
+                        "input_pm": 15.0
+                    },
+                    "3": {
+                        "materialName": "Packaged turbofuel",
+                        "materialId": 2006,
+                        "input": 3.0,
+                        "input_pm": 15.0
+                    }
+                }
+            }
+        }
+    },
+    "Turbo rifle ammo (blender)": {
+        "materialName": "Turbo rifle ammo (blender)",
+        "fact": "Blender",
+        "power_input": 75.0,
+        "materialId": 914,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 50.0,
+                "output_pm": 250.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Rifle ammo",
+                        "materialId": 909,
+                        "input": 25.0,
+                        "input_pm": 125.0
+                    },
+                    "2": {
+                        "materialName": "Aluminum casing",
+                        "materialId": 207,
+                        "input": 3.0,
+                        "input_pm": 15.0
+                    },
+                    "3": {
+                        "materialName": "Turbofuel",
+                        "materialId": 1804,
+                        "input": 3.0,
+                        "input_pm": 15.0
+                    }
+                }
+            }
+        }
+    },
+    "Smokeless powder": {
+        "materialName": "Smokeless powder",
+        "fact": "Refinery",
+        "power_input": 30.0,
+        "materialId": 915,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 2.0,
+                "output_pm": 20.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Black powder",
+                        "materialId": 902,
+                        "input": 2.0,
+                        "input_pm": 20.0
+                    },
+                    "2": {
+                        "materialName": "Heavy oil residue",
+                        "materialId": 1706,
+                        "input": 1.0,
+                        "input_pm": 10.0
+                    }
+                }
+            }
+        }
+    },
+    "Rotor": {
+        "materialName": "Rotor",
+        "fact": "Assembler",
+        "power_input": 15.0,
+        "materialId": 1001,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 1.0,
+                "output_pm": 4.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Iron rod",
+                        "materialId": 202,
+                        "input": 5.0,
+                        "input_pm": 20.0
+                    },
+                    "2": {
+                        "materialName": "Screw",
+                        "materialId": 203,
+                        "input": 25.0,
+                        "input_pm": 100.0
+                    }
+                }
+            }
+        }
+    },
+    "Stator": {
+        "materialName": "Stator",
+        "fact": "Assembler",
+        "power_input": 15.0,
+        "materialId": 1002,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 1.0,
+                "output_pm": 5.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Steel pipe",
+                        "materialId": 206,
+                        "input": 3.0,
+                        "input_pm": 15.0
+                    },
+                    "2": {
+                        "materialName": "Wire",
+                        "materialId": 301,
+                        "input": 8.0,
+                        "input_pm": 40.0
+                    }
+                }
+            }
+        }
+    },
+    "Motor": {
+        "materialName": "Motor",
+        "fact": "Assembler",
+        "power_input": 15.0,
+        "materialId": 1003,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 1.0,
+                "output_pm": 5.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Rotor",
+                        "materialId": 1001,
+                        "input": 2.0,
+                        "input_pm": 10.0
+                    },
+                    "2": {
+                        "materialName": "Stator",
+                        "materialId": 1002,
+                        "input": 2.0,
+                        "input_pm": 10.0
+                    }
+                }
+            }
+        }
+    },
+    "Heat sink": {
+        "materialName": "Heat sink",
+        "fact": "Assembler",
+        "power_input": 15.0,
+        "materialId": 1004,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 1.0,
+                "output_pm": 7.5,
+                "materials": {
+                    "1": {
+                        "materialName": "Alclad aluminum sheet",
+                        "materialId": 211,
+                        "input": 5.0,
+                        "input_pm": 37.5
+                    },
+                    "2": {
+                        "materialName": "Copper sheet",
+                        "materialId": 204,
+                        "input": 3.0,
+                        "input_pm": 22.5
+                    }
+                }
+            }
+        }
+    },
+    "Turbo motor": {
+        "materialName": "Turbo motor",
+        "fact": "Manufacturer",
+        "power_input": 55.0,
+        "materialId": 1005,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 1.0,
+                "output_pm": 1.875,
+                "materials": {
+                    "1": {
+                        "materialName": "Cooling system",
+                        "materialId": 1006,
+                        "input": 4.0,
+                        "input_pm": 7.5
+                    },
+                    "2": {
+                        "materialName": "Radio control unit",
+                        "materialId": 1304,
+                        "input": 2.0,
+                        "input_pm": 3.75
+                    },
+                    "3": {
+                        "materialName": "Motor",
+                        "materialId": 1003,
+                        "input": 4.0,
+                        "input_pm": 7.5
+                    },
+                    "4": {
+                        "materialName": "Rubber",
+                        "materialId": 1703,
+                        "input": 24.0,
+                        "input_pm": 45.0
+                    }
+                }
+            }
+        }
+    },
+    "Cooling system": {
+        "materialName": "Cooling system",
+        "fact": "Blender",
+        "power_input": 75.0,
+        "materialId": 1006,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 1.0,
+                "output_pm": 6.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Heat sink",
+                        "materialId": 1004,
+                        "input": 2.0,
+                        "input_pm": 12.0
+                    },
+                    "2": {
+                        "materialName": "Rubber",
+                        "materialId": 1703,
+                        "input": 2.0,
+                        "input_pm": 12.0
+                    },
+                    "3": {
+                        "materialName": "Water",
+                        "materialId": 7,
+                        "input": 5.0,
+                        "input_pm": 30.0
+                    },
+                    "4": {
+                        "materialName": "Nitrogen gas",
+                        "materialId": 11,
+                        "input": 25.0,
+                        "input_pm": 150.0
+                    }
+                }
+            }
+        }
+    },
+    "Fused modular frame": {
+        "materialName": "Fused modular frame",
+        "fact": "Blender",
+        "power_input": 75.0,
+        "materialId": 1007,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 1.0,
+                "output_pm": 1.5,
+                "materials": {
+                    "1": {
+                        "materialName": "Heavy modular frame",
+                        "materialId": 212,
+                        "input": 1.0,
+                        "input_pm": 1.5
+                    },
+                    "2": {
+                        "materialName": "Aluminum casing",
+                        "materialId": 207,
+                        "input": 50.0,
+                        "input_pm": 75.0
+                    },
+                    "3": {
+                        "materialName": "Nitrogen gas",
+                        "materialId": 11,
+                        "input": 25.0,
+                        "input_pm": 37.5
+                    }
+                }
+            }
+        }
+    },
+    "Battery": {
+        "materialName": "Battery",
+        "fact": "Blender",
+        "power_input": 75.0,
+        "materialId": 1008,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 1.0,
+                "output_pm": 20.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Sulfuric acid",
+                        "materialId": 1604,
+                        "input": 2.5,
+                        "input_pm": 50.0
+                    },
+                    "2": {
+                        "materialName": "Alumina solution",
+                        "materialId": 1602,
+                        "input": 2.0,
+                        "input_pm": 40.0
+                    },
+                    "3": {
+                        "materialName": "Aluminum casing",
+                        "materialId": 207,
+                        "input": 1.0,
+                        "input_pm": 20.0
+                    }
+                },
+                "material_residual": {
+                    "1": {
+                        "materialName": "Water",
+                        "materialId": 7,
+                        "input": 1.5,
+                        "input_pm": 30.0
+                    }
+                }
+            }
+        }
+    },
+    "Smart plating": {
+        "materialName": "Smart plating",
+        "fact": "Assembler",
+        "power_input": 15.0,
+        "materialId": 1101,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 1.0,
+                "output_pm": 2.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Reinforced iron plate",
+                        "materialId": 208,
+                        "input": 1.0,
+                        "input_pm": 2.0
+                    },
+                    "2": {
+                        "materialName": "Rotor",
+                        "materialId": 1001,
+                        "input": 1.0,
+                        "input_pm": 2.0
+                    }
+                }
+            }
+        }
+    },
+    "Versatile framework": {
+        "materialName": "Versatile framework",
+        "fact": "Assembler",
+        "power_input": 15.0,
+        "materialId": 1102,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 2.0,
+                "output_pm": 5.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Modular frame",
+                        "materialId": 1007,
+                        "input": 1.0,
+                        "input_pm": 2.5
+                    },
+                    "2": {
+                        "materialName": "Steel beam",
+                        "materialId": 205,
+                        "input": 12.0,
+                        "input_pm": 30.0
+                    }
+                }
+            }
+        }
+    },
+    "Automated wiring": {
+        "materialName": "Automated wiring",
+        "fact": "Assembler",
+        "power_input": 15.0,
+        "materialId": 1103,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 1.0,
+                "output_pm": 2.5,
+                "materials": {
+                    "1": {
+                        "materialName": "Stator",
+                        "materialId": 1002,
+                        "input": 1.0,
+                        "input_pm": 2.5
+                    },
+                    "2": {
+                        "materialName": "Cable",
+                        "materialId": 302,
+                        "input": 20.0,
+                        "input_pm": 50.0
+                    }
+                }
+            }
+        }
+    },
+    "Assembly director system": {
+        "materialName": "Assembly director system",
+        "fact": "Assembler",
+        "power_input": 15.0,
+        "materialId": 1104,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 1.0,
+                "output_pm": 0.75,
+                "materials": {
+                    "1": {
+                        "materialName": "Adaptive control unit",
+                        "materialId": 1106,
+                        "input": 2.0,
+                        "input_pm": 1.5
+                    },
+                    "2": {
+                        "materialName": "Supercomputer",
+                        "materialId": 1302,
+                        "input": 1.0,
+                        "input_pm": 0.75
+                    }
+                }
+            }
+        }
+    },
+    "Modular engine": {
+        "materialName": "Modular engine",
+        "fact": "Manufacturer",
+        "power_input": 55.0,
+        "materialId": 1105,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 1.0,
+                "output_pm": 1.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Motor",
+                        "materialId": 1003,
+                        "input": 2.0,
+                        "input_pm": 2.0
+                    },
+                    "2": {
+                        "materialName": "Rubber",
+                        "materialId": 1703,
+                        "input": 15.0,
+                        "input_pm": 15.0
+                    },
+                    "3": {
+                        "materialName": "Smart plating",
+                        "materialId": 1101,
+                        "input": 2.0,
+                        "input_pm": 2.0
+                    }
+                }
+            }
+        }
+    },
+    "Adaptive control unit": {
+        "materialName": "Adaptive control unit",
+        "fact": "Manufacturer",
+        "power_input": 55.0,
+        "materialId": 1106,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 2.0,
+                "output_pm": 1.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Automated wiring",
+                        "materialId": 1103,
+                        "input": 15.0,
+                        "input_pm": 7.5
+                    },
+                    "2": {
+                        "materialName": "Circuit board",
+                        "materialId": 305,
+                        "input": 10.0,
+                        "input_pm": 5.0
+                    },
+                    "3": {
+                        "materialName": "Heavy modular frame",
+                        "materialId": 212,
+                        "input": 2.0,
+                        "input_pm": 1.0
+                    },
+                    "4": {
+                        "materialName": "Computer",
+                        "materialId": 1301,
+                        "input": 2.0,
+                        "input_pm": 1.0
+                    }
+                }
+            }
+        }
+    },
+    "Magnetic field generator": {
+        "materialName": "Magnetic field generator",
+        "fact": "Manufacturer",
+        "power_input": 55.0,
+        "materialId": 1107,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 2.0,
+                "output_pm": 1.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Versatile framework",
+                        "materialId": 1102,
+                        "input": 5.0,
+                        "input_pm": 2.5
+                    },
+                    "2": {
+                        "materialName": "Electromagnetic control rod",
+                        "materialId": 1201,
+                        "input": 2.0,
+                        "input_pm": 1.0
+                    },
+                    "3": {
+                        "materialName": "Battery",
+                        "materialId": 1008,
+                        "input": 10.0,
+                        "input_pm": 5.0
+                    }
+                }
+            }
+        }
+    },
+    "Thermal propulsion rocket": {
+        "materialName": "Thermal propulsion rocket",
+        "fact": "Manufacturer",
+        "power_input": 55.0,
+        "materialId": 1108,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 2.0,
+                "output_pm": 1.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Modular engine",
+                        "materialId": 1105,
+                        "input": 5.0,
+                        "input_pm": 2.5
+                    },
+                    "2": {
+                        "materialName": "Turbo motor",
+                        "materialId": 1005,
+                        "input": 2.0,
+                        "input_pm": 1.0
+                    },
+                    "3": {
+                        "materialName": "Cooling system",
+                        "materialId": 1006,
+                        "input": 6.0,
+                        "input_pm": 3.0
+                    },
+                    "4": {
+                        "materialName": "Fused modular frame",
+                        "materialId": 1007,
+                        "input": 2.0,
+                        "input_pm": 1.0
+                    }
+                }
+            }
+        }
+    },
+    "Electromagnetic control rod": {
+        "materialName": "Electromagnetic control rod",
+        "fact": "Assembler",
+        "power_input": 15.0,
+        "materialId": 1201,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 2.0,
+                "output_pm": 4.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Stator",
+                        "materialId": 1002,
+                        "input": 3.0,
+                        "input_pm": 6.0
+                    },
+                    "2": {
+                        "materialName": "AI limiter",
+                        "materialId": 304,
+                        "input": 2.0,
+                        "input_pm": 4.0
+                    }
+                }
+            }
+        }
+    },
+    "Encased plutonium cell": {
+        "materialName": "Encased plutonium cell",
+        "fact": "Assembler",
+        "power_input": 15.0,
+        "materialId": 1202,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 1.0,
+                "output_pm": 5.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Plutonium pellet",
+                        "materialId": 1207,
+                        "input": 2.0,
+                        "input_pm": 10.0
+                    },
+                    "2": {
+                        "materialName": "Concrete",
+                        "materialId": 401,
+                        "input": 4.0,
+                        "input_pm": 20.0
+                    }
+                }
+            }
+        }
+    },
+    "Uranium fuel rod": {
+        "materialName": "Uranium fuel rod",
+        "fact": "Manufacturer",
+        "power_input": 55.0,
+        "materialId": 1203,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 1.0,
+                "output_pm": 0.4,
+                "materials": {
+                    "1": {
+                        "materialName": "Encased uranium cell",
+                        "materialId": 1205,
+                        "input": 50.0,
+                        "input_pm": 20.0
+                    },
+                    "2": {
+                        "materialName": "Encased industrial beam",
+                        "materialId": 210,
+                        "input": 3.0,
+                        "input_pm": 1.2
+                    },
+                    "3": {
+                        "materialName": "Electromagnetic control rod",
+                        "materialId": 1201,
+                        "input": 5.0,
+                        "input_pm": 2.0
+                    }
+                }
+            }
+        }
+    },
+    "Plutonium fuel rod": {
+        "materialName": "Plutonium fuel rod",
+        "fact": "Manufacturer",
+        "power_input": 55.0,
+        "materialId": 1204,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 1.0,
+                "output_pm": 0.25,
+                "materials": {
+                    "1": {
+                        "materialName": "Encased plutonium cell",
+                        "materialId": 1202,
+                        "input": 30.0,
+                        "input_pm": 7.5
+                    },
+                    "2": {
+                        "materialName": "Steel beam",
+                        "materialId": 205,
+                        "input": 18.0,
+                        "input_pm": 4.5
+                    },
+                    "3": {
+                        "materialName": "Electromagnetic control rod",
+                        "materialId": 1201,
+                        "input": 6.0,
+                        "input_pm": 1.5
+                    },
+                    "4": {
+                        "materialName": "Heat sink",
+                        "materialId": 1004,
+                        "input": 10.0,
+                        "input_pm": 2.5
+                    }
+                }
+            }
+        }
+    },
+    "Encased uranium cell": {
+        "materialName": "Encased uranium cell",
+        "fact": "Blender",
+        "power_input": 75.0,
+        "materialId": 1205,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 5.0,
+                "output_pm": 25.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Uranium",
+                        "materialId": 10,
+                        "input": 10.0,
+                        "input_pm": 50.0
+                    },
+                    "2": {
+                        "materialName": "Concrete",
+                        "materialId": 401,
+                        "input": 3.0,
+                        "input_pm": 15.0
+                    },
+                    "3": {
+                        "materialName": "Sulfuric acid",
+                        "materialId": 1604,
+                        "input": 8.0,
+                        "input_pm": 40.0
+                    }
+                },
+                "material_residual": {
+                    "1": {
+                        "materialName": "Sulfuric acid",
+                        "materialId": 1604,
+                        "input": 2.0,
+                        "input_pm": 10.0
+                    }
+                }
+            }
+        }
+    },
+    "Non-fissile uranium": {
+        "materialName": "Non-fissile uranium",
+        "fact": "Blender",
+        "power_input": 75.0,
+        "materialId": 1206,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 20.0,
+                "output_pm": 50.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Uranium waste",
+                        "materialId": 1208,
+                        "input": 15.0,
+                        "input_pm": 37.5
+                    },
+                    "2": {
+                        "materialName": "Silica",
+                        "materialId": 403,
+                        "input": 10.0,
+                        "input_pm": 25.0
+                    },
+                    "3": {
+                        "materialName": "Nitric acid",
+                        "materialId": 1601,
+                        "input": 6.0,
+                        "input_pm": 15.0
+                    },
+                    "4": {
+                        "materialName": "Sulfuric acid",
+                        "materialId": 1604,
+                        "input": 6.0,
+                        "input_pm": 15.0
+                    }
+                },
+                "material_residual": {
+                    "1": {
+                        "materialName": "Water",
+                        "materialId": 7,
+                        "input": 6.0,
+                        "input_pm": 15.0
+                    }
+                }
+            }
+        }
+    },
+    "Plutonium pellet": {
+        "materialName": "Plutonium pellet",
+        "fact": "Particle accelerator",
+        "power_input": 750.0,
+        "materialId": 1207,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 30.0,
+                "output_pm": 30.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Non-fissile uranium",
+                        "materialId": 1206,
+                        "input": 6.0,
+                        "input_pm": 30.0
+                    },
+                    "2": {
+                        "materialName": "Uranium waste",
+                        "materialId": 1208,
+                        "input": 12.0,
+                        "input_pm": 60.0
+                    }
+                }
+            }
+        }
+    },
+    "Computer": {
+        "materialName": "Computer",
+        "fact": "Manufacturer",
+        "power_input": 55.0,
+        "materialId": 1301,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 1.0,
+                "output_pm": 2.5,
+                "materials": {
+                    "1": {
+                        "materialName": "Circuit board",
+                        "materialId": 305,
+                        "input": 10.0,
+                        "input_pm": 25.0
+                    },
+                    "2": {
+                        "materialName": "Cable",
+                        "materialId": 302,
+                        "input": 9.0,
+                        "input_pm": 22.5
+                    },
+                    "3": {
+                        "materialName": "Plastic",
+                        "materialId": 1701,
+                        "input": 18.0,
+                        "input_pm": 45.0
+                    },
+                    "4": {
+                        "materialName": "Screw",
+                        "materialId": 203,
+                        "input": 52.0,
+                        "input_pm": 130.0
+                    }
+                }
+            }
+        }
+    },
+    "Supercomputer": {
+        "materialName": "Supercomputer",
+        "fact": "Manufacturer",
+        "power_input": 55.0,
+        "materialId": 1302,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 1.0,
+                "output_pm": 1.875,
+                "materials": {
+                    "1": {
+                        "materialName": "Computer",
+                        "materialId": 1301,
+                        "input": 2.0,
+                        "input_pm": 3.75
+                    },
+                    "2": {
+                        "materialName": "AI limiter",
+                        "materialId": 304,
+                        "input": 2.0,
+                        "input_pm": 3.75
+                    },
+                    "3": {
+                        "materialName": "High-speed connector",
+                        "materialId": 306,
+                        "input": 3.0,
+                        "input_pm": 5.625
+                    },
+                    "4": {
+                        "materialName": "Plastic",
+                        "materialId": 1701,
+                        "input": 28.0,
+                        "input_pm": 52.5
+                    }
+                }
+            }
+        }
+    },
+    "Crystal oscillator": {
+        "materialName": "Crystal oscillator",
+        "fact": "Manufacturer",
+        "power_input": 55.0,
+        "materialId": 1303,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 2.0,
+                "output_pm": 1.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Quartz crystal",
+                        "materialId": 402,
+                        "input": 36.0,
+                        "input_pm": 18.0
+                    },
+                    "2": {
+                        "materialName": "Cable",
+                        "materialId": 302,
+                        "input": 28.0,
+                        "input_pm": 14.0
+                    },
+                    "3": {
+                        "materialName": "Reinforced iron plate",
+                        "materialId": 208,
+                        "input": 5.0,
+                        "input_pm": 2.5
+                    }
+                }
+            }
+        }
+    },
+    "Radio control unit": {
+        "materialName": "Radio control unit",
+        "fact": "Manufacturer",
+        "power_input": 55.0,
+        "materialId": 1304,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 2.0,
+                "output_pm": 2.5,
+                "materials": {
+                    "1": {
+                        "materialName": "Aluminum casing",
+                        "materialId": 207,
+                        "input": 32.0,
+                        "input_pm": 40.0
+                    },
+                    "2": {
+                        "materialName": "Crystal oscillator",
+                        "materialId": 1303,
+                        "input": 1.0,
+                        "input_pm": 1.25
+                    },
+                    "3": {
+                        "materialName": "Computer",
+                        "materialId": 1301,
+                        "input": 1.0,
+                        "input_pm": 1.25
+                    }
+                }
+            }
+        }
+    },
+    "Nitric acid": {
+        "materialName": "Nitric acid",
+        "fact": "Blender",
+        "power_input": 75.0,
+        "materialId": 1601,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 3.0,
+                "output_pm": 30.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Nitrogen gas",
+                        "materialId": 11,
+                        "input": 12.0,
+                        "input_pm": 120.0
+                    },
+                    "2": {
+                        "materialName": "Water",
+                        "materialId": 7,
+                        "input": 3.0,
+                        "input_pm": 30.0
+                    },
+                    "3": {
+                        "materialName": "Iron plate",
+                        "materialId": 201,
+                        "input": 1.0,
+                        "input_pm": 10.0
+                    }
+                }
+            }
+        }
+    },
+    "Alumina solution": {
+        "materialName": "Alumina solution",
+        "fact": "Refinery",
+        "power_input": 30.0,
+        "materialId": 1602,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 12.0,
+                "output_pm": 120.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Bauxite",
+                        "materialId": 9,
+                        "input": 12.0,
+                        "input_pm": 120.0
+                    },
+                    "2": {
+                        "materialName": "Water",
+                        "materialId": 7,
+                        "input": 18.0,
+                        "input_pm": 180.0
+                    }
+                },
+                "material_residual": {
+                    "1": {
+                        "materialName": "Silica",
+                        "materialId": 403,
+                        "input": 5.0,
+                        "input_pm": 50.0
+                    }
+                }
+            }
+        }
+    },
+    "Aluminum scrap": {
+        "materialName": "Aluminum scrap",
+        "fact": "Refinery",
+        "power_input": 30.0,
+        "materialId": 1603,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 6.0,
+                "output_pm": 360.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Alumina solution",
+                        "materialId": 1602,
+                        "input": 4.0,
+                        "input_pm": 240.0
+                    },
+                    "2": {
+                        "materialName": "Coal",
+                        "materialId": 4,
+                        "input": 2.0,
+                        "input_pm": 120.0
+                    }
+                },
+                "material_residual": {
+                    "1": {
+                        "materialName": "Water",
+                        "materialId": 7,
+                        "input": 2.0,
+                        "input_pm": 120.0
+                    }
+                }
+            }
+        }
+    },
+    "Sulfuric acid": {
+        "materialName": "Sulfuric acid",
+        "fact": "Refinery",
+        "power_input": 30.0,
+        "materialId": 1604,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 5.0,
+                "output_pm": 50.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Sulfur",
+                        "materialId": 6,
+                        "input": 5.0,
+                        "input_pm": 50.0
+                    },
+                    "2": {
+                        "materialName": "Water",
+                        "materialId": 7,
+                        "input": 5.0,
+                        "input_pm": 50.0
+                    }
+                }
+            }
+        }
+    },
+    "Plastic": {
+        "materialName": "Plastic",
+        "fact": "Refinery",
+        "power_input": 30.0,
+        "materialId": 1701,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 2.0,
+                "output_pm": 20.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Crude oil",
+                        "materialId": 12,
+                        "input": 3.0,
+                        "input_pm": 30.0
+                    }
+                },
+                "material_residual": {
+                    "1": {
+                        "materialName": "Heavy oil residue",
+                        "materialId": 1706,
+                        "input": 1.0,
+                        "input_pm": 10.0
+                    }
+                }
+            }
+        }
+    },
+    "Residual plastic": {
+        "materialName": "Residual plastic",
+        "fact": "Refinery",
+        "power_input": 30.0,
+        "materialId": 1702,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 2.0,
+                "output_pm": 20.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Polymer resin",
+                        "materialId": 1707,
+                        "input": 6.0,
+                        "input_pm": 60.0
+                    },
+                    "2": {
+                        "materialName": "Water",
+                        "materialId": 7,
+                        "input": 2.0,
+                        "input_pm": 20.0
+                    }
+                }
+            }
+        }
+    },
+    "Rubber": {
+        "materialName": "Rubber",
+        "fact": "Refinery",
+        "power_input": 30.0,
+        "materialId": 1703,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 2.0,
+                "output_pm": 20.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Crude oil",
+                        "materialId": 12,
+                        "input": 3.0,
+                        "input_pm": 30.0
+                    }
+                },
+                "material_residual": {
+                    "1": {
+                        "materialName": "Heavy oil residue",
+                        "materialId": 1706,
+                        "input": 2.0,
+                        "input_pm": 20.0
+                    }
+                }
+            }
+        }
+    },
+    "Residual rubber": {
+        "materialName": "Residual rubber",
+        "fact": "Refinery",
+        "power_input": 30.0,
+        "materialId": 1704,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 2.0,
+                "output_pm": 20.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Polymer resin",
+                        "materialId": 1707,
+                        "input": 4.0,
+                        "input_pm": 40.0
+                    },
+                    "2": {
+                        "materialName": "Water",
+                        "materialId": 7,
+                        "input": 4.0,
+                        "input_pm": 40.0
+                    }
+                }
+            }
+        }
+    },
+    "Petroleum coke": {
+        "materialName": "Petroleum coke",
+        "fact": "Refinery",
+        "power_input": 30.0,
+        "materialId": 1705,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 12.0,
+                "output_pm": 120.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Heavy oil residue",
+                        "materialId": 1706,
+                        "input": 4.0,
+                        "input_pm": 40.0
+                    }
+                }
+            }
+        }
+    },
+    "Heavy oil residue": {
+        "materialName": "Heavy oil residue",
+        "fact": "Refinery",
+        "power_input": 30.0,
+        "materialId": 1706,
+        "ore": true,
+        "enabled": true,
+        "recipes": {}
+    },
+    "Polymer resin": {
+        "materialName": "Polymer resin",
+        "fact": "Refinery",
+        "power_input": 30.0,
+        "materialId": 1707,
+        "ore": true,
+        "enabled": true,
+        "recipes": {}
+    },
+    "Fuel": {
+        "materialName": "Fuel",
+        "fact": "Refinery",
+        "power_input": 30.0,
+        "materialId": 1801,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 4.0,
+                "output_pm": 40.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Crude oil",
+                        "materialId": 12,
+                        "input": 6.0,
+                        "input_pm": 60.0
+                    }
+                },
+                "material_residual": {
+                    "1": {
+                        "materialName": "Polymer resin",
+                        "materialId": 1707,
+                        "input": 3.0,
+                        "input_pm": 30.0
+                    }
+                }
+            }
+        }
+    },
+    "Residual fuel": {
+        "materialName": "Residual fuel",
+        "fact": "Refinery",
+        "power_input": 30.0,
+        "materialId": 1802,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 4.0,
+                "output_pm": 40.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Heavy oil residue",
+                        "materialId": 1706,
+                        "input": 6.0,
+                        "input_pm": 60.0
+                    }
+                }
+            }
+        }
+    },
+    "Liquid biofuel": {
+        "materialName": "Residual fuel",
+        "fact": "Refinery",
+        "power_input": 30.0,
+        "materialId": 1803,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 4.0,
+                "output_pm": 60.0,
+                "materials": {
+                    "1": {
+                        "materialName": "Solid biofuel",
+                        "materialId": 506,
+                        "input": 6.0,
+                        "input_pm": 90.0
+                    },
+                    "2": {
+                        "materialName": "Water",
+                        "materialId": 7,
+                        "input": 3.0,
+                        "input_pm": 45.0
+                    }
+                }
+            }
+        }
+    },
+    "Turbofuel": {
+        "materialName": "Turbofuel",
+        "fact": "Refinery",
+        "power_input": 30.0,
+        "materialId": 1804,
+        "ore": false,
+        "enabled": true,
+        "recipes": {
+            "1": {
+                "output": 5.0,
+                "output_pm": 18.75,
+                "materials": {
+                    "1": {
+                        "materialName": "Fuel",
+                        "materialId": 1801,
+                        "input": 6.0,
+                        "input_pm": 22.5
+                    },
+                    "2": {
+                        "materialName": "Compacted coal",
+                        "materialId": 405,
+                        "input": 4.0,
                         "input_pm": 15.0
                     }
                 }

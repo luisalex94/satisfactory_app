@@ -35,6 +35,8 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
   bool showCollectionMaterials = false;
   String nameCollectionMaterials = "";
 
+  String nameMaterialConfiguration = "";
+
   @override
   void initState() {
     super.initState();
@@ -65,8 +67,10 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
           ),
           IconButton(
             onPressed: () {
-              //var factories = FactoriesHandlers().getMainFactoryCollection();
-              //var log = 0;
+              // ignore: unused_local_variable
+              var factories = FactoriesHandlers().getMainFactoryCollection();
+              // ignore: unused_local_variable
+              var log = 0;
             },
             icon: const Icon(Icons.info_outline),
           ),
@@ -148,6 +152,8 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
   }
 
   Widget _mainPage(MaterialItem? material) {
+    /// showCollectionRecipe = true: muestra recetas de [FactoryConfiguration] de las [FactoryCollection]
+    /// showCollectionRecipe = false: muestra recetas de recetario general
     if (showCollectionRecipe) {
       int row = recipe.length;
       int column = recipe[0].length;
@@ -156,7 +162,7 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
           return SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: SingleChildScrollView(
-              child: _columnConstructor(
+              child: _collectionRecipeWidgetConstructor(
                 column,
                 row,
               ),
@@ -172,7 +178,7 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
           return SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: SingleChildScrollView(
-              child: _columnConstructor(
+              child: _simpleRecipeWidgetConstructor(
                 column,
                 row,
               ),
@@ -185,7 +191,7 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
     }
   }
 
-  Widget _columnConstructor(int column, int row) {
+  Widget _simpleRecipeWidgetConstructor(int column, int row) {
     List<Widget> mainColumn = [];
     for (int i = 0; i < row; i++) {
       List<Widget> rowChildren = [];
@@ -193,6 +199,48 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
         rowChildren.add(
           RegularItemcard(
             material: recipe[i][j],
+            key: ValueKey(
+                '${recipe[i][j].materialId != 0 ? 0 : recipe[i][j].materialId} _$i _$j'),
+          ),
+        );
+        rowChildren.add(
+          const SizedBox(
+            width: 10,
+            height: 10,
+          ),
+        );
+      }
+      mainColumn.add(
+        Row(
+          children: rowChildren,
+        ),
+      );
+      mainColumn.add(
+        const SizedBox(
+          width: 10,
+          height: 10,
+        ),
+      );
+    }
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: mainColumn,
+    );
+  }
+
+  Widget _collectionRecipeWidgetConstructor(int column, int row) {
+    List<Widget> mainColumn = [];
+    for (int i = 0; i < row; i++) {
+      List<Widget> rowChildren = [];
+      for (int j = 0; j < column; j++) {
+        rowChildren.add(
+          CollectionItemcard(
+            material: recipe[i][j],
+            collectionName: nameCollectionMaterials,
+            materialName: nameMaterialConfiguration,
+            row: i,
+            column: j,
             key: ValueKey(
                 '${recipe[i][j].materialId != 0 ? 0 : recipe[i][j].materialId} _$i _$j'),
           ),
@@ -379,6 +427,9 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
                             ppm: ppmDouble,
                           );
                           oreItems = MaterialHandlers().getOreItems();
+
+                          // Indica que debe mostrar un item de la lista general
+                          showCollectionRecipe = false;
                         },
                       );
                     },
@@ -533,15 +584,22 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
     setState(() {});
   }
 
-  void _callBackFunctionUpdateRecipe(
-    Recipe recipeUpdate,
-    Map<String, OreItem> oreItemsUpdate,
-    String materialNameUpdate,
-    String collectionNameUpdate,
-  ) {
+  void _callBackFunctionUpdateRecipe({
+    required Recipe recipeUpdate,
+    required Map<String, OreItem> oreItemsUpdate,
+    required String materialNameUpdate,
+    required String collectionNameUpdate,
+  }) {
     setState(() {
+      // Actualica receta y mapa de oreItems
       recipe = recipeUpdate.recipe;
       oreItems = oreItemsUpdate;
+
+      // Actualiza informacion de coleccion y material
+      nameCollectionMaterials = collectionNameUpdate;
+      nameMaterialConfiguration = materialNameUpdate;
+
+      // Indica que debe mostrarse la receta de una coleccion
       showCollectionRecipe = true;
     });
   }
