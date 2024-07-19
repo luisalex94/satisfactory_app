@@ -566,6 +566,10 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
           callBackFunction: _callBackFunction,
           callBackFunctionOnlySetState: _callBackFunctionOnlySetState,
           callBackFunctionUpdateRecipe: _callBackFunctionUpdateRecipe,
+          callBackFunctionDeleteFunctionFactoryCollection:
+              _callBackFunctionDeleteFunctionFactoryCollection,
+          callBackFunctionDeleteFunctionFactoryConfiguration:
+              _callBackFunctionDeleteFunctionFactoryConfiguration,
         ),
       );
     }
@@ -605,6 +609,34 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
       // Indica que debe mostrarse la receta de una coleccion
       showCollectionRecipe = true;
     });
+  }
+
+  void _callBackFunctionDeleteFunctionFactoryCollection({
+    required String factoryCollectionName,
+  }) {
+    if (showCollectionRecipe &&
+        factoryCollectionName == nameCollectionMaterials) {
+      setState(() {
+        showCollectionRecipe = false;
+        selectedMaterial = MaterialItem();
+        oreItems = {};
+      });
+    }
+  }
+
+  void _callBackFunctionDeleteFunctionFactoryConfiguration({
+    required String factoryCollectionName,
+    required String factoryConfigurationName,
+  }) {
+    if (showCollectionRecipe &&
+        factoryCollectionName == nameCollectionMaterials &&
+        factoryConfigurationName == nameMaterialConfiguration) {
+      setState(() {
+        showCollectionRecipe = false;
+        selectedMaterial = MaterialItem();
+        oreItems = {};
+      });
+    }
   }
 
   void _addNewCollectionPopup() {

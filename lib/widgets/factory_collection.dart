@@ -12,6 +12,8 @@ class FactoryCollectionWidget extends StatefulWidget {
     required this.callBackFunction,
     required this.callBackFunctionOnlySetState,
     required this.callBackFunctionUpdateRecipe,
+    required this.callBackFunctionDeleteFunctionFactoryCollection,
+    required this.callBackFunctionDeleteFunctionFactoryConfiguration,
     super.key,
   });
 
@@ -27,6 +29,13 @@ class FactoryCollectionWidget extends StatefulWidget {
     required String materialNameUpdate,
     required String collectionNameUpdate,
   }) callBackFunctionUpdateRecipe;
+  final Function({
+    required String factoryCollectionName,
+  }) callBackFunctionDeleteFunctionFactoryCollection;
+  final Function({
+    required String factoryCollectionName,
+    required String factoryConfigurationName,
+  }) callBackFunctionDeleteFunctionFactoryConfiguration;
 
   @override
   State<FactoryCollectionWidget> createState() =>
@@ -73,6 +82,11 @@ class _FactoryCollectionWidgetState extends State<FactoryCollectionWidget> {
                             widget.factoryCollection.factoryCollectionName,
                           );
                           widget.callBackFunctionOnlySetState();
+                          widget
+                              .callBackFunctionDeleteFunctionFactoryCollection(
+                            factoryCollectionName:
+                                widget.factoryCollection.factoryCollectionName,
+                          );
                         },
                       ),
                 IconButton(
@@ -165,7 +179,13 @@ class _FactoryCollectionWidgetState extends State<FactoryCollectionWidget> {
                         _deleteItemFromCollection(
                             key, factoryCollection.factoryCollectionName);
                         setState(() {
-                          widget.callBackFunctionOnlySetState();
+                          //widget.callBackFunctionOnlySetState();
+                          widget
+                              .callBackFunctionDeleteFunctionFactoryConfiguration(
+                            factoryCollectionName:
+                                factoryCollection.factoryCollectionName,
+                            factoryConfigurationName: value.itemName,
+                          );
                         });
                       },
                     ),
