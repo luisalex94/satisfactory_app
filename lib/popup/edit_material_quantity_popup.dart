@@ -10,14 +10,19 @@ class EditMaterialQuantityPopup extends StatefulWidget {
     required this.factoryConfiguration,
     required this.factoryCollectionName,
     required this.factoryConfigurationName,
-    required this.callBackFunction,
+    required this.callBackFunctionUpdateRecipe,
     super.key,
   });
 
   final FactoryConfiguration factoryConfiguration;
   final String factoryCollectionName;
   final String factoryConfigurationName;
-  final Function callBackFunction;
+  final Function({
+    required String collectionNameUpdate,
+    required String materialNameUpdate,
+    required Map<String, OreItem> oreItemsUpdate,
+    required Recipe recipeUpdate,
+  }) callBackFunctionUpdateRecipe;
 
   @override
   State<EditMaterialQuantityPopup> createState() =>
@@ -137,6 +142,11 @@ class _EditMaterialQuantityPopupState extends State<EditMaterialQuantityPopup> {
           factoryCollectionName: widget.factoryCollectionName,
           factoryConfigurationName: widget.factoryConfigurationName,
         );
+        widget.callBackFunctionUpdateRecipe(
+            collectionNameUpdate: widget.factoryCollectionName,
+            materialNameUpdate: widget.factoryConfigurationName,
+            recipeUpdate: recipeItem,
+            oreItemsUpdate: oreItems);
         Navigator.of(context).pop();
       },
       child: const Text("Actualiza item"),
@@ -166,6 +176,11 @@ class _EditMaterialQuantityPopupState extends State<EditMaterialQuantityPopup> {
       factoryCollectionName: widget.factoryCollectionName,
       factoryConfigurationName: widget.factoryConfigurationName,
     );
+    widget.callBackFunctionUpdateRecipe(
+        collectionNameUpdate: widget.factoryCollectionName,
+        materialNameUpdate: widget.factoryConfigurationName,
+        recipeUpdate: recipeItem,
+        oreItemsUpdate: oreItems);
     Navigator.of(context).pop();
   }
 }

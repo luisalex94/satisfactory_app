@@ -147,60 +147,91 @@ class _FactoryCollectionWidgetState extends State<FactoryCollectionWidget> {
         String outputPm =
             factoryCollection.factoryCollection[key]!.outputPm.toString();
         factoryConfiguration.add(
-          GestureDetector(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    CheckboxFactoryConfiguration(
-                      factoryConfigurationName: itemName,
-                      collectionName: factoryCollection.factoryCollectionName,
-                    ),
-                    Text('$itemName ($outputPm)'),
-                  ],
-                ),
-                Row(
-                  children: [
-                    IconButton(
-                      icon: const Icon(Icons.edit),
-                      onPressed: () {
-                        _editFactoryConfiguration(
-                          factoryConfiguration: value,
-                          factoryCollectionName:
-                              factoryCollection.factoryCollectionName,
-                          factoryConfigurationName: value.itemName,
-                        );
-                      },
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.delete_outline),
-                      onPressed: () {
-                        _deleteItemFromCollection(
-                            key, factoryCollection.factoryCollectionName);
-                        setState(() {
-                          //widget.callBackFunctionOnlySetState();
-                          widget
-                              .callBackFunctionDeleteFunctionFactoryConfiguration(
-                            factoryCollectionName:
+          Column(
+            children: [
+              GestureDetector(
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.white54,
+                    border: Border.all(width: 1),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          CheckboxFactoryConfiguration(
+                            factoryConfigurationName: itemName,
+                            collectionName:
                                 factoryCollection.factoryCollectionName,
-                            factoryConfigurationName: value.itemName,
-                          );
-                        });
-                      },
-                    ),
-                  ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              top: 4,
+                              bottom: 4,
+                            ),
+                            child: SizedBox(
+                              width: 160,
+                              child: Text(
+                                '$itemName ($outputPm)',
+                                textAlign: TextAlign.left,
+                                overflow: TextOverflow.visible,
+                                softWrap: true,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          IconButton(
+                            icon: const Icon(Icons.edit),
+                            onPressed: () {
+                              _editFactoryConfiguration(
+                                factoryConfiguration: value,
+                                factoryCollectionName:
+                                    factoryCollection.factoryCollectionName,
+                                factoryConfigurationName: value.itemName,
+                              );
+                              widget.callBackFunctionOnlySetState();
+                            },
+                          ),
+                          IconButton(
+                            icon: const Icon(Icons.delete_outline),
+                            onPressed: () {
+                              _deleteItemFromCollection(
+                                  key, factoryCollection.factoryCollectionName);
+                              setState(
+                                () {
+                                  //widget.callBackFunctionOnlySetState();
+                                  widget
+                                      .callBackFunctionDeleteFunctionFactoryConfiguration(
+                                    factoryCollectionName:
+                                        factoryCollection.factoryCollectionName,
+                                    factoryConfigurationName: value.itemName,
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ],
-            ),
-            onTap: () {
-              widget.callBackFunctionUpdateRecipe(
-                recipeUpdate: value.factoryItem[value.itemName]!,
-                oreItemsUpdate: value.oreItems,
-                materialNameUpdate: value.itemName,
-                collectionNameUpdate: factoryCollection.factoryCollectionName,
-              );
-            },
+                onTap: () {
+                  widget.callBackFunctionUpdateRecipe(
+                    recipeUpdate: value.factoryItem[value.itemName]!,
+                    oreItemsUpdate: value.oreItems,
+                    materialNameUpdate: value.itemName,
+                    collectionNameUpdate:
+                        factoryCollection.factoryCollectionName,
+                  );
+                },
+              ),
+              _sizedBox10()
+            ],
           ),
         );
       },
@@ -225,7 +256,7 @@ class _FactoryCollectionWidgetState extends State<FactoryCollectionWidget> {
               factoryConfiguration: factoryConfiguration,
               factoryCollectionName: factoryCollectionName,
               factoryConfigurationName: factoryConfigurationName,
-              callBackFunction: widget.callBackFunctionOnlySetState,
+              callBackFunctionUpdateRecipe: widget.callBackFunctionUpdateRecipe,
             ),
           ),
         );

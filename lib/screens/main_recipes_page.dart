@@ -330,22 +330,53 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
 
     data.forEach(
       (key, value) {
-        widgetList.add(Row(
-          children: [
-            CheckboxOreItemCollection(
-              collectionName: collectionName,
-              oreName: value.materialName,
-              ppm: value.outputPm,
-              key: ValueKey('$collectionName-${value.materialName}'),
-              //ready: value.ready,
-            )
-          ],
-        ));
+        widgetList.add(
+          Column(
+            children: [
+              GestureDetector(
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.white54,
+                    border: Border.all(width: 1),
+                  ),
+                  child: Row(
+                    children: [
+                      Row(
+                        children: [
+                          CheckboxOreItemCollection(
+                            collectionName: collectionName,
+                            oreName: value.materialName,
+                            ppm: value.outputPm,
+                          )
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                              '${value.materialName}: ${value.outputPm.ceil()}'),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              _sizedBox10(),
+            ],
+          ),
+        );
       },
     );
 
     return Column(
       children: widgetList,
+    );
+  }
+
+  Widget _sizedBox10() {
+    return const SizedBox(
+      height: 10,
+      width: 10,
     );
   }
 
@@ -440,13 +471,6 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
           ],
         ),
       ),
-    );
-  }
-
-  Widget _sizedBox10() {
-    return const SizedBox(
-      height: 10,
-      width: 10,
     );
   }
 
@@ -673,14 +697,12 @@ class CheckboxOreItemCollection extends StatefulWidget {
     required this.oreName,
     required this.collectionName,
     required this.ppm,
-    //required this.ready,
     super.key,
   });
 
   final String oreName;
   final String collectionName;
   final double ppm;
-  //final bool ready;
 
   @override
   State<CheckboxOreItemCollection> createState() =>
@@ -705,23 +727,26 @@ class _CheckboxOreItemCollectionState extends State<CheckboxOreItemCollection> {
       collectionName: widget.collectionName,
       oreName: widget.oreName,
     );
-    return Row(
-      children: [
-        Checkbox(
-          value: isCheck,
-          onChanged: (value) {
-            FactoriesHandlers().setReadyOreItemFactoryCollection(
-              collectionName: widget.collectionName,
-              oreName: widget.oreName,
-              ready: value ?? false,
-            );
-            setState(() {
+    return Padding(
+      padding: const EdgeInsets.only(
+        bottom: 4,
+        top: 4,
+      ),
+      child: Checkbox(
+        value: isCheck,
+        onChanged: (value) {
+          FactoriesHandlers().setReadyOreItemFactoryCollection(
+            collectionName: widget.collectionName,
+            oreName: widget.oreName,
+            ready: value ?? false,
+          );
+          setState(
+            () {
               isCheck = value;
-            });
-          },
-        ),
-        Text('${widget.oreName}: ${widget.ppm.ceil()}')
-      ],
+            },
+          );
+        },
+      ),
     );
   }
 }
