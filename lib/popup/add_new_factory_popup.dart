@@ -157,7 +157,10 @@ class _AddNewFactoryPopupState extends State<AddNewFactoryPopup> {
   Widget _itemsPm(BuildContext context) {
     return TextFormField(
       controller: _itemsPmTextController,
-      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
+        DecimalTextInputFormater(),
+      ],
       decoration: InputDecoration(
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
         filled: true,
@@ -263,5 +266,24 @@ class _AddNewFactoryPopupState extends State<AddNewFactoryPopup> {
       },
       child: const Text('Add item'),
     );
+  }
+}
+
+class DecimalTextInputFormater extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
+    final regExp = RegExp(r'^\d*\.?\d*$');
+    if (newValue.text.isEmpty) {
+      return newValue.copyWith(text: '');
+    } else if (regExp.hasMatch(newValue.text)) {
+      double value = double.tryParse(newValue.text) ?? 0.0;
+      if (value >= 0.0) {
+        return newValue;
+      }
+    }
+    return oldValue;
   }
 }

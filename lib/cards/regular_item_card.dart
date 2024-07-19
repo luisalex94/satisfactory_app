@@ -70,30 +70,122 @@ class _RegularItemcardState extends State<RegularItemcard> {
               //Text(material.materialId.toString()),
               Text(
                   '${widget.material!.fact}: ${widget.material!.factQuantity}'),
-              Text(
-                  'Output: ${widget.material!.recipes['1']!.output.toString()}'),
-              Text(
-                  'Output PM: ${widget.material!.recipes['1']!.outputPm.toString()}'),
-              Text(
-                'Modified Output PM: ${(widget.material!.recipes['1']!.outputModifiedPm.toStringAsFixed(2))}',
-                style: const TextStyle(fontWeight: FontWeight.bold),
+
+              RichText(
+                  text: TextSpan(
+                      style: const TextStyle(color: Colors.black),
+                      children: [
+                    const TextSpan(text: 'Output: '),
+                    TextSpan(
+                        text:
+                            '${widget.material!.recipes['1']!.outputPm.toString()} '),
+                    TextSpan(
+                      text:
+                          '(${(widget.material!.recipes['1']!.outputModifiedPm.toStringAsFixed(2))})',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )
+                  ])),
+
+              const Divider(
+                indent: 10,
+                endIndent: 10,
               ),
-              const Divider(),
+
               widget.material!.recipes['1']!.materials['1']?.input != null
-                  ? Text(
-                      '1 - ${widget.material!.recipes['1']!.materials['1']?.materialName}: ${widget.material!.recipes['1']!.materials['1']?.inputPm} (${(widget.material!.recipes['1']!.materials['1']?.inputModifiedPm)!.toStringAsFixed(2)})')
+                  ? RichText(
+                      text: TextSpan(
+                        style: const TextStyle(color: Colors.black),
+                        children: [
+                          const TextSpan(text: '1 - '),
+                          TextSpan(
+                              text:
+                                  '${widget.material!.recipes['1']!.materials['1']?.materialName}: '),
+                          TextSpan(
+                              text:
+                                  '${widget.material!.recipes['1']!.materials['1']?.inputPm} '),
+                          TextSpan(
+                            text:
+                                '(${(widget.material!.recipes['1']!.materials['1']?.inputModifiedPm)!.toStringAsFixed(2)})',
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
                   : Container(),
+
               widget.material!.recipes['1']!.materials['2']?.input != null
-                  ? Text(
-                      '2 - ${widget.material!.recipes['1']!.materials['2']?.materialName}: ${widget.material!.recipes['1']!.materials['2']?.inputPm} (${(widget.material!.recipes['1']!.materials['2']?.inputModifiedPm.toStringAsFixed(2))})')
+                  ? RichText(
+                      text: TextSpan(
+                        style: const TextStyle(color: Colors.black),
+                        children: [
+                          const TextSpan(text: '1 - '),
+                          TextSpan(
+                              text:
+                                  '${widget.material!.recipes['1']!.materials['2']?.materialName}: '),
+                          TextSpan(
+                              text:
+                                  '${widget.material!.recipes['1']!.materials['2']?.inputPm} '),
+                          TextSpan(
+                            text:
+                                '(${(widget.material!.recipes['1']!.materials['2']?.inputModifiedPm)!.toStringAsFixed(2)})',
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
                   : Container(),
+
               widget.material!.recipes['1']!.materials['3']?.input != null
-                  ? Text(
-                      '3 - ${widget.material!.recipes['1']!.materials['3']?.materialName}: ${widget.material!.recipes['1']!.materials['3']?.inputPm} (${(widget.material!.recipes['1']!.materials['3']?.inputModifiedPm.toStringAsFixed(2))})')
+                  ? RichText(
+                      text: TextSpan(
+                        style: const TextStyle(color: Colors.black),
+                        children: [
+                          const TextSpan(text: '1 - '),
+                          TextSpan(
+                              text:
+                                  '${widget.material!.recipes['1']!.materials['3']?.materialName}: '),
+                          TextSpan(
+                              text:
+                                  '${widget.material!.recipes['1']!.materials['3']?.inputPm} '),
+                          TextSpan(
+                            text:
+                                '(${(widget.material!.recipes['1']!.materials['3']?.inputModifiedPm)!.toStringAsFixed(2)})',
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
                   : Container(),
               widget.material!.recipes['1']!.materials['4']?.input != null
-                  ? Text(
-                      '4 - ${widget.material!.recipes['1']!.materials['4']?.materialName}: ${widget.material!.recipes['1']!.materials['4']?.inputPm} (${(widget.material!.recipes['1']!.materials['4']?.inputModifiedPm.toStringAsFixed(2))})')
+                  ? RichText(
+                      text: TextSpan(
+                        style: const TextStyle(color: Colors.black),
+                        children: [
+                          const TextSpan(text: '1 - '),
+                          TextSpan(
+                              text:
+                                  '${widget.material!.recipes['1']!.materials['4']?.materialName}: '),
+                          TextSpan(
+                              text:
+                                  '${widget.material!.recipes['1']!.materials['4']?.inputPm} '),
+                          TextSpan(
+                            text:
+                                '(${(widget.material!.recipes['1']!.materials['4']?.inputModifiedPm)!.toStringAsFixed(2)})',
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
                   : Container(),
             ],
           ),
@@ -212,30 +304,122 @@ class _CollectionItemcardState extends State<CollectionItemcard> {
               //Text(material.materialId.toString()),
               Text(
                   '${widget.material!.fact}: ${widget.material!.factQuantity}'),
-              Text(
-                  'Output: ${widget.material!.recipes['1']!.output.toString()}'),
-              Text(
-                  'Output PM: ${widget.material!.recipes['1']!.outputPm.toString()}'),
-              Text(
-                'Modified Output PM: ${(widget.material!.recipes['1']!.outputModifiedPm.toStringAsFixed(2))}',
-                style: const TextStyle(fontWeight: FontWeight.bold),
+
+              RichText(
+                  text: TextSpan(
+                      style: const TextStyle(color: Colors.black),
+                      children: [
+                    const TextSpan(text: 'Output: '),
+                    TextSpan(
+                        text:
+                            '${widget.material!.recipes['1']!.outputPm.toString()} '),
+                    TextSpan(
+                      text:
+                          '(${(widget.material!.recipes['1']!.outputModifiedPm.toStringAsFixed(2))})',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )
+                  ])),
+
+              const Divider(
+                indent: 10,
+                endIndent: 10,
               ),
-              const Divider(),
+
               widget.material!.recipes['1']!.materials['1']?.input != null
-                  ? Text(
-                      '1 - ${widget.material!.recipes['1']!.materials['1']?.materialName}: ${widget.material!.recipes['1']!.materials['1']?.inputPm} (${(widget.material!.recipes['1']!.materials['1']?.inputModifiedPm)!.toStringAsFixed(2)})')
+                  ? RichText(
+                      text: TextSpan(
+                        style: const TextStyle(color: Colors.black),
+                        children: [
+                          const TextSpan(text: '1 - '),
+                          TextSpan(
+                              text:
+                                  '${widget.material!.recipes['1']!.materials['1']?.materialName}: '),
+                          TextSpan(
+                              text:
+                                  '${widget.material!.recipes['1']!.materials['1']?.inputPm} '),
+                          TextSpan(
+                            text:
+                                '(${(widget.material!.recipes['1']!.materials['1']?.inputModifiedPm)!.toStringAsFixed(2)})',
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
                   : Container(),
+
               widget.material!.recipes['1']!.materials['2']?.input != null
-                  ? Text(
-                      '2 - ${widget.material!.recipes['1']!.materials['2']?.materialName}: ${widget.material!.recipes['1']!.materials['2']?.inputPm} (${(widget.material!.recipes['1']!.materials['2']?.inputModifiedPm.toStringAsFixed(2))})')
+                  ? RichText(
+                      text: TextSpan(
+                        style: const TextStyle(color: Colors.black),
+                        children: [
+                          const TextSpan(text: '1 - '),
+                          TextSpan(
+                              text:
+                                  '${widget.material!.recipes['1']!.materials['2']?.materialName}: '),
+                          TextSpan(
+                              text:
+                                  '${widget.material!.recipes['1']!.materials['2']?.inputPm} '),
+                          TextSpan(
+                            text:
+                                '(${(widget.material!.recipes['1']!.materials['2']?.inputModifiedPm)!.toStringAsFixed(2)})',
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
                   : Container(),
+
               widget.material!.recipes['1']!.materials['3']?.input != null
-                  ? Text(
-                      '3 - ${widget.material!.recipes['1']!.materials['3']?.materialName}: ${widget.material!.recipes['1']!.materials['3']?.inputPm} (${(widget.material!.recipes['1']!.materials['3']?.inputModifiedPm.toStringAsFixed(2))})')
+                  ? RichText(
+                      text: TextSpan(
+                        style: const TextStyle(color: Colors.black),
+                        children: [
+                          const TextSpan(text: '1 - '),
+                          TextSpan(
+                              text:
+                                  '${widget.material!.recipes['1']!.materials['3']?.materialName}: '),
+                          TextSpan(
+                              text:
+                                  '${widget.material!.recipes['1']!.materials['3']?.inputPm} '),
+                          TextSpan(
+                            text:
+                                '(${(widget.material!.recipes['1']!.materials['3']?.inputModifiedPm)!.toStringAsFixed(2)})',
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
                   : Container(),
               widget.material!.recipes['1']!.materials['4']?.input != null
-                  ? Text(
-                      '4 - ${widget.material!.recipes['1']!.materials['4']?.materialName}: ${widget.material!.recipes['1']!.materials['4']?.inputPm} (${(widget.material!.recipes['1']!.materials['4']?.inputModifiedPm.toStringAsFixed(2))})')
+                  ? RichText(
+                      text: TextSpan(
+                        style: const TextStyle(color: Colors.black),
+                        children: [
+                          const TextSpan(text: '1 - '),
+                          TextSpan(
+                              text:
+                                  '${widget.material!.recipes['1']!.materials['4']?.materialName}: '),
+                          TextSpan(
+                              text:
+                                  '${widget.material!.recipes['1']!.materials['4']?.inputPm} '),
+                          TextSpan(
+                            text:
+                                '(${(widget.material!.recipes['1']!.materials['4']?.inputModifiedPm)!.toStringAsFixed(2)})',
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
                   : Container(),
             ],
           ),
