@@ -26,6 +26,10 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
   int selectedIndex = -1;
   List<List<MaterialItem>> recipe = [];
   bool ready = false;
+
+  /// [showCollectionRecipe] se usa para mostrar o no una receta de [FactoryCollection]
+  /// true: muestra una receta seleccionada de una [FactoryCollection]
+  /// false: muestra una receta seleccionada de las recetas rapidas
   bool showCollectionRecipe = false;
 
   final TextEditingController _itemsPmTextController = TextEditingController();
@@ -323,7 +327,7 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
                 children: [
                   const Expanded(
                     child: Text(
-                      'Selecciona una colección con materiales para mostrar los ingredientes.',
+                      'Selecciona una colección con items para mostrar los ingredientes.',
                     ),
                   ),
                   IconButton(
@@ -460,6 +464,10 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
         }
       },
     );
+
+    if (data.isEmpty) {
+      data.add(const Text('Selecciona un item para ver sus ingredientes'));
+    }
 
     return Column(
       children: data,
