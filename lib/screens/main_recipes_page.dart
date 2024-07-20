@@ -329,9 +329,11 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
                   IconButton(
                     icon: const Icon(Icons.close),
                     onPressed: () {
-                      setState(() {
-                        showCollectionMaterials = false;
-                      });
+                      setState(
+                        () {
+                          showCollectionMaterials = false;
+                        },
+                      );
                     },
                   )
                 ],
@@ -410,22 +412,57 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
       width: 320,
       child: Padding(
         padding: const EdgeInsets.all(10.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Expanded(
-              child: ListView.builder(
-                itemCount: oreItems.length,
-                itemBuilder: (BuildContext context, int index) {
-                  String name = oreItems.values.elementAt(index).materialName;
-                  double quantity = oreItems.values.elementAt(index).outputPm;
-                  return Text('$name: ${quantity.toStringAsFixed(2)}');
-                },
-              ),
-            ),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              _showOreItemsList(),
+            ],
+          ),
         ),
       ),
+    );
+  }
+
+  Widget _showOreItemsList() {
+    List<Widget> data = [];
+
+    oreItems.forEach(
+      (key, value) {
+        if (value.outputPm > 0) {
+          data.add(
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.white54,
+                border: Border.all(width: 1),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  top: 6,
+                  bottom: 6,
+                  left: 6,
+                ),
+                child: Row(
+                  children: [
+                    Text('$key '),
+                    Text(value.outputPm.toStringAsFixed(2)),
+                  ],
+                ),
+              ),
+            ),
+          );
+          data.add(
+            const SizedBox(
+              height: 10,
+            ),
+          );
+        }
+      },
+    );
+
+    return Column(
+      children: data,
     );
   }
 
@@ -651,6 +688,7 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
 
       // Indica que debe mostrarse la receta de una coleccion
       showCollectionRecipe = true;
+      showCollectionMaterials = true;
     });
   }
 
