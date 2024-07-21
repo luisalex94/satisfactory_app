@@ -56,11 +56,13 @@ class _EditMaterialQuantityPopupState extends State<EditMaterialQuantityPopup> {
                 fontWeight: FontWeight.bold,
                 fontSize: 24,
               ),
+              textAlign: TextAlign.center,
             ),
             _sizedBox10(),
             _itemsPm(context),
             _sizedBox10(),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 _updateButton(),
               ],
