@@ -53,11 +53,6 @@ class _AddNewCollectionPopupState extends State<AddNewCollectionPopup> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text(
-              selectedMaterial.materialName == ""
-                  ? "Select material from the list"
-                  : selectedMaterial.materialName,
-            ),
             _createNewCollectionTextFormField(context),
             _sizedBox10(),
             _addButton(),
@@ -78,6 +73,8 @@ class _AddNewCollectionPopupState extends State<AddNewCollectionPopup> {
     return Form(
       key: _formKeyAddNewCollection,
       child: TextFormField(
+        textAlign: TextAlign.center,
+        showCursor: false,
         controller: _newCollectionNameController,
         inputFormatters: [FilteringTextInputFormatter.singleLineFormatter],
         decoration: InputDecoration(
@@ -86,7 +83,7 @@ class _AddNewCollectionPopupState extends State<AddNewCollectionPopup> {
           hintStyle: TextStyle(color: Colors.grey[800]),
           hintText: "New collection name",
           fillColor: Colors.white70,
-          suffixIcon: const Icon(Icons.search),
+          suffixIcon: const Icon(Icons.add),
           suffixIconColor: Colors.grey[800],
         ),
         onFieldSubmitted: (value) {
@@ -95,6 +92,10 @@ class _AddNewCollectionPopupState extends State<AddNewCollectionPopup> {
         validator: (value) {
           if (_sameName(value)) {
             return "Already exists";
+          } else if (value != null) {
+            if (value.length >= 30) {
+              return "Name must not have more than 30 characters";
+            }
           }
           return null;
         },
@@ -136,7 +137,13 @@ class _AddNewCollectionPopupState extends State<AddNewCollectionPopup> {
 
         Navigator.of(context).pop(true);
       },
-      child: const Text('Add item to collection and close popup'),
+      child: const Padding(
+        padding: EdgeInsets.all(8.0),
+        child: Text(
+          'Add item to collection and close popup',
+          textAlign: TextAlign.center,
+        ),
+      ),
     );
   }
 

@@ -4,6 +4,8 @@ import 'package:satisfactory_app/cards/regular_item_card.dart';
 import 'package:satisfactory_app/handlers/material_handlers.dart';
 import 'package:satisfactory_app/handlers/material_item.dart';
 import 'package:satisfactory_app/popup/add_new_collection_popup.dart';
+import 'package:satisfactory_app/popup/info_popup.dart';
+import 'package:satisfactory_app/popup/paypal_popup.dart';
 import 'package:satisfactory_app/screens/arguments/arguments.dart';
 import 'package:satisfactory_app/handlers/factories_item.dart';
 import 'package:satisfactory_app/handlers/factories_handlers.dart';
@@ -60,7 +62,7 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: Colors.black12,
         title: const Text('Recipes'),
         actions: [
           IconButton(
@@ -71,13 +73,16 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
           ),
           IconButton(
             onPressed: () {
-              // ignore: unused_local_variable
-              var factories = FactoriesHandlers().getMainFactoryCollection();
-              // ignore: unused_local_variable
-              var log = 0;
+              _infoPupup();
             },
             icon: const Icon(Icons.info_outline),
           ),
+          IconButton(
+            onPressed: () {
+              _paypalPopup();
+            },
+            icon: const Icon(Icons.paypal),
+          )
         ],
       ),
       body: body(context),
@@ -123,6 +128,8 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          _supportButton(),
+          _sizedBox10(),
           _showOreItems(),
           _sizedBox10(),
           _showListOfItems(),
@@ -191,7 +198,7 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
         },
       );
     } else {
-      return const Text('Selecciona un item para ver su receta');
+      return const Text('Select an item to see its recipe');
     }
   }
 
@@ -405,6 +412,35 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
     );
   }
 
+  Widget _supportButton() {
+    return GestureDetector(
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.black12,
+          border: Border.all(width: 1),
+        ),
+        height: 50,
+        width: 320,
+        child: const Padding(
+          padding: EdgeInsets.all(10.0),
+          child: SingleChildScrollView(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.paypal),
+                Text('Support us'),
+              ],
+            ),
+          ),
+        ),
+      ),
+      onTap: () {
+        _paypalPopup();
+      },
+    );
+  }
+
   Widget _showOreItems() {
     return Container(
       decoration: BoxDecoration(
@@ -466,7 +502,7 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
     );
 
     if (data.isEmpty) {
-      data.add(const Text('Selecciona un item para ver sus ingredientes'));
+      data.add(const Text('Select an item to see its ingredients'));
     }
 
     return Column(
@@ -481,13 +517,14 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
         color: Colors.black12,
         border: Border.all(width: 1),
       ),
-      height: _screenHeight - 330,
+      height: _screenHeight - 390,
       width: 320,
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            _textQuickRecipe(),
             _itemsPm(context),
             _sizedBox10(),
             _findBox(),
@@ -534,6 +571,31 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
             )
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _textQuickRecipe() {
+    return const Padding(
+      padding: EdgeInsets.only(bottom: 10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.lightbulb_outline,
+            size: 16,
+          ),
+          SizedBox(
+            width: 6,
+          ),
+          Text(
+            'Quick recipes',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -738,6 +800,32 @@ class _MainRecipesPageState extends State<MainRecipesPage> {
               collectionsStringList:
                   FactoriesHandlers().getCollectionStringNamesList(),
             ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _infoPupup() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const AlertDialog(
+          content: SizedBox(
+            child: InfoPopup(),
+          ),
+        );
+      },
+    );
+  }
+
+  void _paypalPopup() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const AlertDialog(
+          content: SizedBox(
+            child: PaypalPopup(),
           ),
         );
       },
