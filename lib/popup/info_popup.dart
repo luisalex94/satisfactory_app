@@ -37,6 +37,17 @@ class _InfoPopupState extends State<InfoPopup> {
                 const SizedBox(
                   height: 10,
                 ),
+                _nextSteps(),
+                const SizedBox(
+                  height: 10,
+                ),
+                const Divider(
+                  indent: 10,
+                  endIndent: 10,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
                 _quickRecipe(),
                 const SizedBox(
                   height: 10,
@@ -49,9 +60,106 @@ class _InfoPopupState extends State<InfoPopup> {
                   height: 10,
                 ),
                 _factoryRecipe(),
+                const SizedBox(
+                  height: 10,
+                ),
+                const Divider(
+                  indent: 10,
+                  endIndent: 10,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                _appIconCopyright(),
               ],
             ),
           )),
+    );
+  }
+
+  Widget _nextSteps() {
+    return const Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Icon(Icons.code),
+            SizedBox(
+              width: 8,
+            ),
+            Text(
+              'Next steps',
+              style: TextStyle(
+                fontSize: 24,
+                color: Colors.black87,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+        Row(
+          children: [
+            Text(
+              'First, listen to suggestions from you, the public..',
+              style: TextStyle(
+                fontSize: 16,
+              ),
+              textAlign: TextAlign.left,
+            ),
+          ],
+        ),
+        Row(
+          children: [
+            Expanded(
+              child: Text(
+                '1. Cache the factories and recipes so you can reopen everything as you left it.',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.black87,
+                ),
+                textAlign: TextAlign.left,
+              ),
+            ),
+          ],
+        ),
+        Row(
+          children: [
+            Text(
+              '2. Add recipes that come with new updates.',
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.black87,
+              ),
+              textAlign: TextAlign.left,
+            ),
+          ],
+        ),
+        Row(
+          children: [
+            Text(
+              '3. Add tutorials to get the most out of the application.',
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.black87,
+              ),
+              textAlign: TextAlign.left,
+            ),
+          ],
+        ),
+        Row(
+          children: [
+            Text(
+              '4. Improve the interface and user experience.',
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.black87,
+              ),
+              textAlign: TextAlign.left,
+            ),
+          ],
+        ),
+      ],
     );
   }
 
@@ -81,7 +189,7 @@ class _InfoPopupState extends State<InfoPopup> {
           width: 10,
         ),
         Text(
-          'Version 0.1',
+          'Version 0.1.0',
           style: TextStyle(
             fontSize: 16,
             color: Colors.black45,
@@ -103,7 +211,7 @@ class _InfoPopupState extends State<InfoPopup> {
             color: Colors.black45,
           ),
           textAlign: TextAlign.left,
-        )
+        ),
       ],
     );
   }
@@ -362,6 +470,17 @@ class _InfoPopupState extends State<InfoPopup> {
           width: 10,
         ),
       ],
+    );
+  }
+
+  Widget _appIconCopyright() {
+    return const Text(
+      'App icon copyright:\nGame boy advance iconos creados por Tru3 Art - Flaticon\nhttps://www.flaticon.es/iconos-gratis/game-boy-advance',
+      style: TextStyle(
+        fontSize: 16,
+        color: Colors.black45,
+      ),
+      textAlign: TextAlign.center,
     );
   }
 }
