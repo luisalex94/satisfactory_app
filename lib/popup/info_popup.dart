@@ -101,7 +101,7 @@ class _InfoPopupState extends State<InfoPopup> {
         Row(
           children: [
             Text(
-              'First, listen to suggestions from you, the public..',
+              'First, listen to suggestions from you, the public.',
               style: TextStyle(
                 fontSize: 16,
               ),
