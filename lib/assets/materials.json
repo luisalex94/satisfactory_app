@@ -2406,6 +2406,15 @@
             }
         }
     },
+    "Uranium waste": {
+        "materialName": "Uranium waste",
+        "fact": "Residue",
+        "power_input": 0.0,
+        "materialId": 1208,
+        "ore": true,
+        "enabled": true,
+        "recipes": {}
+    },
     "Computer": {
         "materialName": "Computer",
         "fact": "Manufacturer",

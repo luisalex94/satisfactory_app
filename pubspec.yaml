@@ -47,6 +47,15 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^3.0.0
+  msix: ^3.16.7
+
+msix_config:
+  display_name: Satisfactory app
+  msix_version: 1.0.0.0
+  publisher_display_name: Satisfactory app
+  publisher: CN=Satisfactory app
+  certificate_path: C:\certificado.pfx
+  certificate_password: 1234
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
