@@ -159,6 +159,34 @@ class _InfoPopupState extends State<InfoPopup> {
             ),
           ],
         ),
+        Row(
+          children: [
+            Expanded(
+              child: Text(
+                '5. Add creation information of child products like water in Aluminum scrap.',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.black87,
+                ),
+                textAlign: TextAlign.left,
+              ),
+            ),
+          ],
+        ),
+        Row(
+          children: [
+            Expanded(
+              child: Text(
+                '6. Improve guides and instructions.',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.black87,
+                ),
+                textAlign: TextAlign.left,
+              ),
+            ),
+          ],
+        )
       ],
     );
   }

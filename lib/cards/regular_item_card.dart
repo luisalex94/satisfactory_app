@@ -43,7 +43,7 @@ class _RegularItemcardState extends State<RegularItemcard> {
             const Divider(),
             widget.material!.oreOutputPm != 0
                 ? Text(
-                    'InputPM: ${(widget.material!.oreOutputPm.toStringAsFixed(2))}',
+                    'Input(pm): ${(widget.material!.oreOutputPm.toStringAsFixed(2))}',
                     style: const TextStyle(fontWeight: FontWeight.bold))
                 : Container(),
           ],
